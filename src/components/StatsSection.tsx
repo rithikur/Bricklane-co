@@ -1,27 +1,53 @@
 import { motion } from 'framer-motion';
+import AnimatedCounter from './common/AnimatedCounter';
+import RevealText from './common/RevealText';
 
 const stats = [
-    { value: '10k+', label: 'Premium Listings' },
-    { value: '2k+', label: 'Monthly Sales' },
-    { value: '98%', label: 'Customer Satisfaction' },
-    { value: '15+', label: 'Years Experience' },
+    { value: '10k+', label: 'Premium Listings', desc: 'Verified properties across India' },
+    { value: '2k+', label: 'Monthly Sales', desc: 'Transactions processed monthly' },
+    { value: '98%', label: 'Satisfaction', desc: 'Avg. rating from our clients' },
+    { value: '15+', label: 'Years Experience', desc: 'In the real estate market' },
 ];
 
 const StatsSection = () => {
     return (
-        <section className="py-20 bg-primary-black text-white">
-            <div className="max-w-[1440px] mx-auto px-4 md:px-8">
-                <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+        <section className="py-24 md:py-32 bg-primary-black text-white overflow-hidden relative">
+            {/* Subtle grid overlay */}
+            <div
+                className="absolute inset-0 opacity-5 pointer-events-none"
+                style={{
+                    backgroundImage: `linear-gradient(rgba(255,255,255,0.5) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.5) 1px, transparent 1px)`,
+                    backgroundSize: '80px 80px'
+                }}
+            />
+
+            <div className="max-w-[1440px] mx-auto px-4 md:px-8 relative">
+                {/* Section label */}
+                <div className="mb-14 md:mb-20 text-center">
+                    <RevealText as="p" className="text-neutral-grey text-xs font-bold tracking-widest uppercase mb-3">
+                        By The Numbers
+                    </RevealText>
+                    <RevealText as="h2" className="text-3xl md:text-5xl font-bold text-white" delay={0.1}>
+                        Trusted by Thousands
+                    </RevealText>
+                </div>
+
+                <div className="grid grid-cols-2 md:grid-cols-4 gap-px bg-white/10 rounded-2xl overflow-hidden">
                     {stats.map((stat, index) => (
                         <motion.div
                             key={index}
-                            initial={{ opacity: 0, scale: 0.9 }}
-                            whileInView={{ opacity: 1, scale: 1 }}
+                            initial={{ opacity: 0, y: 20 }}
+                            whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true }}
-                            transition={{ delay: index * 0.1 }}
+                            transition={{ delay: index * 0.1, duration: 0.6 }}
+                            className="bg-primary-black p-8 md:p-12 text-center flex flex-col items-center justify-center gap-2 group hover:bg-white/5 transition-colors duration-300"
                         >
-                            <h3 className="text-4xl md:text-6xl font-bold mb-2">{stat.value}</h3>
-                            <p className="text-neutral-grey font-medium text-base md:text-lg">{stat.label}</p>
+                            <AnimatedCounter
+                                value={stat.value}
+                                className="text-5xl md:text-7xl font-bold text-white tabular-nums"
+                            />
+                            <p className="text-white font-bold text-base md:text-lg mt-1">{stat.label}</p>
+                            <p className="text-neutral-grey text-sm hidden md:block">{stat.desc}</p>
                         </motion.div>
                     ))}
                 </div>

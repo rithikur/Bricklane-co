@@ -7,7 +7,7 @@ const AboutPage = () => {
             <Navbar />
             <div className="pt-20 pb-20">
                 {/* Hero Section */}
-                <div className="max-w-[1440px] mx-auto px-4 md:px-8 mb-20 text-center">
+                <div className="max-w-[1440px] mx-auto px-4 md:px-8 mb-20 flex flex-col items-center text-center">
                     <h1 className="text-5xl md:text-7xl font-bold text-primary-black mb-8">Rearranging Real Estate</h1>
                     <p className="text-2xl text-neutral-grey max-w-4xl mx-auto leading-relaxed">
                         We are Bricklane co. A modern real estate agency that combines technology with a human touch to deliver an exceptional experience.

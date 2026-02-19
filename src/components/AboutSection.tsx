@@ -6,7 +6,7 @@ const AboutSection = () => {
         <section id="about" className="py-20 bg-white">
             <div className="max-w-[1440px] mx-auto px-4 md:px-10">
                 {/* Hero Section */}
-                <div className="mb-12 md:mb-20 text-center">
+                <div className="mb-12 md:mb-20 flex flex-col items-center text-center">
                     <span className="text-xs md:text-sm font-bold tracking-widest text-neutral-grey uppercase mb-4 block">Who We Are</span>
                     <RevealText as="h2" className="text-3xl md:text-6xl font-bold text-primary-black mb-6 md:mb-8">
                         Rearranging Real Estate

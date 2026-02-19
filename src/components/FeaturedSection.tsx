@@ -1,6 +1,7 @@
 import { ArrowRight, Heart } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
+import RevealText from './common/RevealText';
 
 const properties = [
     { id: 1, price: '4.5 Cr', address: 'Worli Sea Face, Mumbai', rooms: 3, baths: 3, area: 1850, image: 'https://images.unsplash.com/photo-1613977257363-707ba9348227?auto=format&fit=crop&q=80&w=2070' },
@@ -14,11 +15,15 @@ const FeaturedSection = () => {
             <div className="max-w-[1440px] mx-auto px-4 md:px-8">
                 <div className="flex justify-between items-end mb-12">
                     <div>
-                        <h2 className="text-3xl md:text-5xl font-bold text-primary-black mb-4">Featured Properties</h2>
-                        <p className="text-neutral-grey text-base md:text-lg max-w-xl">Explore our hand-picked selection of the most exclusive properties in the city.</p>
+                        <RevealText as="h2" className="text-3xl md:text-5xl font-bold text-primary-black mb-4">
+                            Featured Properties
+                        </RevealText>
+                        <RevealText as="p" className="text-neutral-grey text-base md:text-lg max-w-xl" delay={0.2}>
+                            Explore our hand-picked selection of the most exclusive properties in the city.
+                        </RevealText>
                     </div>
-                    <Link to="/search" className="hidden md:flex items-center gap-2 font-bold text-primary-black border-b-2 border-primary-black pb-1 hover:text-neutral-grey hover:border-neutral-grey transition-colors">
-                        View all properties <ArrowRight size={20} />
+                    <Link to="/search" className="hidden md:flex items-center gap-2 font-bold text-primary-black border-b-2 border-primary-black pb-1 hover:text-neutral-grey hover:border-neutral-grey transition-colors shrink-0 ml-8">
+                        View all <ArrowRight size={20} />
                     </Link>
                 </div>
 
@@ -26,11 +31,11 @@ const FeaturedSection = () => {
                     {properties.map((p, index) => (
                         <motion.div
                             key={p.id}
-                            initial={{ opacity: 0, y: 20 }}
+                            initial={{ opacity: 0, y: 30 }}
                             whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true }}
-                            transition={{ delay: index * 0.1 }}
-                            className="group"
+                            transition={{ delay: index * 0.12, duration: 0.6 }}
+                            className="group card-lift"
                         >
                             <Link to={`/property/${p.id}`}>
                                 <div className="relative aspect-[4/3] overflow-hidden rounded-std mb-4 bg-light-grey">
