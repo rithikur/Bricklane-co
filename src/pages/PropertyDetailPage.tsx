@@ -1,0 +1,157 @@
+import { useEffect, useState } from 'react';
+import { useParams, Link } from 'react-router-dom';
+import Navbar from '../components/Navbar';
+import { Heart, Share, Check, ArrowLeft } from 'lucide-react';
+import { properties } from '../data/properties';
+
+const PropertyDetailPage = () => {
+    const { id } = useParams();
+    const [isSaved, setIsSaved] = useState(false);
+
+    // Find property by ID
+    const propertyId = id ? parseInt(id) : 1;
+    const property = properties.find(p => p.id === propertyId) || properties[0];
+
+    // Scroll to top on load
+    useEffect(() => {
+        window.scrollTo(0, 0);
+    }, [id]);
+
+    // Generate more images based on the main image for the bento grid
+    // In a real app, these would be separate images from the API
+    const images = [
+        property.image,
+        property.kitchen_image || "https://images.unsplash.com/photo-1556910103-1c02745a30bf?auto=format&fit=crop&q=80&w=2000", // Kitchen (from data or fallback)
+        "https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?auto=format&fit=crop&q=80&w=2070", // Living Room (New working URL)
+        "https://images.unsplash.com/photo-1600607686527-6fb886090705?auto=format&fit=crop&q=80&w=2000"  // Patio
+    ];
+
+    const amenities = [
+        "Equipped kitchen", "Wi-Fi", "City view",
+        "Free parking", "Swimming pool", "Light",
+        "Air conditioning", "Gym"
+    ];
+
+    return (
+        <div className="font-display min-h-screen bg-white pb-20">
+            <Navbar />
+
+            <div className="max-w-[1440px] mx-auto px-4 md:px-8 pt-6 md:pt-10">
+                <Link to="/search" className="inline-flex items-center gap-2 text-neutral-grey hover:text-primary-black mb-6 font-bold transition-colors">
+                    <ArrowLeft size={20} /> Back to Search
+                </Link>
+
+                {/* Image Gallery Bento Grid */}
+                <div className="grid grid-cols-1 md:grid-cols-4 grid-rows-2 gap-4 h-auto md:h-[500px] mb-8 md:mb-12">
+                    <div className="md:col-span-2 md:row-span-2 rounded-std overflow-hidden relative group h-64 md:h-auto">
+                        <img src={images[0]} alt="Main" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
+                    </div>
+                    <div className="hidden md:block md:col-span-1 md:row-span-1 rounded-std overflow-hidden relative group">
+                        <img src={images[1]} alt="Kitchen" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
+                    </div>
+                    <div className="hidden md:block md:col-span-1 md:row-span-1 rounded-std overflow-hidden relative group">
+                        <img src={images[2]} alt="Living Room" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
+                    </div>
+                    <div className="hidden md:block md:col-span-2 md:row-span-1 rounded-std overflow-hidden relative group">
+                        <img src={images[3]} alt="Patio" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
+                    </div>
+                </div>
+
+                <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
+                    {/* Left Column: Details */}
+                    <div className="lg:col-span-2">
+                        {/* Header */}
+                        <div className="flex flex-col md:flex-row md:items-center justify-between mb-6 gap-4">
+                            <h1 className="text-3xl md:text-4xl font-bold text-primary-black">₹{property.price} Cr</h1>
+                            <div className="flex gap-4">
+                                <button
+                                    onClick={() => setIsSaved(!isSaved)}
+                                    className={`flex-1 md:flex-none flex items-center justify-center gap-2 px-6 py-2 border rounded-std font-medium transition-colors ${isSaved ? 'bg-primary-black text-white border-primary-black' : 'border-light-grey hover:border-primary-black'}`}
+                                >
+                                    <Heart size={18} fill={isSaved ? "currentColor" : "none"} />
+                                    {isSaved ? 'Saved' : 'Save'}
+                                </button>
+                                <button onClick={() => alert('Share link copied!')} className="flex-1 md:flex-none flex items-center justify-center gap-2 px-6 py-2 border border-light-grey rounded-std font-medium hover:border-primary-black transition-colors">
+                                    <Share size={18} />
+                                    Share
+                                </button>
+                            </div>
+                        </div>
+
+                        {/* Quick Specs */}
+                        <div className="grid grid-cols-4 gap-4 mb-12 py-6 border-y border-light-grey">
+                            <div className="flex flex-col items-center justify-center border-r border-light-grey last:border-0 p-2">
+                                <span className="text-lg md:text-xl font-bold text-primary-black">{property.area} m²</span>
+                                <span className="text-xs md:text-sm text-neutral-grey font-medium">Area</span>
+                            </div>
+                            <div className="flex flex-col items-center justify-center border-r border-light-grey last:border-0 p-2">
+                                <span className="text-lg md:text-xl font-bold text-primary-black">{property.rooms}</span>
+                                <span className="text-xs md:text-sm text-neutral-grey font-medium">Beds</span>
+                            </div>
+                            <div className="flex flex-col items-center justify-center border-r border-light-grey last:border-0 p-2">
+                                <span className="text-lg md:text-xl font-bold text-primary-black">{property.baths}</span>
+                                <span className="text-xs md:text-sm text-neutral-grey font-medium">Baths</span>
+                            </div>
+                            <div className="flex flex-col items-center justify-center p-2">
+                                <span className="text-lg md:text-xl font-bold text-primary-black">{Math.floor(Math.random() * 20) + 1}</span>
+                                <span className="text-xs md:text-sm text-neutral-grey font-medium">Floor</span>
+                            </div>
+                        </div>
+
+                        {/* Description / Address */}
+                        <div className="mb-12">
+                            <div className="mb-8">
+                                <h2 className="text-2xl font-bold mb-4">Location</h2>
+                                <p className="text-neutral-grey text-lg">{property.address}, India</p>
+                            </div>
+
+                            <div>
+                                <h2 className="text-2xl font-bold mb-4">About this home</h2>
+                                <p className="text-neutral-grey text-lg leading-relaxed">
+                                    {property.description}
+                                </p>
+                            </div>
+                        </div>
+
+                        {/* Amenities */}
+                        <div className="mb-12">
+                            <h2 className="text-2xl font-bold mb-6">Amenities</h2>
+                            <div className="grid grid-cols-2 md:grid-cols-3 gap-y-4">
+                                {amenities.map(item => (
+                                    <div key={item} className="flex items-center gap-3">
+                                        <div className="w-6 h-6 bg-light-grey/30 rounded-full flex items-center justify-center">
+                                            <Check size={14} className="text-primary-black" />
+                                        </div>
+                                        <span className="font-medium text-primary-black">{item}</span>
+                                    </div>
+                                ))}
+                            </div>
+                        </div>
+                    </div>
+
+                    {/* Right Column: Agent Card */}
+                    <div className="lg:col-span-1">
+                        <div className="bg-white border border-light-grey rounded-std p-6 sticky top-24 shadow-sm">
+                            <div className="flex items-center gap-4 mb-6">
+                                <img src={property.agent.image} alt={property.agent.name} className="w-16 h-16 rounded-full object-cover" />
+                                <div>
+                                    <h3 className="text-lg font-bold text-primary-black">{property.agent.name}</h3>
+                                    <p className="text-sm text-neutral-grey font-medium">Real Estate Agent</p>
+                                </div>
+                            </div>
+
+                            <button className="w-full bg-primary-black text-white py-3 rounded-std font-bold hover:bg-neutral-grey transition-colors mb-4">
+                                Send a request
+                            </button>
+                            <button className="w-full border border-light-grey text-primary-black py-3 rounded-std font-bold hover:border-primary-black transition-colors">
+                                Call Agent
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    );
+};
+
+export default PropertyDetailPage;
