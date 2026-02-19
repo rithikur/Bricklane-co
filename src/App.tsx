@@ -6,6 +6,7 @@ import ServicesPage from './pages/ServicesPage';
 import AboutPage from './pages/AboutPage';
 import BlogPage from './pages/BlogPage';
 import HelpPage from './pages/HelpPage';
+import WishlistPage from './pages/WishlistPage';
 import AdminLogin from './pages/AdminLogin';
 import AdminDashboard from './pages/AdminDashboard';
 import AdminPropertyForm from './pages/AdminPropertyForm';
@@ -23,6 +24,7 @@ function App() {
           <Route path="/about" element={<AboutPage />} />
           <Route path="/blog" element={<BlogPage />} />
           <Route path="/help" element={<HelpPage />} />
+          <Route path="/wishlist" element={<WishlistPage />} />
 
           {/* Admin Routes */}
           <Route path="/admin" element={<AdminLogin />} />

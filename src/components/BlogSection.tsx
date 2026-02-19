@@ -24,12 +24,12 @@ const posts = [
 
 const BlogSection = () => {
     return (
-        <section className="py-20 bg-white">
+        <section id="blog" className="py-20 bg-white">
             <div className="max-w-[1440px] mx-auto px-4 md:px-8">
                 <div className="flex justify-between items-end mb-12">
                     <div>
-                        <h2 className="text-4xl font-bold text-primary-black mb-4">Latest from Our Blog</h2>
-                        <p className="text-neutral-grey text-lg max-w-xl">Insights, tips, and trends from the world of real estate and design.</p>
+                        <h2 className="text-3xl md:text-4xl font-bold text-primary-black mb-4">Latest from Our Blog</h2>
+                        <p className="text-neutral-grey text-base md:text-lg max-w-xl">Insights, tips, and trends from the world of real estate and design.</p>
                     </div>
                     <a href="#" className="hidden md:flex items-center gap-2 font-bold text-primary-black border-b-2 border-primary-black pb-1 hover:text-neutral-grey hover:border-neutral-grey transition-colors">
                         View all articles <ArrowRight size={20} />

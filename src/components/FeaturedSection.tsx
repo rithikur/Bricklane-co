@@ -14,8 +14,8 @@ const FeaturedSection = () => {
             <div className="max-w-[1440px] mx-auto px-4 md:px-8">
                 <div className="flex justify-between items-end mb-12">
                     <div>
-                        <h2 className="text-4xl md:text-5xl font-bold text-primary-black mb-4">Featured Properties</h2>
-                        <p className="text-neutral-grey text-lg max-w-xl">Explore our hand-picked selection of the most exclusive properties in the city.</p>
+                        <h2 className="text-3xl md:text-5xl font-bold text-primary-black mb-4">Featured Properties</h2>
+                        <p className="text-neutral-grey text-base md:text-lg max-w-xl">Explore our hand-picked selection of the most exclusive properties in the city.</p>
                     </div>
                     <Link to="/search" className="hidden md:flex items-center gap-2 font-bold text-primary-black border-b-2 border-primary-black pb-1 hover:text-neutral-grey hover:border-neutral-grey transition-colors">
                         View all properties <ArrowRight size={20} />

@@ -51,18 +51,18 @@ const Hero = () => {
             />
 
             {/* Content */}
-            <div className="relative h-full flex items-center">
-                <div className="max-w-[1440px] mx-auto px-4 md:px-10 w-full grid grid-cols-1 lg:grid-cols-2 gap-12 items-center pt-20">
+            <div className="relative h-full flex items-center min-h-screen pt-24 md:pt-20 pb-10">
+                <div className="max-w-[1440px] mx-auto px-4 md:px-10 w-full grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
                     {/* Left Text */}
-                    <motion.div variants={container} initial="hidden" animate="show" className="text-white">
+                    <motion.div variants={container} initial="hidden" animate="show" className="text-white pt-10 md:pt-0">
                         <motion.div variants={item}>
-                            <span className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-sm border border-white/20 text-white/90 text-xs font-bold tracking-widest px-4 py-2 rounded-full mb-6">
+                            <span className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-sm border border-white/20 text-white/90 text-[10px] md:text-xs font-bold tracking-widest px-3 md:px-4 py-2 rounded-full mb-6">
                                 <span className="w-2 h-2 bg-green-400 rounded-full animate-pulse" />
                                 PREMIUM REAL ESTATE MARKETPLACE
                             </span>
                         </motion.div>
 
-                        <motion.h1 variants={item} className="text-6xl md:text-7xl lg:text-8xl font-bold leading-[0.88] tracking-tighter mb-6">
+                        <motion.h1 variants={item} className="text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-bold leading-[0.9] tracking-tighter mb-6">
                             <span className="block">FIND YOUR</span>
                             <span className="block text-transparent bg-clip-text bg-gradient-to-r from-white via-gray-200 to-gray-400">
                                 DREAM
@@ -70,7 +70,7 @@ const Hero = () => {
                             <span className="block">HOME</span>
                         </motion.h1>
 
-                        <motion.p variants={item} className="text-white/70 text-lg font-medium leading-relaxed max-w-md mb-8">
+                        <motion.p variants={item} className="text-white/70 text-base md:text-lg font-medium leading-relaxed max-w-md mb-8">
                             Discover over 12,000+ premium properties in the most exclusive neighborhoods across India.
                         </motion.p>
 
@@ -78,9 +78,9 @@ const Hero = () => {
                         <motion.form
                             variants={item}
                             onSubmit={handleSearch}
-                            className="relative w-full max-w-xl bg-white rounded-2xl shadow-2xl flex items-center p-2 mb-4 group focus-within:ring-2 focus-within:ring-white/50"
+                            className="relative w-full max-w-xl bg-white rounded-2xl shadow-2xl flex flex-col sm:flex-row items-stretch sm:items-center p-2 mb-6 group focus-within:ring-2 focus-within:ring-white/50"
                         >
-                            <div className="flex items-center gap-2 pl-3 pr-1 border-r border-light-grey">
+                            <div className="hidden sm:flex items-center gap-2 pl-3 pr-1 border-r border-light-grey">
                                 <MapPin size={18} className="text-neutral-grey shrink-0" />
                                 <span className="text-xs font-bold text-neutral-grey whitespace-nowrap">Location</span>
                             </div>
@@ -88,21 +88,21 @@ const Hero = () => {
                                 type="text"
                                 value={searchQuery}
                                 onChange={(e) => setSearchQuery(e.target.value)}
-                                placeholder="City, neighbourhood, or address..."
-                                className="flex-1 h-12 px-4 text-primary-black placeholder-neutral-grey focus:outline-none text-base font-medium bg-transparent"
+                                placeholder="City or address..."
+                                className="flex-1 h-12 px-4 text-primary-black placeholder-neutral-grey focus:outline-none text-base font-medium bg-transparent text-center sm:text-left"
                             />
                             <button
                                 type="submit"
-                                className="bg-primary-black text-white h-12 px-6 rounded-xl flex items-center gap-2 hover:bg-neutral-grey transition-all shrink-0 font-bold text-sm active:scale-95 duration-200"
+                                className="bg-primary-black text-white h-12 px-6 rounded-xl flex items-center justify-center gap-2 hover:bg-neutral-grey transition-all shrink-0 font-bold text-sm active:scale-95 duration-200 mt-2 sm:mt-0 w-full sm:w-auto"
                             >
                                 <Search size={18} />
-                                <span className="hidden sm:inline">Search</span>
+                                <span>Search</span>
                             </button>
                         </motion.form>
 
                         {/* Popular Searches */}
-                        <motion.div variants={item} className="flex flex-wrap items-center gap-2">
-                            <span className="text-white/50 text-xs font-bold uppercase tracking-wider">Popular:</span>
+                        <motion.div variants={item} className="flex flex-wrap items-center gap-2 justify-center sm:justify-start">
+                            <span className="text-white/50 text-xs font-bold uppercase tracking-wider hidden sm:inline">Popular:</span>
                             {popularLocations.map(loc => (
                                 <button
                                     key={loc}

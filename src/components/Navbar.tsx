@@ -1,16 +1,36 @@
 import { useState, useEffect } from 'react';
 import { Menu, X, User, Search, Heart } from 'lucide-react';
 import { Link, useLocation } from 'react-router-dom';
+import { motion } from 'framer-motion';
 import { useProperties } from '../context/PropertyContext';
 
 const Navbar = () => {
     const [isOpen, setIsOpen] = useState(false);
     const [scrolled, setScrolled] = useState(false);
+    const [activeSection, setActiveSection] = useState('');
     const location = useLocation();
     const { wishlist } = useProperties();
 
     useEffect(() => {
-        const handleScroll = () => setScrolled(window.scrollY > 20);
+        const handleScroll = () => {
+            setScrolled(window.scrollY > 20);
+
+            // Detect active section
+            const sections = ['services', 'about', 'blog', 'help'];
+            const current = sections.find(section => {
+                const element = document.getElementById(section);
+                if (element) {
+                    const rect = element.getBoundingClientRect();
+                    return rect.top >= 0 && rect.top <= 300; // Trigger when section is near top
+                }
+                return false;
+            });
+            if (current) {
+                setActiveSection(current);
+            } else if (window.scrollY < 100) {
+                setActiveSection('');
+            }
+        };
         window.addEventListener('scroll', handleScroll);
         return () => window.removeEventListener('scroll', handleScroll);
     }, []);
@@ -21,25 +41,99 @@ const Navbar = () => {
     const isLanding = location.pathname === '/';
     const isTransparent = isLanding && !scrolled;
 
+    const scrollToSection = (id: string) => {
+        if (location.pathname === '/') {
+            const element = document.getElementById(id);
+            if (element) {
+                element.scrollIntoView({ behavior: 'smooth' });
+            }
+        } else {
+            // Navigate to home with hash
+            // This requires handling hash on load in LandingPage or using a library, 
+            // but for now we'll just navigate to home. 
+            // A better approach is usually `useNavigate` then scroll.
+            // Simplified for this context:
+            window.location.href = `/#${id}`;
+        }
+        setIsOpen(false);
+    };
+
+    // Helper to determine active state
+    const isActive = (to: string) => {
+        if (to.startsWith('/#')) {
+            const sectionId = to.replace('/#', '');
+            return isLanding && activeSection === sectionId;
+        }
+        return location.pathname === to;
+    };
+
+    // Helper to determine if we should use Link or button
+    const NavItem = ({ to, label, className }: { to: string, label: string, className?: string }) => {
+        const isSection = to.startsWith('/#');
+        const sectionId = to.replace('/#', '');
+        const active = isActive(to);
+
+        const content = (
+            <span className="relative flex flex-col items-center">
+                {label}
+                {active && (
+                    <motion.div
+                        layoutId="navbar-indicator"
+                        className={`absolute -bottom-1.5 w-5 h-1 rounded-full ${isTransparent ? 'bg-white' : 'bg-primary-black'}`}
+                        initial={{ opacity: 0, scale: 0.5 }}
+                        animate={{ opacity: 1, scale: 1 }}
+                        transition={{ type: "spring", stiffness: 400, damping: 30 }}
+                    />
+                )}
+            </span>
+        );
+
+        // Boxy Hover Effect + Base Layout
+        // We remove the old CSS underline classes and add our own hover/layout classes
+        const cleanClassName = className?.replace(/after:[\w\-\[\].\d]+/g, '').replace('relative', '').trim() || '';
+        const hoverClasses = isTransparent
+            ? 'hover:bg-white/10'
+            : 'hover:bg-primary-black/5';
+
+        const finalClassName = `${cleanClassName} relative flex items-center justify-center rounded-lg px-4 py-2 transition-colors duration-200 ${hoverClasses}`;
+
+        if (isSection) {
+            return (
+                <button
+                    onClick={() => scrollToSection(sectionId)}
+                    className={finalClassName}
+                >
+                    {content}
+                </button>
+            );
+        }
+
+        return (
+            <Link to={to} className={finalClassName} onClick={() => setIsOpen(false)}>
+                {content}
+            </Link>
+        );
+    };
+
     const navLinks = [
         { to: '/search', label: 'Find Home' },
-        { to: '/services', label: 'Services' },
-        { to: '/about', label: 'About' },
-        { to: '/blog', label: 'Blog' },
-        { to: '/help', label: 'Help' },
+        { to: '/#services', label: 'Services' },
+        { to: '/#about', label: 'About' },
+        { to: '/#blog', label: 'Blog' },
+        { to: '/#help', label: 'Help' },
     ];
 
     return (
         <nav
             className={`sticky top-0 z-50 transition-all duration-500 ${isTransparent
-                    ? 'bg-transparent'
-                    : 'bg-white/80 backdrop-blur-xl border-b border-light-grey shadow-sm'
+                ? 'bg-transparent'
+                : 'bg-white/80 backdrop-blur-xl border-b border-light-grey shadow-sm'
                 }`}
         >
             <div className="max-w-[1440px] mx-auto px-4 md:px-10 h-20 flex items-center justify-between gap-6">
 
                 {/* Logo */}
-                <Link to="/" className="flex items-center gap-2.5 group shrink-0">
+                <Link to="/" className="flex items-center gap-2.5 group shrink-0" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>
                     <div className={`w-9 h-9 rounded-xl flex items-center justify-center font-bold text-lg shadow-md transition-all group-hover:scale-110 duration-300 ${isTransparent ? 'bg-white text-primary-black' : 'bg-primary-black text-white'}`}>
                         B
                     </div>
@@ -49,18 +143,17 @@ const Navbar = () => {
                 </Link>
 
                 {/* Desktop Center Pills Nav */}
-                <div className={`hidden md:flex items-center gap-1 px-4 py-2 rounded-full transition-all duration-500 ${isTransparent ? 'bg-white/10 backdrop-blur-sm border border-white/20' : 'bg-light-grey'}`}>
+                <div className={`hidden md:flex items-center gap-1 px-4 py-2 rounded-full transition-all duration-500 ${isTransparent ? 'bg-white/10 backdrop-blur-sm border border-white/20' : 'bg-transparent'}`}>
                     {navLinks.map(link => (
-                        <Link
+                        <NavItem
                             key={link.to}
                             to={link.to}
-                            className={`px-4 py-2 rounded-full text-sm font-bold transition-all duration-200 ${location.pathname === link.to
-                                    ? (isTransparent ? 'bg-white text-primary-black' : 'bg-white text-primary-black shadow-sm')
-                                    : (isTransparent ? 'text-white/90 hover:bg-white/20' : 'text-neutral-grey hover:text-primary-black hover:bg-white/80')
+                            label={link.label}
+                            className={`px-4 py-2 text-base font-bold transition-all duration-200 ${isTransparent
+                                ? 'text-white hover:bg-white/10'
+                                : 'text-neutral-grey hover:text-primary-black hover:bg-light-grey/50'
                                 }`}
-                        >
-                            {link.label}
-                        </Link>
+                        />
                     ))}
                 </div>
 
@@ -68,7 +161,7 @@ const Navbar = () => {
                 <div className="hidden md:flex items-center gap-3 shrink-0">
                     {/* Wishlist */}
                     <Link
-                        to="/search"
+                        to="/wishlist"
                         className={`relative p-2.5 rounded-full transition-all duration-200 ${isTransparent ? 'text-white hover:bg-white/20' : 'text-primary-black hover:bg-light-grey'}`}
                         title="Wishlist"
                     >
@@ -91,12 +184,6 @@ const Navbar = () => {
 
                     <div className={`h-6 w-px mx-1 ${isTransparent ? 'bg-white/30' : 'bg-light-grey'}`} />
 
-                    <Link
-                        to="/admin"
-                        className={`text-sm font-bold px-3 py-2 rounded-full transition-all duration-200 ${isTransparent ? 'text-white/80 hover:text-white hover:bg-white/20' : 'text-neutral-grey hover:text-primary-black hover:bg-light-grey'}`}
-                    >
-                        Admin
-                    </Link>
                     <button className={`flex items-center gap-2 px-5 py-2.5 rounded-full text-sm font-bold transition-all shadow-md hover:shadow-lg active:scale-95 duration-200 ${isTransparent ? 'bg-white text-primary-black hover:bg-white/90' : 'bg-primary-black text-white hover:bg-neutral-grey'}`}>
                         <User size={16} />
                         Sign In
@@ -105,7 +192,7 @@ const Navbar = () => {
 
                 {/* Mobile Actions */}
                 <div className="md:hidden flex items-center gap-2">
-                    <Link to="/search" className={`relative p-2 rounded-full transition-colors ${isTransparent ? 'text-white' : 'text-primary-black'}`}>
+                    <Link to="/wishlist" className={`relative p-2 rounded-full transition-colors ${isTransparent ? 'text-white' : 'text-primary-black'}`}>
                         <Heart size={20} />
                         {wishlist.length > 0 && (
                             <span className="absolute -top-0.5 -right-0.5 w-4 h-4 bg-red-500 text-white rounded-full text-[10px] font-bold flex items-center justify-center">
@@ -124,25 +211,16 @@ const Navbar = () => {
 
             {/* Mobile Menu */}
             {isOpen && (
-                <div className="md:hidden absolute top-20 left-0 w-full bg-white/95 backdrop-blur-xl border-b border-light-grey p-6 flex flex-col gap-2 shadow-2xl z-40">
+                <div className="md:hidden absolute top-20 left-0 w-full bg-white/95 backdrop-blur-xl border-b border-light-grey p-6 flex flex-col gap-2 shadow-2xl z-40 h-[calc(100vh-80px)] overflow-y-auto">
                     {navLinks.map(link => (
-                        <Link
+                        <NavItem
                             key={link.to}
                             to={link.to}
-                            className="text-lg font-bold p-3 hover:bg-light-grey rounded-xl transition-colors text-primary-black"
-                            onClick={() => setIsOpen(false)}
-                        >
-                            {link.label}
-                        </Link>
+                            label={link.label}
+                            className="text-lg font-bold p-3 hover:bg-light-grey rounded-xl transition-colors text-primary-black text-left w-full block"
+                        />
                     ))}
-                    <Link
-                        to="/admin"
-                        className="text-lg font-bold p-3 hover:bg-light-grey rounded-xl transition-colors text-primary-black"
-                        onClick={() => setIsOpen(false)}
-                    >
-                        Admin Portal
-                    </Link>
-                    <div className="mt-4 pt-4 border-t border-light-grey">
+                    <div className="mt-auto pt-4 border-t border-light-grey pb-8">
                         <button className="flex items-center justify-center gap-2 bg-primary-black text-white px-5 py-4 rounded-full text-lg font-bold w-full shadow-lg active:scale-95 transition-transform">
                             <User size={20} />
                             Sign In / Register

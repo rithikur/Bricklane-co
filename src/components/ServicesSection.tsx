@@ -25,11 +25,11 @@ const services = [
 
 const ServicesSection = () => {
     return (
-        <section className="py-20 bg-light-grey/10">
+        <section id="services" className="py-20 bg-light-grey/10">
             <div className="max-w-[1440px] mx-auto px-4 md:px-8">
-                <div className="text-center mb-16 max-w-2xl mx-auto">
-                    <h2 className="text-4xl font-bold text-primary-black mb-4">Our Services</h2>
-                    <p className="text-neutral-grey text-lg">Whether you are buying, selling, or renting, we can help you move forward.</p>
+                <div className="text-center mb-12 md:mb-16 max-w-2xl mx-auto">
+                    <h2 className="text-3xl md:text-4xl font-bold text-primary-black mb-4">Our Services</h2>
+                    <p className="text-neutral-grey text-base md:text-lg">Whether you are buying, selling, or renting, we can help you move forward.</p>
                 </div>
 
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-8">

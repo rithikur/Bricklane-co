@@ -20,8 +20,8 @@ const StatsSection = () => {
                             viewport={{ once: true }}
                             transition={{ delay: index * 0.1 }}
                         >
-                            <h3 className="text-5xl md:text-6xl font-bold mb-2">{stat.value}</h3>
-                            <p className="text-neutral-grey font-medium text-lg">{stat.label}</p>
+                            <h3 className="text-4xl md:text-6xl font-bold mb-2">{stat.value}</h3>
+                            <p className="text-neutral-grey font-medium text-base md:text-lg">{stat.label}</p>
                         </motion.div>
                     ))}
                 </div>

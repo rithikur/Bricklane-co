@@ -3,7 +3,9 @@ import Hero from '../components/Hero';
 import FeaturedSection from '../components/FeaturedSection';
 import StatsSection from '../components/StatsSection';
 import ServicesSection from '../components/ServicesSection';
+import AboutSection from '../components/AboutSection';
 import BlogSection from '../components/BlogSection';
+import HelpSection from '../components/HelpSection';
 import Footer from '../components/Footer';
 
 const LandingPage = () => {
@@ -14,7 +16,9 @@ const LandingPage = () => {
             <FeaturedSection />
             <StatsSection />
             <ServicesSection />
+            <AboutSection />
             <BlogSection />
+            <HelpSection />
             <Footer />
         </div>
     );
