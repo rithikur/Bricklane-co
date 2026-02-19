@@ -4,8 +4,8 @@ import { ArrowRight, User, Lock } from 'lucide-react';
 import { motion } from 'framer-motion';
 
 const AdminLogin = () => {
-    const [username, setUsername] = useState('');
-    const [password, setPassword] = useState('');
+    const [username, setUsername] = useState('admin');
+    const [password, setPassword] = useState('admin123');
     const [error, setError] = useState('');
     const navigate = useNavigate();
 
@@ -21,7 +21,7 @@ const AdminLogin = () => {
             } else {
                 setError('Invalid credentials. Please try again.');
             }
-        }, 800);
+        }, 100);
     };
 
     return (

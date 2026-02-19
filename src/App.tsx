@@ -11,6 +11,7 @@ import AdminLogin from './pages/AdminLogin';
 import AdminDashboard from './pages/AdminDashboard';
 import AdminPropertyForm from './pages/AdminPropertyForm';
 import { PropertyProvider } from './context/PropertyContext';
+import AuthPage from './pages/AuthPage';
 
 function App() {
   return (
@@ -31,6 +32,8 @@ function App() {
           <Route path="/admin/dashboard" element={<AdminDashboard />} />
           <Route path="/admin/property/new" element={<AdminPropertyForm />} />
           <Route path="/admin/property/edit/:id" element={<AdminPropertyForm />} />
+          <Route path="/signin" element={<AuthPage />} />
+          <Route path="/signup" element={<AuthPage />} />
         </Routes>
       </Router>
     </PropertyProvider>

@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Menu, X, User, Search, Heart } from 'lucide-react';
+import { Menu, X, User, Search, Heart, ArrowLeft } from 'lucide-react';
 import { Link, useLocation } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { useProperties } from '../context/PropertyContext';
@@ -127,13 +127,24 @@ const Navbar = () => {
         <nav
             className={`sticky top-0 z-50 transition-all duration-500 ${isTransparent
                 ? 'bg-transparent'
-                : 'bg-white/80 backdrop-blur-xl border-b border-light-grey shadow-sm'
+                : 'bg-white/80 backdrop-blur-xl'
                 }`}
         >
             <div className="max-w-[1440px] mx-auto px-4 md:px-10 h-20 flex items-center justify-between gap-6">
 
+                {/* Back Button (Absolute Top Left) */}
+                {!isLanding && (
+                    <button
+                        onClick={() => window.history.back()}
+                        className={`absolute left-4 md:left-8 top-1/2 -translate-y-1/2 p-2 rounded-full transition-all duration-300 hover:scale-110 z-50 ${isTransparent ? 'bg-white/20 text-white hover:bg-white/30' : 'bg-light-grey/30 text-primary-black hover:bg-light-grey/50'}`}
+                        title="Go Back"
+                    >
+                        <ArrowLeft size={20} />
+                    </button>
+                )}
+
                 {/* Logo */}
-                <Link to="/" className="flex items-center gap-2.5 group shrink-0" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>
+                <Link to="/" className="flex items-center gap-2.5 group shrink-0 ml-8 md:ml-0" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>
                     <div className={`w-9 h-9 rounded-xl flex items-center justify-center font-bold text-lg shadow-md transition-all group-hover:scale-110 duration-300 ${isTransparent ? 'bg-white text-primary-black' : 'bg-primary-black text-white'}`}>
                         B
                     </div>
@@ -143,7 +154,7 @@ const Navbar = () => {
                 </Link>
 
                 {/* Desktop Center Pills Nav */}
-                <div className={`hidden md:flex items-center gap-1 px-4 py-2 rounded-full transition-all duration-500 ${isTransparent ? 'bg-white/10 backdrop-blur-sm border border-white/20' : 'bg-transparent'}`}>
+                <div className={`hidden md:flex items-center gap-1 px-4 py-2 rounded-full transition-all duration-500 ${isTransparent ? 'bg-white/10 backdrop-blur-sm' : 'bg-transparent'}`}>
                     {navLinks.map(link => (
                         <NavItem
                             key={link.to}
@@ -184,10 +195,10 @@ const Navbar = () => {
 
                     <div className={`h-6 w-px mx-1 ${isTransparent ? 'bg-white/30' : 'bg-light-grey'}`} />
 
-                    <button className={`flex items-center gap-2 px-5 py-2.5 rounded-full text-sm font-bold transition-all shadow-md hover:shadow-lg active:scale-95 duration-200 ${isTransparent ? 'bg-white text-primary-black hover:bg-white/90' : 'bg-primary-black text-white hover:bg-neutral-grey'}`}>
+                    <Link to="/signin" className={`flex items-center gap-2 px-5 py-2.5 rounded-full text-sm font-bold transition-all shadow-md hover:shadow-lg active:scale-95 duration-200 ${isTransparent ? 'bg-white text-primary-black hover:bg-white/90' : 'bg-primary-black text-white hover:bg-neutral-grey'}`}>
                         <User size={16} />
                         Sign In
-                    </button>
+                    </Link>
                 </div>
 
                 {/* Mobile Actions */}
@@ -221,10 +232,10 @@ const Navbar = () => {
                         />
                     ))}
                     <div className="mt-auto pt-4 border-t border-light-grey pb-8">
-                        <button className="flex items-center justify-center gap-2 bg-primary-black text-white px-5 py-4 rounded-full text-lg font-bold w-full shadow-lg active:scale-95 transition-transform">
+                        <Link to="/signin" className="flex items-center justify-center gap-2 bg-primary-black text-white px-5 py-4 rounded-full text-lg font-bold w-full shadow-lg active:scale-95 transition-transform" onClick={() => setIsOpen(false)}>
                             <User size={20} />
                             Sign In / Register
-                        </button>
+                        </Link>
                     </div>
                 </div>
             )}

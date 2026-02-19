@@ -8,6 +8,8 @@ import BlogSection from '../components/BlogSection';
 import HelpSection from '../components/HelpSection';
 import Footer from '../components/Footer';
 
+import Chatbot from '../components/Chatbot';
+
 const LandingPage = () => {
     return (
         <div className="min-h-screen font-display bg-white">
@@ -20,6 +22,7 @@ const LandingPage = () => {
             <BlogSection />
             <HelpSection />
             <Footer />
+            <Chatbot />
         </div>
     );
 };
