@@ -1,4 +1,5 @@
 import { MapPin, Globe, Award } from 'lucide-react';
+import RevealText from './common/RevealText';
 
 const AboutSection = () => {
     return (
@@ -7,10 +8,12 @@ const AboutSection = () => {
                 {/* Hero Section */}
                 <div className="mb-12 md:mb-20 text-center">
                     <span className="text-xs md:text-sm font-bold tracking-widest text-neutral-grey uppercase mb-4 block">Who We Are</span>
-                    <h2 className="text-3xl md:text-6xl font-bold text-primary-black mb-6 md:mb-8">Rearranging Real Estate</h2>
-                    <p className="text-lg md:text-xl text-neutral-grey max-w-4xl mx-auto leading-relaxed">
+                    <RevealText as="h2" className="text-3xl md:text-6xl font-bold text-primary-black mb-6 md:mb-8">
+                        Rearranging Real Estate
+                    </RevealText>
+                    <RevealText as="p" className="text-lg md:text-xl text-neutral-grey max-w-4xl mx-auto leading-relaxed" delay={0.2}>
                         We are Bricklane co. A modern real estate agency that combines technology with a human touch to deliver an exceptional experience. We believe that finding a home should be an inspiring journey, not a stressful chore.
-                    </p>
+                    </RevealText>
                 </div>
 
                 {/* Image Grid */}
@@ -32,7 +35,9 @@ const AboutSection = () => {
                     <div className="flex flex-col md:flex-row justify-between items-end mb-12 md:mb-16 gap-6">
                         <div>
                             <span className="text-xs font-bold tracking-widest text-neutral-grey uppercase mb-2 block">Company Overview</span>
-                            <h3 className="text-3xl md:text-5xl font-bold text-primary-black">Built on Trust,<br />Driven by Design.</h3>
+                            <RevealText as="h3" className="text-3xl md:text-5xl font-bold text-primary-black">
+                                Built on Trust, Driven by Design.
+                            </RevealText>
                         </div>
                         <p className="max-w-md text-neutral-grey text-lg leading-relaxed">
                             Since 2018, we've been rewriting the rules of Indian real estate, moving from a transaction-first model to a relationship-first approach.

@@ -3,6 +3,7 @@ import { Menu, X, User, Search, Heart, ArrowLeft } from 'lucide-react';
 import { Link, useLocation } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { useProperties } from '../context/PropertyContext';
+import Magnetic from './common/Magnetic';
 
 const Navbar = () => {
     const [isOpen, setIsOpen] = useState(false);
@@ -149,12 +150,12 @@ const Navbar = () => {
                         B
                     </div>
                     <span className={`text-xl font-bold tracking-tight transition-colors duration-300 ${isTransparent ? 'text-white' : 'text-primary-black'}`}>
-                        BRICKLANE<span className={`font-normal ${isTransparent ? 'text-white/70' : 'text-neutral-grey'}`}>co.</span>
+                        BRICKLANE<span className={`font-normal ml-1 ${isTransparent ? 'text-white/70' : 'text-neutral-grey'}`}>co.</span>
                     </span>
                 </Link>
 
                 {/* Desktop Center Pills Nav */}
-                <div className={`hidden md:flex items-center gap-1 px-4 py-2 rounded-full transition-all duration-500 ${isTransparent ? 'bg-white/10 backdrop-blur-sm' : 'bg-transparent'}`}>
+                <div className="hidden md:flex items-center gap-1 px-4 py-2 rounded-full bg-white/10 backdrop-blur-sm">
                     {navLinks.map(link => (
                         <NavItem
                             key={link.to}
@@ -171,34 +172,40 @@ const Navbar = () => {
                 {/* Right Actions */}
                 <div className="hidden md:flex items-center gap-3 shrink-0">
                     {/* Wishlist */}
-                    <Link
-                        to="/wishlist"
-                        className={`relative p-2.5 rounded-full transition-all duration-200 ${isTransparent ? 'text-white hover:bg-white/20' : 'text-primary-black hover:bg-light-grey'}`}
-                        title="Wishlist"
-                    >
-                        <Heart size={20} />
-                        {wishlist.length > 0 && (
-                            <span className="absolute -top-0.5 -right-0.5 w-4 h-4 bg-red-500 text-white rounded-full text-[10px] font-bold flex items-center justify-center">
-                                {wishlist.length}
-                            </span>
-                        )}
-                    </Link>
+                    <Magnetic strength={0.4}>
+                        <Link
+                            to="/wishlist"
+                            className={`relative p-2.5 rounded-full transition-all duration-200 ${isTransparent ? 'text-white hover:bg-white/20' : 'text-primary-black hover:bg-light-grey'}`}
+                            title="Wishlist"
+                        >
+                            <Heart size={20} />
+                            {wishlist.length > 0 && (
+                                <span className="absolute -top-0.5 -right-0.5 w-4 h-4 bg-red-500 text-white rounded-full text-[10px] font-bold flex items-center justify-center">
+                                    {wishlist.length}
+                                </span>
+                            )}
+                        </Link>
+                    </Magnetic>
 
                     {/* Search */}
-                    <Link
-                        to="/search"
-                        className={`p-2.5 rounded-full transition-all duration-200 ${isTransparent ? 'text-white hover:bg-white/20' : 'text-primary-black hover:bg-light-grey'}`}
-                        title="Search"
-                    >
-                        <Search size={20} />
-                    </Link>
+                    <Magnetic strength={0.4}>
+                        <Link
+                            to="/search"
+                            className={`p-2.5 rounded-full transition-all duration-200 ${isTransparent ? 'text-white hover:bg-white/20' : 'text-primary-black hover:bg-light-grey'}`}
+                            title="Search"
+                        >
+                            <Search size={20} />
+                        </Link>
+                    </Magnetic>
 
                     <div className={`h-6 w-px mx-1 ${isTransparent ? 'bg-white/30' : 'bg-light-grey'}`} />
 
-                    <Link to="/signin" className={`flex items-center gap-2 px-5 py-2.5 rounded-full text-sm font-bold transition-all shadow-md hover:shadow-lg active:scale-95 duration-200 ${isTransparent ? 'bg-white text-primary-black hover:bg-white/90' : 'bg-primary-black text-white hover:bg-neutral-grey'}`}>
-                        <User size={16} />
-                        Sign In
-                    </Link>
+                    <Magnetic strength={0.25}>
+                        <Link to="/signin" className={`flex items-center gap-2 px-5 py-2.5 rounded-full text-sm font-bold transition-all shadow-md hover:shadow-lg active:scale-95 duration-200 ${isTransparent ? 'bg-white text-primary-black hover:bg-white/90' : 'bg-primary-black text-white hover:bg-neutral-grey'}`}>
+                            <User size={16} />
+                            Sign In
+                        </Link>
+                    </Magnetic>
                 </div>
 
                 {/* Mobile Actions */}

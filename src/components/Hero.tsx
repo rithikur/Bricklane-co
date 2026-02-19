@@ -2,6 +2,8 @@ import { useState } from 'react';
 import { Search, Star, MapPin, TrendingUp, Shield } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
+import RevealText from './common/RevealText';
+import Magnetic from './common/Magnetic';
 
 const Hero = () => {
     const navigate = useNavigate();
@@ -62,17 +64,15 @@ const Hero = () => {
                             </span>
                         </motion.div>
 
-                        <motion.h1 variants={item} className="text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-bold leading-[0.9] tracking-tighter mb-6">
-                            <span className="block">FIND YOUR</span>
-                            <span className="block text-transparent bg-clip-text bg-gradient-to-r from-white via-gray-200 to-gray-400">
-                                DREAM
-                            </span>
-                            <span className="block">HOME</span>
-                        </motion.h1>
+                        <div className="mb-6">
+                            <RevealText as="h1" className="text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-bold leading-[0.9] tracking-tighter text-white" delay={0.1}>
+                                FIND YOUR DREAM HOME
+                            </RevealText>
+                        </div>
 
-                        <motion.p variants={item} className="text-white/70 text-base md:text-lg font-medium leading-relaxed max-w-md mb-8">
+                        <RevealText as="p" className="text-white/70 text-base md:text-lg font-medium leading-relaxed max-w-md mb-8" delay={0.4}>
                             Discover over 12,000+ premium properties in the most exclusive neighborhoods across India.
-                        </motion.p>
+                        </RevealText>
 
                         {/* Search Bar */}
                         <motion.form
@@ -91,13 +91,15 @@ const Hero = () => {
                                 placeholder="City or address..."
                                 className="flex-1 h-12 px-4 text-primary-black placeholder-neutral-grey focus:outline-none text-base font-medium bg-transparent text-center sm:text-left"
                             />
-                            <button
-                                type="submit"
-                                className="bg-primary-black text-white h-12 px-6 rounded-xl flex items-center justify-center gap-2 hover:bg-neutral-grey transition-all shrink-0 font-bold text-sm active:scale-95 duration-200 mt-2 sm:mt-0 w-full sm:w-auto"
-                            >
-                                <Search size={18} />
-                                <span>Search</span>
-                            </button>
+                            <Magnetic strength={0.2}>
+                                <button
+                                    type="submit"
+                                    className="bg-primary-black text-white h-12 px-6 rounded-xl flex items-center justify-center gap-2 hover:bg-neutral-grey transition-all shrink-0 font-bold text-sm active:scale-95 duration-200 mt-2 sm:mt-0 w-full sm:w-auto"
+                                >
+                                    <Search size={18} />
+                                    <span>Search</span>
+                                </button>
+                            </Magnetic>
                         </motion.form>
 
                         {/* Popular Searches */}

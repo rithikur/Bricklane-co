@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { ArrowRight, Home, Key, Receipt } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
+import RevealText from './common/RevealText';
 
 const services = [
     {
@@ -39,10 +40,12 @@ const ServicesSection = () => {
                 <div className="flex flex-col md:flex-row justify-between items-end mb-12 md:mb-16 gap-6">
                     <div className="max-w-xl">
                         <span className="text-xs font-bold tracking-widest text-neutral-grey uppercase mb-2 block">Our Expertise</span>
-                        <h2 className="text-4xl md:text-5xl font-bold text-primary-black mb-4">Real Estate Made Simple.</h2>
-                        <p className="text-neutral-grey text-lg leading-relaxed">
+                        <RevealText as="h2" className="text-4xl md:text-5xl font-bold text-primary-black mb-4">
+                            Real Estate Made Simple.
+                        </RevealText>
+                        <RevealText as="p" className="text-neutral-grey text-lg leading-relaxed" delay={0.2}>
                             Navigate the market with confidence. Whether you're buying, selling, or renting, we provide the tools and guidance you need.
-                        </p>
+                        </RevealText>
                     </div>
                 </div>
 
