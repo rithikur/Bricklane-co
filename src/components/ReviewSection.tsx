@@ -59,7 +59,7 @@ const ReviewSection = () => {
     const isInView = useInView(ref, { once: true, margin: "-10%" });
 
     return (
-        <section ref={ref} className="py-20 bg-light-grey/30">
+        <section id="reviews" ref={ref} className="py-20 bg-light-grey/30">
             <div className="max-w-[1440px] mx-auto px-4 md:px-8">
                 <div className="text-center mb-16">
                     <span className="text-xs font-bold tracking-widest text-neutral-grey uppercase mb-4 block">Testimonials</span>

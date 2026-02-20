@@ -14,6 +14,7 @@ import { PropertyProvider } from './context/PropertyContext';
 import AuthPage from './pages/AuthPage';
 import SmoothScroll from './components/common/SmoothScroll';
 import CustomCursor from './components/common/CustomCursor';
+import ScrollToTop from './components/common/ScrollToTop';
 import CareersPage from './pages/CareersPage';
 import PressPage from './pages/PressPage';
 import PrivacyPolicyPage from './pages/PrivacyPolicyPage';
@@ -27,6 +28,8 @@ function App() {
       <Router>
         {/* Custom cursor — only renders on non-touch devices */}
         <CustomCursor />
+        {/* Scroll to top on every route change */}
+        <ScrollToTop />
         {/* Smooth scroll wraps all content */}
         <SmoothScroll>
           <Routes>

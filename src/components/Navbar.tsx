@@ -17,7 +17,7 @@ const Navbar = () => {
             setScrolled(window.scrollY > 20);
 
             // Detect active section
-            const sections = ['services', 'about', 'blog', 'help'];
+            const sections = ['services', 'about', 'reviews', 'blog', 'help'];
             const current = sections.find(section => {
                 const element = document.getElementById(section);
                 if (element) {
@@ -120,6 +120,7 @@ const Navbar = () => {
         { to: '/search', label: 'Find Home' },
         { to: '/#services', label: 'Services' },
         { to: '/#about', label: 'About' },
+        { to: '/#reviews', label: 'Reviews' },
         { to: '/#blog', label: 'Blog' },
         { to: '/#help', label: 'Help' },
     ];
