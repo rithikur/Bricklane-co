@@ -32,20 +32,20 @@ const Footer = () => {
                     <div>
                         <h4 className="font-bold text-lg mb-6 text-primary-black">Company</h4>
                         <ul className="space-y-4 text-neutral-grey font-medium">
-                            <li><a href="#" className="hover:text-primary-black transition-colors">About Us</a></li>
-                            <li><a href="#" className="hover:text-primary-black transition-colors">Careers</a></li>
-                            <li><a href="#" className="hover:text-primary-black transition-colors">Blog</a></li>
-                            <li><a href="#" className="hover:text-primary-black transition-colors">Press</a></li>
+                            <li><Link to="/about" className="hover:text-primary-black transition-colors">About Us</Link></li>
+                            <li><Link to="/careers" className="hover:text-primary-black transition-colors">Careers</Link></li>
+                            <li><Link to="/blog" className="hover:text-primary-black transition-colors">Blog</Link></li>
+                            <li><Link to="/press" className="hover:text-primary-black transition-colors">Press</Link></li>
                         </ul>
                     </div>
 
                     <div>
                         <h4 className="font-bold text-lg mb-6 text-primary-black">Resources</h4>
                         <ul className="space-y-4 text-neutral-grey font-medium">
-                            <li><a href="#" className="hover:text-primary-black transition-colors">Help Center</a></li>
-                            <li><a href="#" className="hover:text-primary-black transition-colors">Privacy Policy</a></li>
-                            <li><a href="#" className="hover:text-primary-black transition-colors">Terms of Service</a></li>
-                            <li><a href="#" className="hover:text-primary-black transition-colors">Contact Support</a></li>
+                            <li><Link to="/help" className="hover:text-primary-black transition-colors">Help Center</Link></li>
+                            <li><Link to="/privacy" className="hover:text-primary-black transition-colors">Privacy Policy</Link></li>
+                            <li><Link to="/terms" className="hover:text-primary-black transition-colors">Terms of Service</Link></li>
+                            <li><Link to="/contact" className="hover:text-primary-black transition-colors">Contact Support</Link></li>
                         </ul>
                     </div>
 
@@ -62,11 +62,11 @@ const Footer = () => {
                 </div>
 
                 <div className="border-t border-light-grey pt-8 flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-neutral-grey font-medium">
-                    <p>&copy; 2026 Bricklane co. All rights reserved.</p>
+                    <p>&copy; 2026 Bricklane co. All rights reserved. <span className="mx-2">|</span> Powered by LbxSuite</p>
                     <div className="flex gap-8">
-                        <a href="#" className="hover:text-primary-black transition-colors">Privacy</a>
-                        <a href="#" className="hover:text-primary-black transition-colors">Terms</a>
-                        <a href="#" className="hover:text-primary-black transition-colors">Sitemap</a>
+                        <Link to="/privacy" className="hover:text-primary-black transition-colors">Privacy</Link>
+                        <Link to="/terms" className="hover:text-primary-black transition-colors">Terms</Link>
+                        <Link to="/sitemap" className="hover:text-primary-black transition-colors">Sitemap</Link>
                     </div>
                 </div>
             </div>

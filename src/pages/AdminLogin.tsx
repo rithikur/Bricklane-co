@@ -32,7 +32,7 @@ const AdminLogin = () => {
                     <img
                         src="https://images.unsplash.com/photo-1613977257363-707ba9348227?auto=format&fit=crop&q=80&w=2070"
                         alt="Background"
-                        className="w-full h-full object-cover opacity-60 mix-blend-overlay"
+                        className="w-full h-full object-cover opacity-90"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent"></div>
                 </div>

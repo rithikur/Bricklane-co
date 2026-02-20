@@ -3,7 +3,21 @@ import { MessageCircle, X } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 // Predefined Q&A Logic
-const chatbotData = [
+// Helper type for our chat steps
+type ChatOption = {
+    label: string;
+    nextId?: string;
+    action?: string;
+};
+
+type ChatStep = {
+    id: string;
+    message: string;
+    options: ChatOption[];
+};
+
+// Predefined Q&A Logic
+const chatbotData: ChatStep[] = [
     {
         id: 'start',
         message: "Hi there! 👋 Welcome to Bricklane co. How can I help you today?",
@@ -36,7 +50,7 @@ const chatbotData = [
         id: 'renting',
         message: "Looking for a rental? We have the most up-to-date listings in top cities.",
         options: [
-            { label: "Browse Rentals", action: '/search?type=rent' }, // Mock action
+            { label: "Browse Rentals", action: '/search' },
             { label: "Tenant FAQs", action: '/help' },
             { label: "Back to menu", nextId: 'start' },
         ]
@@ -45,6 +59,7 @@ const chatbotData = [
         id: 'support',
         message: "Our support team is available 24/7. You can reach us at support@bricklane.co or call +91 98765 43210.",
         options: [
+            { label: "Contact Page", action: '/contact' },
             { label: "Back to menu", nextId: 'start' },
         ]
     },
@@ -74,7 +89,7 @@ type Message = {
 const Chatbot = () => {
     const [isOpen, setIsOpen] = useState(false);
     const [history, setHistory] = useState<Message[]>([]);
-    const [currentStep, setCurrentStep] = useState(chatbotData[0]);
+    const [currentStep, setCurrentStep] = useState<ChatStep>(chatbotData[0]);
     const bottomRef = useRef<HTMLDivElement>(null);
 
     // Initial greeting
@@ -89,28 +104,41 @@ const Chatbot = () => {
         bottomRef.current?.scrollIntoView({ behavior: 'smooth' });
     }, [history, isOpen]);
 
-    const handleOptionClick = (option: { label: string, nextId?: string, action?: string }) => {
-        // Add user response
-        setHistory(prev => [...prev, { text: option.label, sender: 'user' }]);
+    const handleOptionClick = (option: ChatOption) => {
+        // 1. Add User's selection to history
+        const userMessage: Message = { text: option.label, sender: 'user' };
+        setHistory((prev) => [...prev, userMessage]);
 
-        // Handle navigation or next step
+        // 2. Handle Action (Navigation)
         if (option.action) {
+            // Simulate bot "thinking" or acknowledging
             setTimeout(() => {
-                setHistory(prev => [...prev, { text: `Redirecting you to ${option.label}...`, sender: 'bot' }]);
+                setHistory((prev) => [
+                    ...prev,
+                    { text: `Navigating to ${option.label}...`, sender: 'bot' }
+                ]);
+                // Actually navigate
                 setTimeout(() => {
                     window.location.href = option.action!;
-                }, 1000);
-            }, 500);
+                }, 800);
+            }, 400);
             return;
         }
 
+        // 3. Handle Next Step (Conversation flow)
         if (option.nextId) {
-            const nextStep = chatbotData.find(step => step.id === option.nextId);
+            const nextStep = chatbotData.find((step) => step.id === option.nextId);
             if (nextStep) {
+                // Update current step's options immediately so UI reflects new choices
                 setCurrentStep(nextStep);
+
+                // Add Bot's response to history with a slight delay for realism
                 setTimeout(() => {
-                    setHistory(prev => [...prev, { text: nextStep.message, sender: 'bot' }]);
-                }, 600);
+                    setHistory((prev) => [
+                        ...prev,
+                        { text: nextStep.message, sender: 'bot' }
+                    ]);
+                }, 500);
             }
         }
     };

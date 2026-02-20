@@ -7,8 +7,8 @@ import AboutSection from '../components/AboutSection';
 import BlogSection from '../components/BlogSection';
 import HelpSection from '../components/HelpSection';
 import Footer from '../components/Footer';
-
 import Chatbot from '../components/Chatbot';
+import ReviewSection from '../components/ReviewSection';
 
 const LandingPage = () => {
     return (
@@ -19,6 +19,7 @@ const LandingPage = () => {
             <StatsSection />
             <ServicesSection />
             <AboutSection />
+            <ReviewSection />
             <BlogSection />
             <HelpSection />
             <Footer />

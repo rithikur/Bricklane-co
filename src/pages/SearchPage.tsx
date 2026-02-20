@@ -4,7 +4,7 @@ import Navbar from '../components/Navbar';
 import SearchFilters from '../components/SearchFilters';
 import PropertyCard from '../components/PropertyCard';
 import MapComponent from '../components/MapComponent';
-import { Map, List, Search } from 'lucide-react';
+import { Map, List, Search, ChevronDown, Check } from 'lucide-react';
 
 import { properties as initialProperties } from '../data/properties';
 
@@ -14,6 +14,7 @@ const SearchPage = () => {
 
     // Sort State
     const [sortBy, setSortBy] = useState('Relevance');
+    const [showSortDropdown, setShowSortDropdown] = useState(false);
 
     // Filters State
     const [listingType, setListingType] = useState('Buy');
@@ -32,8 +33,10 @@ const SearchPage = () => {
                 return false;
             }
 
-            // Listing Type Filter (Currently all data is 'Buy')
-            if (listingType === 'Rent') return false;
+            // Listing Type Filter
+            // Defaulting undefined types to 'Buy' for backward compatibility
+            const pType = (property as any).listingType || 'Buy';
+            if (pType !== listingType) return false;
 
             // Price Filter (Simple numeric check assuming price is stored as string number '4.5')
             const price = parseFloat(property.price);
@@ -107,6 +110,7 @@ const SearchPage = () => {
 
                         <div className="flex items-center justify-between mb-6">
                             <h2 className="text-xl font-bold text-primary-black">{filteredProperties.length} Properties Found</h2>
+
                             <div className="flex gap-4 items-center">
                                 {/* Desktop Map Toggle */}
                                 <button
@@ -123,18 +127,36 @@ const SearchPage = () => {
                                         </>
                                     )}
                                 </button>
+                            </div>
 
-                                <div className="flex gap-2 text-sm text-primary-black font-medium items-center">
-                                    <span className="text-neutral-grey hidden sm:inline">Sort by:</span>
-                                    <select
-                                        className="bg-transparent font-bold cursor-pointer outline-none hover:underline"
-                                        value={sortBy}
-                                        onChange={(e) => setSortBy(e.target.value)}
+                            <div className="flex gap-2 text-sm text-primary-black font-medium items-center relative z-20">
+                                <span className="text-neutral-grey hidden sm:inline">Sort by:</span>
+                                <div className="relative">
+                                    <button
+                                        onClick={() => setShowSortDropdown(!showSortDropdown)}
+                                        className="flex items-center gap-1 font-bold cursor-pointer hover:underline"
                                     >
-                                        <option>Relevance</option>
-                                        <option>Price: Low to High</option>
-                                        <option>Price: High to Low</option>
-                                    </select>
+                                        {sortBy}
+                                        <ChevronDown size={14} />
+                                    </button>
+
+                                    {showSortDropdown && (
+                                        <div className="absolute right-0 top-full mt-2 w-48 bg-white border border-light-grey rounded-std shadow-xl py-1 z-30">
+                                            {['Relevance', 'Price: Low to High', 'Price: High to Low'].map((option) => (
+                                                <button
+                                                    key={option}
+                                                    onClick={() => {
+                                                        setSortBy(option);
+                                                        setShowSortDropdown(false);
+                                                    }}
+                                                    className={`w-full text-left px-4 py-3 text-sm flex items-center justify-between hover:bg-light-grey/50 transition-colors ${sortBy === option ? 'font-bold text-primary-black' : 'text-neutral-grey'}`}
+                                                >
+                                                    {option}
+                                                    {sortBy === option && <Check size={14} className="text-primary-black" />}
+                                                </button>
+                                            ))}
+                                        </div>
+                                    )}
                                 </div>
                             </div>
                         </div>
@@ -166,8 +188,8 @@ const SearchPage = () => {
                         )}
                     </div>
 
-                    {/* Map Area - Toggled on Desktop too now */}
-                    {(showMapMobile) && (
+                    {/* Map Area */}
+                    {showMapMobile && (
                         <div className="w-full md:w-[45%] lg:w-[40%] bg-light-grey relative min-h-full border-l border-light-grey">
                             <MapComponent properties={displayProperties} />
 
@@ -181,7 +203,7 @@ const SearchPage = () => {
                         </div>
                     )}
 
-                    {/* Mobile Map Toggle Button (Floating) - Only visible when List is shown on mobile */}
+                    {/* Mobile Map Toggle Button (Floating) */}
                     {!showMapMobile && (
                         <div className="md:hidden absolute bottom-6 left-1/2 transform -translate-x-1/2 z-50">
                             <button

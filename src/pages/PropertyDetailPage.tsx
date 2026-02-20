@@ -71,7 +71,14 @@ const PropertyDetailPage = () => {
                                     <Heart size={18} fill={isSaved ? "currentColor" : "none"} />
                                     {isSaved ? 'Saved' : 'Save'}
                                 </button>
-                                <button onClick={() => alert('Share link copied!')} className="flex-1 md:flex-none flex items-center justify-center gap-2 px-6 py-2 border border-light-grey rounded-std font-medium hover:border-primary-black transition-colors">
+                                <button
+                                    onClick={() => {
+                                        navigator.clipboard.writeText(window.location.href);
+                                        // Could add a toast here, but for now just console or alert
+                                        alert('Link copied to clipboard!');
+                                    }}
+                                    className="flex-1 md:flex-none flex items-center justify-center gap-2 px-6 py-2 border border-light-grey rounded-std font-medium hover:border-primary-black transition-colors"
+                                >
                                     <Share size={18} />
                                     Share
                                 </button>
@@ -127,6 +134,37 @@ const PropertyDetailPage = () => {
                                 ))}
                             </div>
                         </div>
+
+
+                        {/* Reviews */}
+                        {(property as any).reviews && (property as any).reviews.length > 0 && (
+                            <div className="mb-12 border-t border-light-grey pt-12">
+                                <h2 className="text-2xl font-bold mb-8">Reviews ({(property as any).reviews.length})</h2>
+                                <div className="space-y-8">
+                                    {(property as any).reviews.map((review: any) => (
+                                        <div key={review.id} className="border-b border-light-grey pb-8 last:border-0 last:pb-0">
+                                            <div className="flex justify-between items-start mb-4">
+                                                <div className="flex items-center gap-3">
+                                                    <div className="w-10 h-10 rounded-full bg-primary-black text-white flex items-center justify-center font-bold">
+                                                        {review.user.charAt(0)}
+                                                    </div>
+                                                    <div>
+                                                        <h4 className="font-bold text-primary-black">{review.user}</h4>
+                                                        <span className="text-sm text-neutral-grey">{review.date}</span>
+                                                    </div>
+                                                </div>
+                                                <div className="flex gap-1">
+                                                    {[...Array(5)].map((_, i) => (
+                                                        <span key={i} className={`text-sm ${i < Math.floor(review.rating) ? 'text-primary-black' : 'text-light-grey'}`}>★</span>
+                                                    ))}
+                                                </div>
+                                            </div>
+                                            <p className="text-neutral-grey leading-relaxed">"{review.comment}"</p>
+                                        </div>
+                                    ))}
+                                </div>
+                            </div>
+                        )}
                     </div>
 
                     {/* Right Column: Agent Card */}
@@ -151,6 +189,7 @@ const PropertyDetailPage = () => {
                 </div>
             </div>
         </div>
+
     );
 };
 

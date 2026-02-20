@@ -19,6 +19,30 @@ const faqs = [
     {
         question: "How does the buying process work?",
         answer: "Buying a home involves several steps: getting pre-approved for a mortgage, finding a property, making an offer, home inspection, and closing. Our agents guide you through every step."
+    },
+    {
+        question: "How do I list my property for sale?",
+        answer: "To list your property, navigate to the 'Sell' section or contact our sales team directly. We will schedule a property valuation and professional photography session to get your listing live."
+    },
+    {
+        question: "What are your commission rates?",
+        answer: "Our commission rates are competitive and transparent. For sales, we typically charge a standard percentage of the final sale price. For rentals, it is usually equivalent to one month's rent. Contact us for a detailed quote."
+    },
+    {
+        question: "Can I save properties to view later?",
+        answer: "Yes! You can create an account and click the 'Heart' icon on any property card to add it to your Wishlist. You can access your saved properties from your profile anytime."
+    },
+    {
+        question: "How do I reset my password?",
+        answer: "If you've forgotten your password, click on 'Sign In' and then select 'Forgot Password?'. Follow the instructions sent to your email to reset it."
+    },
+    {
+        question: "Do you offer virtual tours?",
+        answer: "Yes, many of our premium listings feature 3D virtual tours and video walkthroughs. Look for the 'Virtual Tour' badge on the property details page."
+    },
+    {
+        question: "How can I get notified about new listings?",
+        answer: "You can set up property alerts based on your search criteria (location, price, type). We'll send you an email notification as soon as a matching property hits the market."
     }
 ];
 

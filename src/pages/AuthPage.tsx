@@ -44,7 +44,7 @@ const AuthPage = () => {
                     <img
                         src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&q=80&w=2070"
                         alt="Background"
-                        className="w-full h-full object-cover opacity-60 mix-blend-overlay"
+                        className="w-full h-full object-cover opacity-90"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent"></div>
                 </div>

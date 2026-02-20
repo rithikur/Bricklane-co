@@ -1,6 +1,14 @@
 import { createContext, useContext, useState, useEffect, type ReactNode } from 'react';
 import { properties as initialProperties } from '../data/properties';
 
+export interface Review {
+    id: number;
+    user: string;
+    rating: number;
+    comment: string;
+    date: string;
+}
+
 export interface Property {
     id: number;
     price: string;
@@ -14,11 +22,13 @@ export interface Property {
     lng: number;
     type: string; // 'Houses', 'Apartments', 'Condos', 'Commercial'
     view: string; // 'Sea View', 'Garden', 'City View', 'Any'
+    listingType?: string; // 'Buy' or 'Rent'
     description: string;
     agent: {
         name: string;
         image: string;
     };
+    reviews?: Review[];
 }
 
 interface PropertyContextType {

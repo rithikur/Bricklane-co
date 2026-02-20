@@ -289,5 +289,97 @@ export const properties = [
             name: "Rohit Verma",
             image: "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&q=80&w=200"
         }
+    },
+    // Rent Properties
+    {
+        id: 16,
+        price: '0.15',
+        address: 'Koramangala, Bangalore',
+        rooms: 2,
+        baths: 2,
+        area: 1100,
+        image: 'https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?auto=format&fit=crop&q=80&w=2000',
+        lat: 12.9352,
+        lng: 77.6245,
+        type: 'Apartments',
+        view: 'City View',
+        listingType: 'Rent',
+        description: "Fully furnished 2BHK apartment in the heart of Koramangala. Walking distance to startup hubs and restaurants.",
+        agent: {
+            name: "Sneha Patil",
+            image: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&q=80&w=200"
+        },
+        reviews: [
+            {
+                id: 1,
+                user: "Ananya Gupta",
+                rating: 5,
+                comment: "The landlord is very responsive and the apartment is exactly as shown in photos.",
+                date: "2024-02-10"
+            },
+            {
+                id: 2,
+                user: "Karan Mehta",
+                rating: 4,
+                comment: "Good connectivity to tech parks. A bit pricey but worth it.",
+                date: "2024-01-25"
+            }
+        ]
+    },
+    {
+        id: 17,
+        price: '0.25',
+        address: 'Bandra Bandstand, Mumbai',
+        rooms: 3,
+        baths: 3,
+        area: 1600,
+        image: 'https://images.unsplash.com/photo-1554995207-c18c203602cb?auto=format&fit=crop&q=80&w=2000',
+        lat: 19.0522,
+        lng: 72.8189,
+        type: 'Apartments',
+        view: 'Sea View',
+        listingType: 'Rent',
+        description: "Exquisite sea-facing apartment available for lease. Recently renovated with modern interiors and spacious balcony.",
+        agent: {
+            name: "Rajesh Kumar",
+            image: "https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&q=80&w=200"
+        },
+        reviews: [
+            {
+                id: 1,
+                user: "Siddharth Malhotra",
+                rating: 5,
+                comment: "Living at Bandstand is a dream come true. The sea breeze is amazing.",
+                date: "2024-02-05"
+            }
+        ]
+    },
+    {
+        id: 18,
+        price: '0.40',
+        address: 'Defence Colony, New Delhi',
+        rooms: 4,
+        baths: 4,
+        area: 3200,
+        image: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&q=80&w=2000',
+        lat: 28.5733,
+        lng: 77.2343,
+        type: 'Houses',
+        view: 'Garden',
+        listingType: 'Rent',
+        description: "Spacious independent floor in Defence Colony. Perfect for expatriates and diplomats. Includes servant quarters and power backup.",
+        agent: {
+            name: "Amit Malhotra",
+            image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=200"
+        },
+        reviews: [
+            {
+                id: 1,
+                user: "Sarah Williams",
+                rating: 5,
+                comment: "Excellent property for expats. Safe, secure, and spacious.",
+                date: "2024-01-10"
+            }
+        ]
     }
 ];

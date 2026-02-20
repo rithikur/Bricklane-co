@@ -14,7 +14,7 @@ const BlogPage = () => {
                     </p>
                 </div>
 
-                <BlogSection />
+                <BlogSection showAll={true} />
 
                 {/* Additional Blog Content */}
                 <div className="max-w-[1440px] mx-auto px-4 md:px-8 mt-20">

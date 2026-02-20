@@ -1,4 +1,5 @@
 import { useRef, useEffect, type ReactNode } from 'react';
+import { useLocation } from 'react-router-dom';
 import Lenis from 'lenis';
 
 interface SmoothScrollProps {
@@ -7,8 +8,14 @@ interface SmoothScrollProps {
 
 const SmoothScroll = ({ children }: SmoothScrollProps) => {
     const lenisRef = useRef<Lenis | null>(null);
+    const location = useLocation();
 
     useEffect(() => {
+        // Disable Lenis on pages with their own scroll management (like search or dashboard)
+        if (location.pathname.includes('/search') || location.pathname.includes('/admin/dashboard')) {
+            return;
+        }
+
         const lenis = new Lenis({
             duration: 1.2,
             easing: (t: number) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
@@ -26,8 +33,9 @@ const SmoothScroll = ({ children }: SmoothScrollProps) => {
         return () => {
             cancelAnimationFrame(rafId);
             lenis.destroy();
+            lenisRef.current = null;
         };
-    }, []);
+    }, [location.pathname]);
 
     return <>{children}</>;
 };

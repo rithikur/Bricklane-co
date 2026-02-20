@@ -14,6 +14,12 @@ import { PropertyProvider } from './context/PropertyContext';
 import AuthPage from './pages/AuthPage';
 import SmoothScroll from './components/common/SmoothScroll';
 import CustomCursor from './components/common/CustomCursor';
+import CareersPage from './pages/CareersPage';
+import PressPage from './pages/PressPage';
+import PrivacyPolicyPage from './pages/PrivacyPolicyPage';
+import TermsOfServicePage from './pages/TermsOfServicePage';
+import SitemapPage from './pages/SitemapPage';
+import ContactSupportPage from './pages/ContactSupportPage';
 
 function App() {
   return (
@@ -32,6 +38,14 @@ function App() {
             <Route path="/blog" element={<BlogPage />} />
             <Route path="/help" element={<HelpPage />} />
             <Route path="/wishlist" element={<WishlistPage />} />
+
+            {/* Footer Pages */}
+            <Route path="/careers" element={<CareersPage />} />
+            <Route path="/press" element={<PressPage />} />
+            <Route path="/privacy" element={<PrivacyPolicyPage />} />
+            <Route path="/terms" element={<TermsOfServicePage />} />
+            <Route path="/sitemap" element={<SitemapPage />} />
+            <Route path="/contact" element={<ContactSupportPage />} />
 
             {/* Admin Routes */}
             <Route path="/admin" element={<AdminLogin />} />
