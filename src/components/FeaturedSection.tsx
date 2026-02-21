@@ -48,7 +48,7 @@ const FeaturedSection = () => {
                     </Link>
                 </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div className="flex overflow-x-auto pb-12 -mx-4 px-4 gap-6 scrollbar-hide snap-x snap-mandatory md:grid md:grid-cols-2 lg:grid-cols-3 md:gap-8 md:overflow-visible">
                     {properties.map((p, index) => (
                         <motion.div
                             key={p.id}
@@ -56,25 +56,26 @@ const FeaturedSection = () => {
                             whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true }}
                             transition={{ delay: index * 0.12, duration: 0.6 }}
-                            className="group card-lift"
+                            className="min-w-[85vw] md:min-w-0 snap-center group"
                         >
                             <Link to={`/property/${p.id}`}>
-                                <div className="relative aspect-[4/3] overflow-hidden rounded-std mb-4 bg-light-grey">
-                                    <img src={p.image} alt={p.address} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
+                                <div className="relative aspect-[4/5] md:aspect-[4/3] overflow-hidden rounded-[2rem] mb-6 bg-light-grey shadow-sm">
+                                    <img src={p.image} alt={p.address} className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110" />
+                                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-60" />
                                     <button
                                         onClick={(e) => toggleSave(e, p.id, p.address)}
-                                        className={`absolute top-4 right-4 p-2 rounded-full shadow-sm transition-all duration-200 active:scale-90 ${saved.includes(p.id) ? 'bg-primary-black text-white' : 'bg-white/90 text-primary-black hover:bg-primary-black hover:text-white'}`}
+                                        className={`absolute top-6 right-6 p-3 rounded-full shadow-lg backdrop-blur-md transition-all duration-300 active:scale-90 ${saved.includes(p.id) ? 'bg-white text-primary-black' : 'bg-white/20 text-white hover:bg-white hover:text-primary-black'}`}
                                         title={saved.includes(p.id) ? 'Remove from saved' : 'Save property'}
                                     >
-                                        <Heart size={20} className={saved.includes(p.id) ? 'fill-white' : ''} />
+                                        <Heart size={22} className={saved.includes(p.id) ? 'fill-current' : ''} />
                                     </button>
-                                </div>
-                                <div className="flex justify-between items-start">
-                                    <div>
-                                        <h3 className="text-xl font-bold text-primary-black mb-1 group-hover:underline decoration-2 underline-offset-4">{p.address}</h3>
-                                        <p className="text-neutral-grey font-medium">{p.rooms} Beds • {p.baths} Baths • {p.area} m²</p>
+                                    <div className="absolute bottom-6 left-6 right-6">
+                                        <span className="text-2xl font-bold text-white tracking-tight">₹{p.price}</span>
                                     </div>
-                                    <span className="text-xl font-bold text-primary-black">₹{p.price}</span>
+                                </div>
+                                <div className="px-2">
+                                    <h3 className="text-2xl md:text-xl font-bold text-primary-black mb-2 group-hover:text-neutral-grey transition-colors">{p.address}</h3>
+                                    <p className="text-neutral-grey font-medium tracking-tight text-lg md:text-base">{p.rooms} Beds • {p.baths} Baths • {p.area} m²</p>
                                 </div>
                             </Link>
                         </motion.div>
