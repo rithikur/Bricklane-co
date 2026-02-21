@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { useProperties } from '../context/PropertyContext';
 import {
@@ -13,6 +13,18 @@ const AdminDashboard = () => {
     const navigate = useNavigate();
     const [searchTerm, setSearchTerm] = useState('');
     const [activeTab, setActiveTab] = useState('overview');
+    const [avatarUrl, setAvatarUrl] = useState('https://i.pravatar.cc/150?u=admin');
+    const avatarInputRef = useRef<HTMLInputElement>(null);
+
+    const handleAvatarChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const file = e.target.files?.[0];
+        if (!file) return;
+        const reader = new FileReader();
+        reader.onload = (ev) => {
+            if (ev.target?.result) setAvatarUrl(ev.target.result as string);
+        };
+        reader.readAsDataURL(file);
+    };
 
     // Mock Agents Data
     const [agents] = useState([
@@ -260,11 +272,24 @@ const AdminDashboard = () => {
                         </div>
                         <div className="p-8 space-y-8">
                             <div className="flex items-center gap-6">
-                                <div className="w-20 h-20 rounded-full overflow-hidden border-2 border-light-grey">
-                                    <img src="https://i.pravatar.cc/150?u=admin" alt="Admin" className="w-full h-full object-cover" />
+                                <div className="w-20 h-20 rounded-full overflow-hidden border-2 border-light-grey shrink-0">
+                                    <img src={avatarUrl} alt="Admin" className="w-full h-full object-cover" />
                                 </div>
                                 <div>
-                                    <button className="bg-primary-black text-white px-5 py-2.5 rounded-full text-sm font-bold hover:opacity-90 transition-opacity">Change Avatar</button>
+                                    {/* Hidden real file input */}
+                                    <input
+                                        ref={avatarInputRef}
+                                        type="file"
+                                        accept="image/jpeg,image/gif,image/png"
+                                        className="hidden"
+                                        onChange={handleAvatarChange}
+                                    />
+                                    <button
+                                        onClick={() => avatarInputRef.current?.click()}
+                                        className="bg-primary-black text-white px-5 py-2.5 rounded-full text-sm font-bold hover:opacity-90 transition-opacity"
+                                    >
+                                        Change Avatar
+                                    </button>
                                     <p className="text-xs text-neutral-grey mt-2">JPG, GIF or PNG. Max size 800K</p>
                                 </div>
                             </div>
@@ -359,15 +384,19 @@ const AdminDashboard = () => {
                                 className="bg-transparent border-none outline-none ml-3 text-base w-full placeholder-neutral-grey font-medium"
                             />
                         </div>
-                        <div className="flex items-center gap-3 pl-6 border-l border-light-grey">
+                        <button
+                            onClick={() => setActiveTab('settings')}
+                            className="flex items-center gap-3 pl-6 border-l border-light-grey group"
+                            title="Open Settings"
+                        >
                             <div className="text-right hidden md:block">
-                                <p className="text-sm font-bold text-primary-black">Admin User</p>
+                                <p className="text-sm font-bold text-primary-black group-hover:text-neutral-grey transition-colors">Admin User</p>
                                 <p className="text-xs text-neutral-grey font-medium">Super Admin</p>
                             </div>
-                            <div className="w-12 h-12 bg-primary-black rounded-full overflow-hidden border-2 border-white shadow-md cursor-pointer hover:scale-105 transition-transform">
-                                <img src="https://i.pravatar.cc/150?u=admin" alt="Admin" className="w-full h-full object-cover" />
+                            <div className="w-12 h-12 bg-primary-black rounded-full overflow-hidden border-2 border-white shadow-md group-hover:scale-105 transition-transform">
+                                <img src={avatarUrl} alt="Admin" className="w-full h-full object-cover" />
                             </div>
-                        </div>
+                        </button>
                     </div>
                 </header>
 

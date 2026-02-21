@@ -4,8 +4,8 @@ import { ArrowRight, User, Lock } from 'lucide-react';
 import { motion } from 'framer-motion';
 
 const AdminLogin = () => {
-    const [username, setUsername] = useState('admin');
-    const [password, setPassword] = useState('admin123');
+    const [username, setUsername] = useState('');
+    const [password, setPassword] = useState('');
     const [error, setError] = useState('');
     const navigate = useNavigate();
 
@@ -82,7 +82,7 @@ const AdminLogin = () => {
                                     type="text"
                                     value={username}
                                     onChange={(e) => setUsername(e.target.value)}
-                                    className="w-full pl-12 pr-4 py-3.5 bg-light-grey rounded-xl focus:outline-none focus:ring-2 focus:ring-primary-black transition-all border border-transparent focus:bg-white"
+                                    className="w-full pl-12 pr-4 py-3.5 bg-light-grey rounded-xl outline-none border border-transparent focus:border-neutral-grey/50 focus:bg-white transition-all"
                                     placeholder="Enter your username"
                                     required
                                 />
@@ -100,7 +100,7 @@ const AdminLogin = () => {
                                     type="password"
                                     value={password}
                                     onChange={(e) => setPassword(e.target.value)}
-                                    className="w-full pl-12 pr-4 py-3.5 bg-light-grey rounded-xl focus:outline-none focus:ring-2 focus:ring-primary-black transition-all border border-transparent focus:bg-white"
+                                    className="w-full pl-12 pr-4 py-3.5 bg-light-grey rounded-xl outline-none border border-transparent focus:border-neutral-grey/50 focus:bg-white transition-all"
                                     placeholder="••••••••"
                                     required
                                 />

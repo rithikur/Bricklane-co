@@ -1,12 +1,39 @@
 import { useEffect, useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import Navbar from '../components/Navbar';
-import { Heart, Share, Check, ArrowLeft } from 'lucide-react';
+import { Heart, Share2, Check, ArrowLeft, Copy, Link2 } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
 import { properties } from '../data/properties';
+import { useAuth } from '../context/AuthContext';
+import AuthGateModal from '../components/common/AuthGateModal';
 
 const PropertyDetailPage = () => {
     const { id } = useParams();
     const [isSaved, setIsSaved] = useState(false);
+    const [showShareModal, setShowShareModal] = useState(false);
+    const [copied, setCopied] = useState(false);
+    const [showAuthGate, setShowAuthGate] = useState(false);
+    const [authGateMessage, setAuthGateMessage] = useState('');
+    const { isLoggedIn } = useAuth();
+
+    const requireAuth = (message: string, action: () => void) => {
+        if (!isLoggedIn) {
+            setAuthGateMessage(message);
+            setShowAuthGate(true);
+        } else {
+            action();
+        }
+    };
+
+    const handleCopyLink = () => {
+        navigator.clipboard.writeText(window.location.href);
+        setCopied(true);
+        setTimeout(() => setCopied(false), 2500);
+    };
+
+    const handleShare = () => {
+        setShowShareModal(true);
+    };
 
     // Find property by ID
     const propertyId = id ? parseInt(id) : 1;
@@ -35,6 +62,59 @@ const PropertyDetailPage = () => {
     return (
         <div className="font-display min-h-screen bg-white pb-20">
             <Navbar />
+
+            {/* Auth Gate Modal */}
+            <AuthGateModal
+                isOpen={showAuthGate}
+                onClose={() => setShowAuthGate(false)}
+                message={authGateMessage}
+            />
+            <AnimatePresence>
+                {showShareModal && (
+                    <motion.div
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        exit={{ opacity: 0 }}
+                        className="fixed inset-0 z-[999] flex items-center justify-center bg-black/40 backdrop-blur-sm px-4"
+                        onClick={() => setShowShareModal(false)}
+                    >
+                        <motion.div
+                            initial={{ opacity: 0, scale: 0.92, y: 20 }}
+                            animate={{ opacity: 1, scale: 1, y: 0 }}
+                            exit={{ opacity: 0, scale: 0.92, y: 20 }}
+                            transition={{ type: 'spring', stiffness: 400, damping: 30 }}
+                            className="bg-white rounded-2xl shadow-2xl w-full max-w-sm p-8 font-display"
+                            onClick={(e) => e.stopPropagation()}
+                        >
+                            <h3 className="text-2xl font-bold text-primary-black mb-2">Share this property</h3>
+                            <p className="text-neutral-grey mb-8 text-sm">Copy the link below or share directly.</p>
+
+                            {/* URL Copy Box */}
+                            <div className="flex items-center gap-3 border border-light-grey rounded-std p-3 mb-6 bg-light-grey/20">
+                                <Link2 size={16} className="text-neutral-grey shrink-0" />
+                                <span className="text-sm text-neutral-grey truncate flex-1">{window.location.href}</span>
+                                <button
+                                    onClick={handleCopyLink}
+                                    className={`shrink-0 flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-bold transition-all duration-300 ${copied
+                                        ? 'bg-green-500 text-white'
+                                        : 'bg-primary-black text-white hover:bg-neutral-grey'
+                                        }`}
+                                >
+                                    {copied ? <Check size={13} /> : <Copy size={13} />}
+                                    {copied ? 'Copied!' : 'Copy'}
+                                </button>
+                            </div>
+
+                            <button
+                                onClick={() => setShowShareModal(false)}
+                                className="w-full py-3 border border-light-grey rounded-std text-sm font-bold text-neutral-grey hover:bg-light-grey/30 transition-colors"
+                            >
+                                Close
+                            </button>
+                        </motion.div>
+                    </motion.div>
+                )}
+            </AnimatePresence>
 
             <div className="max-w-[1440px] mx-auto px-4 md:px-8 pt-6 md:pt-10">
                 <Link to="/search" className="inline-flex items-center gap-2 text-neutral-grey hover:text-primary-black mb-6 font-bold transition-colors">
@@ -65,21 +145,20 @@ const PropertyDetailPage = () => {
                             <h1 className="text-3xl md:text-4xl font-bold text-primary-black">₹{property.price} Cr</h1>
                             <div className="flex gap-4">
                                 <button
-                                    onClick={() => setIsSaved(!isSaved)}
+                                    onClick={() => requireAuth(
+                                        "Sign in to save this property and access it anytime from your wishlist.",
+                                        () => setIsSaved(!isSaved)
+                                    )}
                                     className={`flex-1 md:flex-none flex items-center justify-center gap-2 px-6 py-2 border rounded-std font-medium transition-colors ${isSaved ? 'bg-primary-black text-white border-primary-black' : 'border-light-grey hover:border-primary-black'}`}
                                 >
                                     <Heart size={18} fill={isSaved ? "currentColor" : "none"} />
                                     {isSaved ? 'Saved' : 'Save'}
                                 </button>
                                 <button
-                                    onClick={() => {
-                                        navigator.clipboard.writeText(window.location.href);
-                                        // Could add a toast here, but for now just console or alert
-                                        alert('Link copied to clipboard!');
-                                    }}
+                                    onClick={handleShare}
                                     className="flex-1 md:flex-none flex items-center justify-center gap-2 px-6 py-2 border border-light-grey rounded-std font-medium hover:border-primary-black transition-colors"
                                 >
-                                    <Share size={18} />
+                                    <Share2 size={18} />
                                     Share
                                 </button>
                             </div>
@@ -178,10 +257,22 @@ const PropertyDetailPage = () => {
                                 </div>
                             </div>
 
-                            <button className="w-full bg-primary-black text-white py-3 rounded-std font-bold hover:bg-neutral-grey transition-colors mb-4">
+                            <button
+                                onClick={() => requireAuth(
+                                    "Sign in to send a request to the agent and start your property journey.",
+                                    () => { }
+                                )}
+                                className="w-full bg-primary-black text-white py-3 rounded-std font-bold hover:bg-neutral-grey transition-colors mb-4"
+                            >
                                 Send a request
                             </button>
-                            <button className="w-full border border-light-grey text-primary-black py-3 rounded-std font-bold hover:border-primary-black transition-colors">
+                            <button
+                                onClick={() => requireAuth(
+                                    "Sign in to schedule a viewing with the agent.",
+                                    () => { }
+                                )}
+                                className="w-full border border-light-grey text-primary-black py-3 rounded-std font-bold hover:border-primary-black transition-colors"
+                            >
                                 Call Agent
                             </button>
                         </div>

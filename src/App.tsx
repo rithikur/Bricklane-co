@@ -11,6 +11,7 @@ import AdminLogin from './pages/AdminLogin';
 import AdminDashboard from './pages/AdminDashboard';
 import AdminPropertyForm from './pages/AdminPropertyForm';
 import { PropertyProvider } from './context/PropertyContext';
+import { AuthProvider } from './context/AuthContext';
 import AuthPage from './pages/AuthPage';
 import SmoothScroll from './components/common/SmoothScroll';
 import CustomCursor from './components/common/CustomCursor';
@@ -24,43 +25,45 @@ import ContactSupportPage from './pages/ContactSupportPage';
 
 function App() {
   return (
-    <PropertyProvider>
-      <Router>
-        {/* Custom cursor — only renders on non-touch devices */}
-        <CustomCursor />
-        {/* Scroll to top on every route change */}
-        <ScrollToTop />
-        {/* Smooth scroll wraps all content */}
-        <SmoothScroll>
-          <Routes>
-            <Route path="/" element={<LandingPage />} />
-            <Route path="/search" element={<SearchPage />} />
-            <Route path="/property/:id" element={<PropertyDetailPage />} />
-            <Route path="/services" element={<ServicesPage />} />
-            <Route path="/about" element={<AboutPage />} />
-            <Route path="/blog" element={<BlogPage />} />
-            <Route path="/help" element={<HelpPage />} />
-            <Route path="/wishlist" element={<WishlistPage />} />
+    <AuthProvider>
+      <PropertyProvider>
+        <Router>
+          {/* Custom cursor — only renders on non-touch devices */}
+          <CustomCursor />
+          {/* Scroll to top on every route change */}
+          <ScrollToTop />
+          {/* Smooth scroll wraps all content */}
+          <SmoothScroll>
+            <Routes>
+              <Route path="/" element={<LandingPage />} />
+              <Route path="/search" element={<SearchPage />} />
+              <Route path="/property/:id" element={<PropertyDetailPage />} />
+              <Route path="/services" element={<ServicesPage />} />
+              <Route path="/about" element={<AboutPage />} />
+              <Route path="/blog" element={<BlogPage />} />
+              <Route path="/help" element={<HelpPage />} />
+              <Route path="/wishlist" element={<WishlistPage />} />
 
-            {/* Footer Pages */}
-            <Route path="/careers" element={<CareersPage />} />
-            <Route path="/press" element={<PressPage />} />
-            <Route path="/privacy" element={<PrivacyPolicyPage />} />
-            <Route path="/terms" element={<TermsOfServicePage />} />
-            <Route path="/sitemap" element={<SitemapPage />} />
-            <Route path="/contact" element={<ContactSupportPage />} />
+              {/* Footer Pages */}
+              <Route path="/careers" element={<CareersPage />} />
+              <Route path="/press" element={<PressPage />} />
+              <Route path="/privacy" element={<PrivacyPolicyPage />} />
+              <Route path="/terms" element={<TermsOfServicePage />} />
+              <Route path="/sitemap" element={<SitemapPage />} />
+              <Route path="/contact" element={<ContactSupportPage />} />
 
-            {/* Admin Routes */}
-            <Route path="/admin" element={<AdminLogin />} />
-            <Route path="/admin/dashboard" element={<AdminDashboard />} />
-            <Route path="/admin/property/new" element={<AdminPropertyForm />} />
-            <Route path="/admin/property/edit/:id" element={<AdminPropertyForm />} />
-            <Route path="/signin" element={<AuthPage />} />
-            <Route path="/signup" element={<AuthPage />} />
-          </Routes>
-        </SmoothScroll>
-      </Router>
-    </PropertyProvider>
+              {/* Admin Routes */}
+              <Route path="/admin" element={<AdminLogin />} />
+              <Route path="/admin/dashboard" element={<AdminDashboard />} />
+              <Route path="/admin/property/new" element={<AdminPropertyForm />} />
+              <Route path="/admin/property/edit/:id" element={<AdminPropertyForm />} />
+              <Route path="/signin" element={<AuthPage />} />
+              <Route path="/signup" element={<AuthPage />} />
+            </Routes>
+          </SmoothScroll>
+        </Router>
+      </PropertyProvider>
+    </AuthProvider>
   );
 }
 

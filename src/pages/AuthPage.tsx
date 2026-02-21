@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { ArrowRight, User, Lock, Mail } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { useAuth } from '../context/AuthContext';
 
 const AuthPage = () => {
     const [isLogin, setIsLogin] = useState(true);
@@ -10,6 +11,7 @@ const AuthPage = () => {
     const [name, setName] = useState('');
     const [error, setError] = useState('');
     const navigate = useNavigate();
+    const { login } = useAuth();
 
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
@@ -18,6 +20,7 @@ const AuthPage = () => {
         if (isLogin) {
             // Login Logic
             if (email === 'user@example.com' && password === 'password') {
+                login('User', email);
                 navigate('/');
             } else {
                 setError('Invalid credentials. Try user@example.com / password');
@@ -25,10 +28,7 @@ const AuthPage = () => {
         } else {
             // Register Logic
             if (email && password && name) {
-                // Determine if this is the first user (Admin) for demo purposes
-                // Ideally this would be handled by a backend
-                // For now, we simulate success
-                localStorage.setItem('user', JSON.stringify({ name, email }));
+                login(name, email);
                 navigate('/');
             } else {
                 setError('Please fill in all fields.');
@@ -110,7 +110,7 @@ const AuthPage = () => {
                                             type="text"
                                             value={name}
                                             onChange={(e) => setName(e.target.value)}
-                                            className="w-full pl-12 pr-4 py-3.5 bg-light-grey rounded-xl focus:outline-none focus:ring-2 focus:ring-primary-black transition-all border border-transparent focus:bg-white"
+                                            className="w-full pl-12 pr-4 py-3.5 bg-light-grey rounded-xl outline-none border border-transparent focus:border-neutral-grey/50 focus:bg-white transition-all"
                                             placeholder="John Doe"
                                         />
                                     </div>
@@ -126,7 +126,7 @@ const AuthPage = () => {
                                     type="email"
                                     value={email}
                                     onChange={(e) => setEmail(e.target.value)}
-                                    className="w-full pl-12 pr-4 py-3.5 bg-light-grey rounded-xl focus:outline-none focus:ring-2 focus:ring-primary-black transition-all border border-transparent focus:bg-white"
+                                    className="w-full pl-12 pr-4 py-3.5 bg-light-grey rounded-xl outline-none border border-transparent focus:border-neutral-grey/50 focus:bg-white transition-all"
                                     placeholder="name@example.com"
                                     required
                                 />
@@ -144,7 +144,7 @@ const AuthPage = () => {
                                     type="password"
                                     value={password}
                                     onChange={(e) => setPassword(e.target.value)}
-                                    className="w-full pl-12 pr-4 py-3.5 bg-light-grey rounded-xl focus:outline-none focus:ring-2 focus:ring-primary-black transition-all border border-transparent focus:bg-white"
+                                    className="w-full pl-12 pr-4 py-3.5 bg-light-grey rounded-xl outline-none border border-transparent focus:border-neutral-grey/50 focus:bg-white transition-all"
                                     placeholder="••••••••"
                                     required
                                 />

@@ -1,8 +1,9 @@
 import { useState, useEffect } from 'react';
-import { Menu, X, User, Search, Heart, ArrowLeft } from 'lucide-react';
+import { Menu, X, User, Search, Heart, ArrowLeft, LogOut } from 'lucide-react';
 import { Link, useLocation } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { useProperties } from '../context/PropertyContext';
+import { useAuth } from '../context/AuthContext';
 import Magnetic from './common/Magnetic';
 
 const Navbar = () => {
@@ -11,6 +12,7 @@ const Navbar = () => {
     const [activeSection, setActiveSection] = useState('');
     const location = useLocation();
     const { wishlist } = useProperties();
+    const { isLoggedIn, user, logout } = useAuth();
 
     useEffect(() => {
         const handleScroll = () => {
@@ -201,11 +203,28 @@ const Navbar = () => {
 
                     <div className={`h-6 w-px mx-1 ${isTransparent ? 'bg-white/30' : 'bg-light-grey'}`} />
 
+                    {/* Auth Button */}
                     <Magnetic strength={0.25}>
-                        <Link to="/signin" className={`flex items-center gap-2 px-5 py-2.5 rounded-full text-sm font-bold transition-all shadow-md hover:shadow-lg active:scale-95 duration-200 ${isTransparent ? 'bg-white text-primary-black hover:bg-white/90' : 'bg-primary-black text-white hover:bg-neutral-grey'}`}>
-                            <User size={16} />
-                            Sign In
-                        </Link>
+                        {isLoggedIn ? (
+                            <div className="flex items-center gap-2">
+                                <span className={`text-sm font-bold ${isTransparent ? 'text-white' : 'text-primary-black'}`}>
+                                    {user?.name}
+                                </span>
+                                <button
+                                    onClick={logout}
+                                    title="Sign Out"
+                                    className={`flex items-center gap-1.5 px-4 py-2.5 rounded-full text-sm font-bold transition-all duration-200 ${isTransparent ? 'bg-white/20 text-white hover:bg-white/30' : 'bg-light-grey text-primary-black hover:bg-primary-black hover:text-white'}`}
+                                >
+                                    <LogOut size={15} />
+                                    Sign Out
+                                </button>
+                            </div>
+                        ) : (
+                            <Link to="/signin" className={`flex items-center gap-2 px-5 py-2.5 rounded-full text-sm font-bold transition-all shadow-md hover:shadow-lg active:scale-95 duration-200 ${isTransparent ? 'bg-white text-primary-black hover:bg-white/90' : 'bg-primary-black text-white hover:bg-neutral-grey'}`}>
+                                <User size={16} />
+                                Sign In
+                            </Link>
+                        )}
                     </Magnetic>
                 </div>
 
@@ -239,11 +258,24 @@ const Navbar = () => {
                             className="text-lg font-bold p-3 hover:bg-light-grey rounded-xl transition-colors text-primary-black text-left w-full block"
                         />
                     ))}
-                    <div className="mt-auto pt-4 border-t border-light-grey pb-8">
-                        <Link to="/signin" className="flex items-center justify-center gap-2 bg-primary-black text-white px-5 py-4 rounded-full text-lg font-bold w-full shadow-lg active:scale-95 transition-transform" onClick={() => setIsOpen(false)}>
-                            <User size={20} />
-                            Sign In / Register
-                        </Link>
+                    <div className="mt-auto pt-4 border-t border-light-grey pb-8 space-y-3">
+                        {isLoggedIn ? (
+                            <>
+                                <p className="text-center text-sm font-bold text-primary-black">Signed in as <span className="text-neutral-grey">{user?.name}</span></p>
+                                <button
+                                    onClick={() => { logout(); setIsOpen(false); }}
+                                    className="flex items-center justify-center gap-2 border border-light-grey text-primary-black px-5 py-4 rounded-full text-lg font-bold w-full hover:bg-light-grey transition-colors"
+                                >
+                                    <LogOut size={20} />
+                                    Sign Out
+                                </button>
+                            </>
+                        ) : (
+                            <Link to="/signin" className="flex items-center justify-center gap-2 bg-primary-black text-white px-5 py-4 rounded-full text-lg font-bold w-full shadow-lg active:scale-95 transition-transform" onClick={() => setIsOpen(false)}>
+                                <User size={20} />
+                                Sign In / Register
+                            </Link>
+                        )}
                     </div>
                 </div>
             )}
