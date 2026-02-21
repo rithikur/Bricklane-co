@@ -91,6 +91,7 @@ const Chatbot = () => {
     const [history, setHistory] = useState<Message[]>([]);
     const [currentStep, setCurrentStep] = useState<ChatStep>(chatbotData[0]);
     const bottomRef = useRef<HTMLDivElement>(null);
+    const containerRef = useRef<HTMLDivElement>(null);
 
     // Initial greeting
     useEffect(() => {
@@ -103,6 +104,18 @@ const Chatbot = () => {
     useEffect(() => {
         bottomRef.current?.scrollIntoView({ behavior: 'smooth' });
     }, [history, isOpen]);
+
+    // Close on outside click
+    useEffect(() => {
+        if (!isOpen) return;
+        const handler = (e: MouseEvent) => {
+            if (containerRef.current && !containerRef.current.contains(e.target as Node)) {
+                setIsOpen(false);
+            }
+        };
+        document.addEventListener('mousedown', handler);
+        return () => document.removeEventListener('mousedown', handler);
+    }, [isOpen]);
 
     const handleOptionClick = (option: ChatOption) => {
         // 1. Add User's selection to history
@@ -144,7 +157,7 @@ const Chatbot = () => {
     };
 
     return (
-        <>
+        <div ref={containerRef} className="contents">
             {/* Toggle Button */}
             <motion.button
                 onClick={() => setIsOpen(!isOpen)}
@@ -217,7 +230,7 @@ const Chatbot = () => {
                     </motion.div>
                 )}
             </AnimatePresence>
-        </>
+        </div>
     );
 };
 

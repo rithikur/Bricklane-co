@@ -1,7 +1,9 @@
+import { useState, useCallback } from 'react';
 import { ArrowRight, Heart } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import RevealText from './common/RevealText';
+import { ToastContainer, useToast } from './common/Toast';
 
 const properties = [
     { id: 1, price: '4.5 Cr', address: 'Worli Sea Face, Mumbai', rooms: 3, baths: 3, area: 1850, image: 'https://images.unsplash.com/photo-1613977257363-707ba9348227?auto=format&fit=crop&q=80&w=2070' },
@@ -9,7 +11,26 @@ const properties = [
     { id: 3, price: '8.5 Cr', address: 'Bandra West, Mumbai', rooms: 5, baths: 5, area: 4500, image: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&q=80&w=2070' },
 ];
 
+const getSaved = (): number[] => {
+    try { return JSON.parse(localStorage.getItem('savedProperties') || '[]'); } catch { return []; }
+};
+
 const FeaturedSection = () => {
+    const [saved, setSaved] = useState<number[]>(getSaved);
+    const { toasts, dismiss, toast } = useToast();
+
+    const toggleSave = useCallback((e: React.MouseEvent, id: number, address: string) => {
+        e.preventDefault();
+        e.stopPropagation();
+        setSaved(prev => {
+            const next = prev.includes(id) ? prev.filter(x => x !== id) : [...prev, id];
+            localStorage.setItem('savedProperties', JSON.stringify(next));
+            if (next.includes(id)) toast.success('Saved!', `${address} added to your saved homes.`);
+            else toast.info('Removed', `${address} removed from saved homes.`);
+            return next;
+        });
+    }, [toast]);
+
     return (
         <section className="py-20 bg-white">
             <div className="max-w-[1440px] mx-auto px-4 md:px-8">
@@ -40,8 +61,12 @@ const FeaturedSection = () => {
                             <Link to={`/property/${p.id}`}>
                                 <div className="relative aspect-[4/3] overflow-hidden rounded-std mb-4 bg-light-grey">
                                     <img src={p.image} alt={p.address} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
-                                    <button className="absolute top-4 right-4 p-2 bg-white/90 rounded-full text-primary-black hover:bg-primary-black hover:text-white transition-colors shadow-sm">
-                                        <Heart size={20} />
+                                    <button
+                                        onClick={(e) => toggleSave(e, p.id, p.address)}
+                                        className={`absolute top-4 right-4 p-2 rounded-full shadow-sm transition-all duration-200 active:scale-90 ${saved.includes(p.id) ? 'bg-primary-black text-white' : 'bg-white/90 text-primary-black hover:bg-primary-black hover:text-white'}`}
+                                        title={saved.includes(p.id) ? 'Remove from saved' : 'Save property'}
+                                    >
+                                        <Heart size={20} className={saved.includes(p.id) ? 'fill-white' : ''} />
                                     </button>
                                 </div>
                                 <div className="flex justify-between items-start">
@@ -62,6 +87,7 @@ const FeaturedSection = () => {
                     </Link>
                 </div>
             </div>
+            <ToastContainer toasts={toasts} onDismiss={dismiss} />
         </section>
     );
 };

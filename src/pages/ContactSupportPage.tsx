@@ -1,9 +1,31 @@
-
+import { useState } from 'react';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import { Mail, Phone, MapPin } from 'lucide-react';
+import { ToastContainer, useToast } from '../components/common/Toast';
 
 const ContactSupportPage = () => {
+    const [form, setForm] = useState({ name: '', email: '', message: '' });
+    const [loading, setLoading] = useState(false);
+    const { toasts, dismiss, toast } = useToast();
+
+    const update = (field: string) => (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) =>
+        setForm(prev => ({ ...prev, [field]: e.target.value }));
+
+    const handleSubmit = async (e: React.FormEvent) => {
+        e.preventDefault();
+        if (!form.name.trim()) { toast.error('Name required', 'Please enter your name.'); return; }
+        if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email)) { toast.error('Invalid email', 'Please enter a valid email address.'); return; }
+        if (!form.message.trim()) { toast.error('Message required', 'Please write a message before sending.'); return; }
+
+        setLoading(true);
+        // Simulate API call
+        await new Promise(r => setTimeout(r, 1200));
+        setLoading(false);
+        toast.success('Message sent!', 'We\'ll get back to you within 24 hours.');
+        setForm({ name: '', email: '', message: '' });
+    };
+
     return (
         <div className="min-h-screen bg-white font-display text-primary-black">
             <Navbar />
@@ -18,29 +40,58 @@ const ContactSupportPage = () => {
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-12 lg:gap-24">
                     <div className="bg-light-grey/30 p-12 rounded-std border border-light-grey">
                         <h2 className="text-3xl font-bold mb-8">Send us a message</h2>
-                        <form className="space-y-6">
+                        <form className="space-y-6" onSubmit={handleSubmit} noValidate>
                             <div>
                                 <label className="block text-sm font-bold mb-2 ml-1">Name</label>
-                                <input type="text" className="w-full px-4 py-3 bg-white border border-light-grey rounded-std focus:outline-none focus:border-primary-black transition-colors" placeholder="Your Name" />
+                                <input
+                                    type="text"
+                                    value={form.name}
+                                    onChange={update('name')}
+                                    className="w-full px-4 py-3 bg-white border border-light-grey rounded-std focus:outline-none focus:border-primary-black transition-colors"
+                                    placeholder="Your Name"
+                                />
                             </div>
                             <div>
                                 <label className="block text-sm font-bold mb-2 ml-1">Email</label>
-                                <input type="email" className="w-full px-4 py-3 bg-white border border-light-grey rounded-std focus:outline-none focus:border-primary-black transition-colors" placeholder="name@example.com" />
+                                <input
+                                    type="email"
+                                    value={form.email}
+                                    onChange={update('email')}
+                                    className="w-full px-4 py-3 bg-white border border-light-grey rounded-std focus:outline-none focus:border-primary-black transition-colors"
+                                    placeholder="name@example.com"
+                                />
                             </div>
                             <div>
                                 <label className="block text-sm font-bold mb-2 ml-1">Message</label>
-                                <textarea className="w-full px-4 py-3 bg-white border border-light-grey rounded-std focus:outline-none focus:border-primary-black transition-colors h-32 resize-none" placeholder="How can we help you?"></textarea>
+                                <textarea
+                                    value={form.message}
+                                    onChange={update('message')}
+                                    className="w-full px-4 py-3 bg-white border border-light-grey rounded-std focus:outline-none focus:border-primary-black transition-colors h-32 resize-none"
+                                    placeholder="How can we help you?"
+                                />
                             </div>
-                            <button className="w-full bg-primary-black text-white font-bold py-4 rounded-std hover:bg-neutral-grey transition-colors">Send Message</button>
+                            <button
+                                type="submit"
+                                disabled={loading}
+                                className="w-full bg-primary-black text-white font-bold py-4 rounded-std hover:bg-neutral-grey transition-colors disabled:opacity-60 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+                            >
+                                {loading ? (
+                                    <>
+                                        <svg className="animate-spin w-4 h-4" viewBox="0 0 24 24" fill="none">
+                                            <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
+                                            <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8z" />
+                                        </svg>
+                                        Sending…
+                                    </>
+                                ) : 'Send Message'}
+                            </button>
                         </form>
                     </div>
 
                     <div className="flex flex-col justify-center space-y-12">
                         <div>
                             <div className="flex items-center gap-4 mb-4">
-                                <div className="p-3 bg-primary-black text-white rounded-full">
-                                    <Mail size={20} />
-                                </div>
+                                <div className="p-3 bg-primary-black text-white rounded-full"><Mail size={20} /></div>
                                 <h3 className="text-xl font-bold">Email Us</h3>
                             </div>
                             <p className="text-neutral-grey ml-14 mb-1">General Inquiries</p>
@@ -49,9 +100,7 @@ const ContactSupportPage = () => {
 
                         <div>
                             <div className="flex items-center gap-4 mb-4">
-                                <div className="p-3 bg-primary-black text-white rounded-full">
-                                    <Phone size={20} />
-                                </div>
+                                <div className="p-3 bg-primary-black text-white rounded-full"><Phone size={20} /></div>
                                 <h3 className="text-xl font-bold">Call Us</h3>
                             </div>
                             <p className="text-neutral-grey ml-14 mb-1">Mon-Fri from 9am to 6pm</p>
@@ -60,9 +109,7 @@ const ContactSupportPage = () => {
 
                         <div>
                             <div className="flex items-center gap-4 mb-4">
-                                <div className="p-3 bg-primary-black text-white rounded-full">
-                                    <MapPin size={20} />
-                                </div>
+                                <div className="p-3 bg-primary-black text-white rounded-full"><MapPin size={20} /></div>
                                 <h3 className="text-xl font-bold">Visit Us</h3>
                             </div>
                             <p className="text-neutral-grey ml-14 max-w-xs leading-relaxed">
@@ -75,6 +122,7 @@ const ContactSupportPage = () => {
             </main>
 
             <Footer />
+            <ToastContainer toasts={toasts} onDismiss={dismiss} />
         </div>
     );
 };

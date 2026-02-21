@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { ChevronDown, ChevronUp } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 const HelpSection = () => {
     const [openIndex, setOpenIndex] = useState<number | null>(0);
@@ -55,9 +56,9 @@ const HelpSection = () => {
                 <div className="mt-20">
                     <h3 className="text-xl font-bold mb-4">Still have questions?</h3>
                     <p className="text-neutral-grey mb-8">Our support team is available 24/7 to assist you.</p>
-                    <button className="bg-primary-black text-white px-8 py-3 rounded-full font-bold hover:bg-neutral-grey transition-colors shadow-lg hover:shadow-xl active:scale-95 duration-200">
+                    <Link to="/contact" className="inline-block bg-primary-black text-white px-8 py-3 rounded-full font-bold hover:bg-neutral-grey transition-colors shadow-lg hover:shadow-xl active:scale-95 duration-200">
                         Contact Support
-                    </button>
+                    </Link>
                 </div>
             </div>
         </section>

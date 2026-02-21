@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import { ChevronDown, ChevronUp } from 'lucide-react';
@@ -81,9 +82,9 @@ const HelpPage = () => {
                     <div className="mt-20 text-center">
                         <h3 className="text-xl font-bold mb-4">Still have questions?</h3>
                         <p className="text-neutral-grey mb-8">Our support team is available 24/7 to assist you.</p>
-                        <button className="bg-primary-black text-white px-8 py-3 rounded-std font-bold hover:bg-neutral-grey transition-colors">
+                        <Link to="/contact" className="inline-block bg-primary-black text-white px-8 py-3 rounded-std font-bold hover:bg-neutral-grey transition-colors">
                             Contact Support
-                        </button>
+                        </Link>
                     </div>
                 </div>
             </div>

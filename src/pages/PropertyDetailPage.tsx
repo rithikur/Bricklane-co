@@ -1,11 +1,12 @@
 import { useEffect, useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import Navbar from '../components/Navbar';
-import { Heart, Share2, Check, ArrowLeft, Copy, Link2 } from 'lucide-react';
+import { Heart, Share2, Check, ArrowLeft, Copy, Link2, PlayCircle } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { properties } from '../data/properties';
 import { useAuth } from '../context/AuthContext';
 import AuthGateModal from '../components/common/AuthGateModal';
+import VirtualTourModal from '../components/common/VirtualTourModal';
 
 const PropertyDetailPage = () => {
     const { id } = useParams();
@@ -14,6 +15,7 @@ const PropertyDetailPage = () => {
     const [copied, setCopied] = useState(false);
     const [showAuthGate, setShowAuthGate] = useState(false);
     const [authGateMessage, setAuthGateMessage] = useState('');
+    const [showTour, setShowTour] = useState(false);
     const { isLoggedIn } = useAuth();
 
     const requireAuth = (message: string, action: () => void) => {
@@ -62,6 +64,14 @@ const PropertyDetailPage = () => {
     return (
         <div className="font-display min-h-screen bg-white pb-20">
             <Navbar />
+
+            {/* Virtual Tour Modal */}
+            <VirtualTourModal
+                isOpen={showTour}
+                onClose={() => setShowTour(false)}
+                images={images}
+                address={property.address}
+            />
 
             {/* Auth Gate Modal */}
             <AuthGateModal
@@ -122,9 +132,18 @@ const PropertyDetailPage = () => {
                 </Link>
 
                 {/* Image Gallery Bento Grid */}
-                <div className="grid grid-cols-1 md:grid-cols-4 grid-rows-2 gap-4 h-auto md:h-[500px] mb-8 md:mb-12">
+                <div className="grid grid-cols-1 md:grid-cols-4 grid-rows-2 gap-4 h-auto md:h-[500px] mb-8 md:mb-12 relative">
                     <div className="md:col-span-2 md:row-span-2 rounded-std overflow-hidden relative group h-64 md:h-auto">
                         <img src={images[0]} alt="Main" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
+                        {/* Virtual Tour Button */}
+                        <button
+                            onClick={() => setShowTour(true)}
+                            className="absolute bottom-4 left-4 flex items-center gap-2 bg-black/70 hover:bg-black/90 backdrop-blur-md text-white px-4 py-2.5 rounded-full text-sm font-bold transition-all hover:scale-105 shadow-lg group/btn"
+                        >
+                            <PlayCircle size={18} className="text-white group-hover/btn:animate-pulse" />
+                            Virtual Tour
+                            <span className="bg-white/20 text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-full">360°</span>
+                        </button>
                     </div>
                     <div className="hidden md:block md:col-span-1 md:row-span-1 rounded-std overflow-hidden relative group">
                         <img src={images[1]} alt="Kitchen" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />

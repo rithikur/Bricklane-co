@@ -1,8 +1,23 @@
+import { useState } from 'react';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import BlogSection from '../components/BlogSection';
+import { ToastContainer, useToast } from '../components/common/Toast';
 
 const BlogPage = () => {
+    const [email, setEmail] = useState('');
+    const { toasts, dismiss, toast } = useToast();
+
+    const handleSubscribe = () => {
+        const trimmed = email.trim();
+        if (!trimmed || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(trimmed)) {
+            toast.error('Invalid email', 'Please enter a valid email address.');
+            return;
+        }
+        toast.success('Subscribed! 🎉', 'You\'ll receive the latest articles in your inbox.');
+        setEmail('');
+    };
+
     return (
         <div className="min-h-screen font-display bg-white">
             <Navbar />
@@ -16,19 +31,32 @@ const BlogPage = () => {
 
                 <BlogSection showAll={true} />
 
-                {/* Additional Blog Content */}
+                {/* Newsletter */}
                 <div className="max-w-[1440px] mx-auto px-4 md:px-8 mt-20">
                     <div className="bg-primary-black text-white rounded-std p-12 md:p-20 text-center">
                         <h2 className="text-3xl md:text-4xl font-bold mb-6">Subscribe to our newsletter</h2>
                         <p className="text-lg text-neutral-grey mb-8 max-w-xl mx-auto">Get the latest articles and property insights delivered straight to your inbox.</p>
                         <div className="flex flex-col md:flex-row gap-4 max-w-md mx-auto">
-                            <input type="email" placeholder="Enter your email" className="flex-1 px-6 py-3 rounded-std text-primary-black focus:outline-none" />
-                            <button className="bg-white text-primary-black px-8 py-3 rounded-std font-bold hover:bg-light-grey transition-colors">Subscribe</button>
+                            <input
+                                type="email"
+                                value={email}
+                                onChange={e => setEmail(e.target.value)}
+                                onKeyDown={e => e.key === 'Enter' && handleSubscribe()}
+                                placeholder="Enter your email"
+                                className="flex-1 px-6 py-3 rounded-std text-primary-black focus:outline-none"
+                            />
+                            <button
+                                onClick={handleSubscribe}
+                                className="bg-white text-primary-black px-8 py-3 rounded-std font-bold hover:bg-light-grey transition-colors active:scale-95"
+                            >
+                                Subscribe
+                            </button>
                         </div>
                     </div>
                 </div>
             </div>
             <Footer />
+            <ToastContainer toasts={toasts} onDismiss={dismiss} />
         </div>
     );
 };

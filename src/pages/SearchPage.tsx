@@ -4,6 +4,7 @@ import Navbar from '../components/Navbar';
 import SearchFilters from '../components/SearchFilters';
 import PropertyCard from '../components/PropertyCard';
 import MapComponent from '../components/MapComponent';
+import AISmartSearch, { type ParsedQuery } from '../components/common/AISmartSearch';
 import { Map, List, Search, ChevronDown, Check } from 'lucide-react';
 
 import { properties as initialProperties } from '../data/properties';
@@ -24,6 +25,19 @@ const SearchPage = () => {
     const [view, setView] = useState('Any');
 
     const locationQuery = searchParams.get('location');
+
+    // Apply parsed AI filters
+    const handleAIFilters = (parsed: ParsedQuery) => {
+        if (parsed.bedrooms) setBedrooms(parsed.bedrooms);
+        if (parsed.maxPrice) setPriceRange([0, parsed.maxPrice]);
+        if (parsed.type) setPropertyType([parsed.type]);
+        if (parsed.view) setView(parsed.view);
+        if (parsed.location) {
+            const newParams = new URLSearchParams(searchParams);
+            newParams.set('location', parsed.location);
+            setSearchParams(newParams);
+        }
+    };
 
     // Filter Logic
     const filteredProperties = useMemo(() => {
@@ -88,23 +102,26 @@ const SearchPage = () => {
                     {/* Property List */}
                     <div className={`flex-1 overflow-y-auto p-4 md:p-6 bg-white z-10 scrollbar-hide ${showMapMobile ? 'hidden md:block' : 'block'}`}>
                         <div className="mb-6">
-                            <div className="flex items-center bg-light-grey px-5 py-3 rounded-full w-full shadow-sm border border-transparent focus-within:border-primary-black transition-all">
-                                <Search size={20} className="text-neutral-grey" />
-                                <input
-                                    type="text"
-                                    placeholder="Search by location..."
-                                    value={searchParams.get('location') || ''}
-                                    onChange={(e) => {
-                                        const newParams = new URLSearchParams(searchParams);
-                                        if (e.target.value) {
-                                            newParams.set('location', e.target.value);
-                                        } else {
-                                            newParams.delete('location');
-                                        }
-                                        setSearchParams(newParams);
-                                    }}
-                                    className="bg-transparent border-none outline-none ml-3 text-base w-full font-bold text-primary-black placeholder-neutral-grey"
-                                />
+                            <div className="flex items-center gap-3">
+                                <div className="flex items-center bg-light-grey px-5 py-3 rounded-full flex-1 shadow-sm border border-transparent focus-within:border-primary-black transition-all">
+                                    <Search size={20} className="text-neutral-grey" />
+                                    <input
+                                        type="text"
+                                        placeholder="Search by location..."
+                                        value={searchParams.get('location') || ''}
+                                        onChange={(e) => {
+                                            const newParams = new URLSearchParams(searchParams);
+                                            if (e.target.value) {
+                                                newParams.set('location', e.target.value);
+                                            } else {
+                                                newParams.delete('location');
+                                            }
+                                            setSearchParams(newParams);
+                                        }}
+                                        className="bg-transparent border-none outline-none ml-3 text-base w-full font-bold text-primary-black placeholder-neutral-grey"
+                                    />
+                                </div>
+                                <AISmartSearch onApplyFilters={handleAIFilters} />
                             </div>
                         </div>
 

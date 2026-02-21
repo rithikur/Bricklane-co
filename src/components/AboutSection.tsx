@@ -1,34 +1,98 @@
-import { MapPin, Globe, Award } from 'lucide-react';
+import { MapPin, Globe, Award, ArrowUpRight } from 'lucide-react';
+import { motion } from 'framer-motion';
 import RevealText from './common/RevealText';
+
+const f = (delay = 0) => ({
+    initial: { opacity: 0, y: 24 },
+    whileInView: { opacity: 1, y: 0 },
+    viewport: { once: true },
+    transition: { duration: 0.65, ease: 'easeOut' as const, delay },
+});
 
 const AboutSection = () => {
     return (
         <section id="about" className="py-20 bg-white">
             <div className="max-w-[1440px] mx-auto px-4 md:px-10">
-                {/* Hero Section */}
-                <div className="mb-12 md:mb-20 flex flex-col items-center text-center">
-                    <span className="text-xs md:text-sm font-bold tracking-widest text-neutral-grey uppercase mb-4 block">Who We Are</span>
-                    <RevealText as="h2" className="text-3xl md:text-6xl font-bold text-primary-black mb-6 md:mb-8">
-                        Rearranging Real Estate
-                    </RevealText>
-                    <RevealText as="p" className="text-lg md:text-xl text-neutral-grey max-w-4xl mx-auto leading-relaxed" delay={0.2}>
-                        We are Bricklane co. A modern real estate agency that combines technology with a human touch to deliver an exceptional experience. We believe that finding a home should be an inspiring journey, not a stressful chore.
-                    </RevealText>
+
+                {/* ── EDITORIAL HERO ── */}
+                <div className="mb-16 md:mb-24">
+                    {/* Label row */}
+                    <div className="flex items-center justify-between mb-8">
+                        <span className="text-xs font-bold tracking-[0.22em] text-neutral-grey uppercase">Who We Are</span>
+                        <span className="hidden md:flex items-center gap-1 text-xs font-bold text-neutral-grey/50 uppercase tracking-widest">
+                            Est. 2018 <ArrowUpRight size={12} />
+                        </span>
+                    </div>
+
+                    {/* Main editorial block */}
+                    <div className="relative grid md:grid-cols-12 gap-6 items-end">
+
+                        {/* Left — oversized image with text overlay */}
+                        <div className="md:col-span-7 relative h-[420px] md:h-[560px] rounded-[2rem] overflow-hidden group">
+                            <img
+                                src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&q=90&w=1400"
+                                alt="Luxury living space"
+                                className="w-full h-full object-cover object-center transition-transform duration-700 group-hover:scale-105"
+                            />
+                            {/* gradient */}
+                            <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-black/20 to-transparent" />
+
+                            {/* Overlaid heading */}
+                            <div className="absolute bottom-0 left-0 p-8 md:p-10">
+                                <RevealText as="h2" className="text-4xl md:text-6xl font-bold text-white leading-[0.93] tracking-tight mb-4">
+                                    Rear&shy;ranging<br />
+                                    <em className="font-light not-italic text-white/65">Real Estate</em>
+                                </RevealText>
+                                <div className="flex items-center gap-2 mt-2">
+                                    <div className="w-8 h-px bg-white/40" />
+                                    <span className="text-white/50 text-xs font-bold uppercase tracking-widest">Bricklane co.</span>
+                                </div>
+                            </div>
+
+                            {/* Floating stat badge */}
+                            <div className="absolute top-6 right-6 bg-white/90 backdrop-blur-sm rounded-2xl px-5 py-3 shadow-xl">
+                                <p className="text-2xl font-bold text-primary-black">1,200+</p>
+                                <p className="text-[10px] font-bold text-neutral-grey uppercase tracking-widest">Families Housed</p>
+                            </div>
+                        </div>
+
+                        {/* Right — mission + accent image stacked */}
+                        <div className="md:col-span-5 flex flex-col gap-5 h-full">
+
+                            {/* Mission card */}
+                            <motion.div {...f(0.1)}
+                                className="flex-1 bg-primary-black text-white rounded-[2rem] p-8 md:p-10 flex flex-col justify-between min-h-[220px]"
+                            >
+                                <div>
+                                    <span className="text-white/40 text-xs font-bold uppercase tracking-[0.2em] block mb-5">Our Mission</span>
+                                    <p className="text-xl md:text-2xl font-bold text-white leading-snug">
+                                        Empowering people to find their perfect home through transparency, innovation, and design.
+                                    </p>
+                                </div>
+                                <div className="mt-8 pt-6 border-t border-white/10 flex items-center justify-between">
+                                    <p className="text-white/45 text-sm">We believe finding a home should be an inspiring journey.</p>
+                                </div>
+                            </motion.div>
+
+                            {/* Accent image */}
+                            <motion.div {...f(0.2)} className="h-[200px] rounded-[2rem] overflow-hidden relative group">
+                                <img
+                                    src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&q=80&w=900"
+                                    alt="Interior"
+                                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                                />
+                                <div className="absolute inset-0 bg-gradient-to-r from-black/50 to-transparent flex items-center px-8">
+                                    <div>
+                                        <p className="text-white text-2xl font-bold">₹250 Cr+</p>
+                                        <p className="text-white/60 text-xs font-bold uppercase tracking-widest mt-1">Property Sold</p>
+                                    </div>
+                                </div>
+                            </motion.div>
+                        </div>
+                    </div>
                 </div>
 
-                {/* Image Grid */}
-                <div className="mb-16 md:mb-24 grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
-                    <div className="h-[300px] md:h-[500px] rounded-std overflow-hidden relative group">
-                        <img src="https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&q=80&w=2069" alt="Office" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
-                        <div className="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition-colors" />
-                    </div>
-                    <div className="h-auto md:h-[500px] rounded-std overflow-hidden flex flex-col justify-center bg-light-grey/30 p-8 md:p-12 hover:bg-light-grey/50 transition-colors">
-                        <h3 className="text-2xl md:text-3xl font-bold mb-4 md:mb-6 text-primary-black">Our Mission</h3>
-                        <p className="text-base md:text-lg text-neutral-grey leading-relaxed">
-                            To empower people to find their perfect home through transparency, innovation, and design. We are committed to rebuilding the trust in the real estate market by providing verified listings and honest advice.
-                        </p>
-                    </div>
-                </div>
+
 
                 {/* Bespoke Company Overview Section */}
                 <div>
