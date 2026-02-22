@@ -90,7 +90,7 @@ const AISmartSearch = ({ onApplyFilters }: AISmartSearchProps) => {
     };
 
     return (
-        <>
+        <div className="transition-colors">
             {/* Trigger Button */}
             <button
                 onClick={() => { setIsOpen(true); setTimeout(() => inputRef.current?.focus(), 100); }}
@@ -115,21 +115,21 @@ const AISmartSearch = ({ onApplyFilters }: AISmartSearchProps) => {
                             animate={{ opacity: 1, y: 0, scale: 1 }}
                             exit={{ opacity: 0, y: -24, scale: 0.95 }}
                             transition={{ type: 'spring', stiffness: 400, damping: 30 }}
-                            className="bg-white rounded-std shadow-2xl w-full max-w-xl font-display overflow-hidden"
+                            className="bg-white dark:bg-dark-surface rounded-std shadow-2xl w-full max-w-xl font-display overflow-hidden border dark:border-dark-border"
                             onClick={(e) => e.stopPropagation()}
                         >
                             {/* Header */}
-                            <div className="px-6 pt-6 pb-4 border-b border-light-grey flex items-center justify-between">
+                            <div className="px-6 pt-6 pb-4 border-b border-light-grey dark:border-dark-border flex items-center justify-between">
                                 <div className="flex items-center gap-2">
                                     <div className="w-8 h-8 rounded-xl bg-gradient-to-br from-amber-400 to-yellow-500 flex items-center justify-center">
                                         <Sparkles size={16} className="text-white" />
                                     </div>
                                     <div>
-                                        <h3 className="font-bold text-primary-black text-base leading-none">AI Smart Search</h3>
-                                        <p className="text-xs text-neutral-grey mt-0.5">Describe your dream home in plain English</p>
+                                        <h3 className="font-bold text-primary-black dark:text-white text-base leading-none">AI Smart Search</h3>
+                                        <p className="text-xs text-neutral-grey dark:text-neutral-grey/80 mt-0.5">Describe your dream home in plain English</p>
                                     </div>
                                 </div>
-                                <button onClick={() => { setIsOpen(false); setParsed(null); setQuery(''); }} className="p-1.5 rounded-full hover:bg-light-grey transition-colors text-neutral-grey">
+                                <button onClick={() => { setIsOpen(false); setParsed(null); setQuery(''); }} className="p-1.5 rounded-full hover:bg-light-grey dark:hover:bg-white/5 transition-colors text-neutral-grey dark:text-neutral-grey/60">
                                     <X size={18} />
                                 </button>
                             </div>
@@ -144,7 +144,7 @@ const AISmartSearch = ({ onApplyFilters }: AISmartSearchProps) => {
                                         onChange={(e) => { setQuery(e.target.value); setParsed(null); }}
                                         onKeyDown={(e) => e.key === 'Enter' && handleSearch()}
                                         placeholder="e.g. 3BHK under ₹2Cr with garden view near Bandra"
-                                        className="flex-1 bg-light-grey rounded-xl px-4 py-3 text-sm font-medium outline-none border border-transparent focus:border-amber-300 transition-all placeholder-neutral-grey"
+                                        className="flex-1 bg-light-grey dark:bg-dark-bg rounded-xl px-4 py-3 text-sm font-medium outline-none border border-transparent focus:border-amber-400 dark:focus:border-gold transition-all placeholder-neutral-grey dark:text-white dark:border-dark-border"
                                     />
                                     <button
                                         onClick={handleSearch}
@@ -166,9 +166,9 @@ const AISmartSearch = ({ onApplyFilters }: AISmartSearchProps) => {
                                         exit={{ opacity: 0, height: 0 }}
                                         className="px-6 pt-4"
                                     >
-                                        <div className="flex items-center gap-3 p-4 bg-amber-50 rounded-xl border border-amber-100">
+                                        <div className="flex items-center gap-3 p-4 bg-amber-50 dark:bg-amber-900/10 rounded-xl border border-amber-100 dark:border-amber-900/30">
                                             <Loader size={18} className="text-amber-500 animate-spin" />
-                                            <span className="text-sm font-medium text-amber-700">Analysing your search...</span>
+                                            <span className="text-sm font-medium text-amber-700 dark:text-amber-400">Analysing your search...</span>
                                         </div>
                                     </motion.div>
                                 )}
@@ -179,19 +179,19 @@ const AISmartSearch = ({ onApplyFilters }: AISmartSearchProps) => {
                                         exit={{ opacity: 0, height: 0 }}
                                         className="px-6 pt-4"
                                     >
-                                        <div className="p-4 bg-green-50 rounded-xl border border-green-100">
-                                            <p className="text-xs font-bold text-green-700 uppercase tracking-wider mb-2">✓ AI Understood</p>
+                                        <div className="p-4 bg-green-50 dark:bg-green-900/10 rounded-xl border border-green-100 dark:border-green-900/30">
+                                            <p className="text-xs font-bold text-green-700 dark:text-green-400 uppercase tracking-wider mb-2">✓ AI Understood</p>
                                             <div className="flex flex-wrap gap-2 mb-4">
-                                                {parsed.bedrooms && <span className="px-3 py-1 bg-white border border-green-200 text-green-800 text-xs font-bold rounded-full">{parsed.bedrooms} BHK</span>}
-                                                {parsed.type && <span className="px-3 py-1 bg-white border border-green-200 text-green-800 text-xs font-bold rounded-full">{parsed.type}</span>}
-                                                {parsed.maxPrice && <span className="px-3 py-1 bg-white border border-green-200 text-green-800 text-xs font-bold rounded-full">Under ₹{parsed.maxPrice} Cr</span>}
-                                                {parsed.view && <span className="px-3 py-1 bg-white border border-green-200 text-green-800 text-xs font-bold rounded-full">{parsed.view} View</span>}
-                                                {parsed.location && <span className="px-3 py-1 bg-white border border-green-200 text-green-800 text-xs font-bold rounded-full">Near {parsed.location}</span>}
-                                                {Object.keys(parsed).length === 0 && <span className="text-sm text-neutral-grey">No specific filters detected — showing all results.</span>}
+                                                {parsed.bedrooms && <span className="px-3 py-1 bg-white dark:bg-dark-surface border border-green-200 dark:border-green-900/50 text-green-800 dark:text-green-300 text-xs font-bold rounded-full">{parsed.bedrooms} BHK</span>}
+                                                {parsed.type && <span className="px-3 py-1 bg-white dark:bg-dark-surface border border-green-200 dark:border-green-900/50 text-green-800 dark:text-green-300 text-xs font-bold rounded-full">{parsed.type}</span>}
+                                                {parsed.maxPrice && <span className="px-3 py-1 bg-white dark:bg-dark-surface border border-green-200 dark:border-green-900/50 text-green-800 dark:text-green-300 text-xs font-bold rounded-full">Under ₹{parsed.maxPrice} Cr</span>}
+                                                {parsed.view && <span className="px-3 py-1 bg-white dark:bg-dark-surface border border-green-200 dark:border-green-900/50 text-green-800 dark:text-green-300 text-xs font-bold rounded-full">{parsed.view} View</span>}
+                                                {parsed.location && <span className="px-3 py-1 bg-white dark:bg-dark-surface border border-green-200 dark:border-green-900/50 text-green-800 dark:text-green-300 text-xs font-bold rounded-full">Near {parsed.location}</span>}
+                                                {Object.keys(parsed).length === 0 && <span className="text-sm text-neutral-grey dark:text-neutral-grey/80">No specific filters detected — showing all results.</span>}
                                             </div>
                                             <button
                                                 onClick={handleApply}
-                                                className="w-full flex items-center justify-center gap-2 bg-primary-black text-white py-3 rounded-xl text-sm font-bold hover:bg-neutral-grey transition-colors"
+                                                className="w-full flex items-center justify-center gap-2 bg-primary-black dark:bg-gold text-white dark:text-black py-3 rounded-xl text-sm font-bold hover:bg-neutral-grey dark:hover:bg-gold-hover transition-colors"
                                             >
                                                 Apply These Filters
                                                 <ArrowRight size={16} />
@@ -203,13 +203,13 @@ const AISmartSearch = ({ onApplyFilters }: AISmartSearchProps) => {
 
                             {/* Suggestions */}
                             <div className="px-6 pt-4 pb-6">
-                                <p className="text-xs font-bold text-neutral-grey uppercase tracking-wider mb-3">Try an example</p>
+                                <p className="text-xs font-bold text-neutral-grey dark:text-neutral-grey/60 uppercase tracking-wider mb-3">Try an example</p>
                                 <div className="flex flex-col gap-2">
                                     {SUGGESTIONS.map((s, i) => (
                                         <button
                                             key={i}
                                             onClick={() => handleSuggestion(s)}
-                                            className="text-left text-sm text-neutral-grey hover:text-primary-black hover:bg-light-grey px-3 py-2 rounded-lg transition-colors font-medium"
+                                            className="text-left text-sm text-neutral-grey dark:text-neutral-grey/60 hover:text-primary-black dark:hover:text-gold hover:bg-light-grey dark:hover:bg-white/5 px-3 py-2 rounded-lg transition-colors font-medium border border-transparent hover:border-light-grey dark:hover:border-dark-border"
                                         >
                                             "{s}"
                                         </button>
@@ -220,7 +220,7 @@ const AISmartSearch = ({ onApplyFilters }: AISmartSearchProps) => {
                     </motion.div>
                 )}
             </AnimatePresence>
-        </>
+        </div>
     );
 };
 

@@ -51,27 +51,27 @@ const HelpPage = () => {
     const [openIndex, setOpenIndex] = useState<number | null>(0);
 
     return (
-        <div className="min-h-screen font-display bg-white">
+        <div className="min-h-screen font-display bg-white dark:bg-dark-bg transition-colors">
             <Navbar />
             <div className="pt-20 pb-20">
                 <div className="max-w-[800px] mx-auto px-4 md:px-8">
-                    <h1 className="text-4xl md:text-5xl font-bold text-primary-black mb-6 text-center">How can we help?</h1>
+                    <h1 className="text-4xl md:text-5xl font-bold text-primary-black dark:text-white mb-6 text-center">How can we help?</h1>
                     <p className="text-xl text-neutral-grey text-center mb-16">
                         Find answers to common questions about buying, renting, and selling with Bricklane co.
                     </p>
 
                     <div className="space-y-4">
                         {faqs.map((faq, index) => (
-                            <div key={index} className="border border-light-grey rounded-std overflow-hidden">
+                            <div key={index} className="border border-light-grey dark:border-dark-border rounded-std overflow-hidden">
                                 <button
-                                    className="w-full flex justify-between items-center p-6 bg-white hover:bg-light-grey/10 transition-colors text-left"
+                                    className="w-full flex justify-between items-center p-6 bg-white dark:bg-dark-surface hover:bg-light-grey/10 dark:hover:bg-white/5 transition-colors text-left"
                                     onClick={() => setOpenIndex(openIndex === index ? null : index)}
                                 >
-                                    <span className="font-bold text-lg text-primary-black">{faq.question}</span>
-                                    {openIndex === index ? <ChevronUp size={20} /> : <ChevronDown size={20} />}
+                                    <span className="font-bold text-lg text-primary-black dark:text-white">{faq.question}</span>
+                                    {openIndex === index ? <ChevronUp size={20} className="dark:text-gold" /> : <ChevronDown size={20} className="dark:text-white/40" />}
                                 </button>
                                 {openIndex === index && (
-                                    <div className="p-6 pt-0 text-neutral-grey leading-relaxed bg-white">
+                                    <div className="p-6 pt-0 text-neutral-grey dark:text-neutral-grey/80 leading-relaxed bg-white dark:bg-dark-surface">
                                         {faq.answer}
                                     </div>
                                 )}
@@ -80,9 +80,9 @@ const HelpPage = () => {
                     </div>
 
                     <div className="mt-20 text-center">
-                        <h3 className="text-xl font-bold mb-4">Still have questions?</h3>
+                        <h3 className="text-xl font-bold mb-4 dark:text-white">Still have questions?</h3>
                         <p className="text-neutral-grey mb-8">Our support team is available 24/7 to assist you.</p>
-                        <Link to="/contact" className="inline-block bg-primary-black text-white px-8 py-3 rounded-std font-bold hover:bg-neutral-grey transition-colors">
+                        <Link to="/contact" className="inline-block bg-primary-black dark:bg-gold text-white dark:text-black px-8 py-3 rounded-std font-bold hover:bg-neutral-grey dark:hover:bg-gold-hover transition-colors">
                             Contact Support
                         </Link>
                     </div>

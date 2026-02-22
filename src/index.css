@@ -8,15 +8,25 @@
   --color-primary-black: #1e1e1b;
   --color-neutral-grey: #8c8c8c;
   --color-light-grey: #e5e5e5;
+  --color-gold: #D4AF37;
+  --color-gold-hover: #C5A028;
+
+  --color-dark-bg: #0a0a0a;
+  --color-dark-surface: #141414;
+  --color-dark-border: #262626;
 
   --radius-std: 4px;
 }
 
+@variant dark (&:where(.dark, .dark *));
+
 @layer base {
   body {
-    font-family: var(--font-display);
-    color: var(--color-primary-black);
-    @apply antialiased bg-white;
+    @apply font-display text-primary-black antialiased bg-white transition-colors duration-300;
+  }
+
+  .dark body {
+    @apply bg-dark-bg text-white;
   }
 
   h1,

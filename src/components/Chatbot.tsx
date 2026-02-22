@@ -157,11 +157,11 @@ const Chatbot = () => {
     };
 
     return (
-        <div ref={containerRef} className="contents">
+        <div ref={containerRef} className="contents transition-colors">
             {/* Toggle Button */}
             <motion.button
                 onClick={() => setIsOpen(!isOpen)}
-                className="fixed bottom-6 right-6 z-50 w-14 h-14 bg-primary-black text-white rounded-full flex items-center justify-center shadow-2xl hover:scale-110 transition-transform duration-300"
+                className="fixed bottom-6 right-6 z-50 w-14 h-14 bg-primary-black dark:bg-gold text-white dark:text-black rounded-full flex items-center justify-center shadow-2xl hover:scale-110 transition-transform duration-300"
                 whileHover={{ scale: 1.1 }}
                 whileTap={{ scale: 0.9 }}
             >
@@ -176,23 +176,23 @@ const Chatbot = () => {
                         animate={{ opacity: 1, y: 0, scale: 1 }}
                         exit={{ opacity: 0, y: 20, scale: 0.95 }}
                         transition={{ duration: 0.2 }}
-                        className="fixed bottom-24 right-6 z-50 w-[350px] max-h-[500px] h-[70vh] bg-white rounded-2xl shadow-2xl border border-light-grey flex flex-col overflow-hidden font-display"
+                        className="fixed bottom-24 right-6 z-50 w-[350px] max-h-[500px] h-[70vh] bg-white dark:bg-dark-surface rounded-2xl shadow-2xl border border-light-grey dark:border-dark-border flex flex-col overflow-hidden font-display transition-colors"
                     >
                         {/* Header */}
-                        <div className="bg-primary-black text-white p-4 flex items-center gap-3">
-                            <div className="w-8 h-8 rounded-full bg-white/20 flex items-center justify-center">
-                                <MessageCircle size={16} />
+                        <div className="bg-primary-black dark:bg-dark-bg text-white dark:text-gold p-4 flex items-center gap-3 border-b dark:border-dark-border">
+                            <div className="w-8 h-8 rounded-full bg-white/20 dark:bg-gold/10 flex items-center justify-center">
+                                <MessageCircle size={16} className="dark:text-gold" />
                             </div>
                             <div>
                                 <h3 className="font-bold text-sm">Bricklane Assistant</h3>
-                                <p className="text-xs text-white/70 flex items-center gap-1">
+                                <p className="text-xs text-white/70 dark:text-gold/70 flex items-center gap-1">
                                     <span className="w-1.5 h-1.5 rounded-full bg-green-400" /> Online
                                 </p>
                             </div>
                         </div>
 
                         {/* Messages Area */}
-                        <div className="flex-1 overflow-y-auto p-4 space-y-4 bg-light-grey/10">
+                        <div className="flex-1 overflow-y-auto p-4 space-y-4 bg-light-grey/10 dark:bg-dark-bg/50">
                             {history.map((msg, idx) => (
                                 <motion.div
                                     key={idx}
@@ -202,8 +202,8 @@ const Chatbot = () => {
                                 >
                                     <div
                                         className={`max-w-[80%] p-3 rounded-2xl text-sm ${msg.sender === 'user'
-                                            ? 'bg-primary-black text-white rounded-tr-none'
-                                            : 'bg-white text-primary-black border border-light-grey rounded-tl-none shadow-sm'
+                                            ? 'bg-primary-black dark:bg-gold text-white dark:text-black rounded-tr-none'
+                                            : 'bg-white dark:bg-dark-surface text-primary-black dark:text-white border border-light-grey dark:border-dark-border rounded-tl-none shadow-sm'
                                             }`}
                                     >
                                         {msg.text}
@@ -214,13 +214,13 @@ const Chatbot = () => {
                         </div>
 
                         {/* Options / Input Area */}
-                        <div className="p-4 bg-white border-t border-light-grey">
+                        <div className="p-4 bg-white dark:bg-dark-surface border-t border-light-grey dark:border-dark-border">
                             <div className="flex flex-wrap gap-2">
                                 {currentStep.options.map((option, idx) => (
                                     <button
                                         key={idx}
                                         onClick={() => handleOptionClick(option)}
-                                        className="text-xs font-bold px-3 py-2 bg-light-grey/20 text-primary-black rounded-full hover:bg-primary-black hover:text-white transition-colors border border-transparent hover:border-black"
+                                        className="text-xs font-bold px-3 py-2 bg-light-grey/20 dark:bg-dark-bg text-primary-black dark:text-white rounded-full hover:bg-primary-black dark:hover:bg-gold hover:text-white dark:hover:text-black transition-colors border border-transparent hover:border-black dark:hover:border-gold"
                                     >
                                         {option.label}
                                     </button>

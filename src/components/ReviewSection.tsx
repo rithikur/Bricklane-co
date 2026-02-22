@@ -59,43 +59,43 @@ const ReviewSection = () => {
     const isInView = useInView(ref, { once: true, margin: "-10%" });
 
     return (
-        <section id="reviews" ref={ref} className="py-20 bg-light-grey/30">
+        <section id="reviews" ref={ref} className="py-20 bg-light-grey/30 dark:bg-dark-bg/50 transition-colors">
             <div className="max-w-[1440px] mx-auto px-4 md:px-8">
                 <div className="text-center mb-16">
-                    <span className="text-xs font-bold tracking-widest text-neutral-grey uppercase mb-4 block">Testimonials</span>
-                    <RevealText as="h2" className="text-3xl md:text-5xl font-bold text-primary-black mb-6">
+                    <span className="text-xs font-bold tracking-widest text-neutral-grey dark:text-gold uppercase mb-4 block">Testimonials</span>
+                    <RevealText as="h2" className="text-3xl md:text-5xl font-bold text-primary-black dark:text-white mb-6">
                         Loved by Our Clients
                     </RevealText>
                 </div>
 
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-                    {reviews.map((review, index) => (
+                    {reviews.slice(0, 3).map((review, index) => (
                         <motion.div
                             key={review.id}
                             initial={{ opacity: 0, y: 30 }}
                             animate={isInView ? { opacity: 1, y: 0 } : {}}
                             transition={{ duration: 0.6, delay: index * 0.2 }}
-                            className="bg-white p-8 rounded-std border border-light-grey shadow-sm hover:shadow-lg transition-all duration-300 relative group"
+                            className="bg-white dark:bg-dark-surface p-8 rounded-std border border-light-grey dark:border-dark-border shadow-sm hover:shadow-lg transition-all duration-300 relative group"
                         >
-                            <Quote className="absolute top-8 right-8 text-light-grey/50 group-hover:text-primary-black/10 transition-colors" size={40} />
+                            <Quote className="absolute top-8 right-8 text-light-grey/50 dark:text-white/5 group-hover:text-primary-black/10 dark:group-hover:text-gold/10 transition-colors" size={40} />
 
                             <div className="flex items-center gap-4 mb-6">
-                                <div className="w-14 h-14 rounded-full overflow-hidden border-2 border-light-grey">
+                                <div className="w-14 h-14 rounded-full overflow-hidden border-2 border-light-grey dark:border-dark-border">
                                     <img src={review.avatar} alt={review.name} className="w-full h-full object-cover" />
                                 </div>
                                 <div>
-                                    <h4 className="font-bold text-primary-black text-lg">{review.name}</h4>
-                                    <p className="text-sm text-neutral-grey font-medium">{review.role}</p>
+                                    <h4 className="font-bold text-primary-black dark:text-white text-lg">{review.name}</h4>
+                                    <p className="text-sm text-neutral-grey dark:text-neutral-grey/60 font-medium">{review.role}</p>
                                 </div>
                             </div>
 
                             <div className="mb-4 flex gap-1">
                                 {[...Array(5)].map((_, i) => (
-                                    <span key={i} className={`text-xl ${i < Math.floor(review.rating) ? 'text-primary-black' : 'text-light-grey'}`}>★</span>
+                                    <span key={i} className={`text-xl ${i < Math.floor(review.rating) ? 'text-primary-black dark:text-gold' : 'text-light-grey dark:text-dark-border'}`}>★</span>
                                 ))}
                             </div>
 
-                            <p className="text-neutral-grey leading-relaxed text-lg">"{review.content}"</p>
+                            <p className="text-neutral-grey dark:text-neutral-grey/80 leading-relaxed text-lg italic">"{review.content}"</p>
                         </motion.div>
                     ))}
                 </div>

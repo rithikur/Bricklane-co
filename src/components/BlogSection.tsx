@@ -47,19 +47,19 @@ const BlogSection = ({ showAll = false }: { showAll?: boolean }) => {
     const displayPosts = showAll ? posts : posts.slice(0, 3);
 
     return (
-        <section id="blog" className="py-20 bg-white">
+        <section id="blog" className="py-20 bg-white dark:bg-dark-bg transition-colors">
             <div className="max-w-[1440px] mx-auto px-4 md:px-8">
                 <div className="flex justify-between items-end mb-12">
                     <div>
-                        <RevealText as="h2" className="text-3xl md:text-4xl font-bold text-primary-black mb-4">
+                        <RevealText as="h2" className="text-3xl md:text-4xl font-bold text-primary-black dark:text-white mb-4">
                             {showAll ? "All Articles" : "Latest from Our Blog"}
                         </RevealText>
-                        <RevealText as="p" className="text-neutral-grey text-base md:text-lg max-w-xl" delay={0.2}>
+                        <RevealText as="p" className="text-neutral-grey dark:text-neutral-grey/60 text-base md:text-lg max-w-xl" delay={0.2}>
                             Insights, tips, and trends from the world of real estate and design.
                         </RevealText>
                     </div>
                     {!showAll && (
-                        <Link to="/blog" className="hidden md:flex items-center gap-2 font-bold text-primary-black border-b-2 border-primary-black pb-1 hover:text-neutral-grey hover:border-neutral-grey transition-colors">
+                        <Link to="/blog" className="hidden md:flex items-center gap-2 font-bold text-primary-black dark:text-gold border-b-2 border-primary-black dark:border-gold pb-1 hover:text-neutral-grey hover:border-neutral-grey transition-colors">
                             View all articles <ArrowRight size={20} />
                         </Link>
                     )}
@@ -75,21 +75,21 @@ const BlogSection = ({ showAll = false }: { showAll?: boolean }) => {
                             transition={{ delay: index * 0.1 }}
                             className="group cursor-pointer"
                         >
-                            <div className="aspect-[3/2] overflow-hidden rounded-std mb-4 bg-light-grey">
+                            <div className="aspect-[3/2] overflow-hidden rounded-std mb-4 bg-light-grey dark:bg-dark-surface shadow-sm">
                                 <img src={post.image} alt={post.title} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
                             </div>
                             <div className="flex items-center gap-4 mb-2">
-                                <span className="text-xs font-bold text-primary-black uppercase tracking-wider">{post.category}</span>
-                                <span className="text-xs font-medium text-neutral-grey">{post.date}</span>
+                                <span className="text-xs font-bold text-primary-black dark:text-gold uppercase tracking-wider">{post.category}</span>
+                                <span className="text-xs font-medium text-neutral-grey dark:text-neutral-grey/60">{post.date}</span>
                             </div>
-                            <h3 className="text-xl font-bold text-primary-black leading-tight group-hover:underline decoration-2 underline-offset-4">{post.title}</h3>
+                            <h3 className="text-xl font-bold text-primary-black dark:text-white leading-tight group-hover:underline decoration-2 underline-offset-4 decoration-primary-black dark:decoration-gold">{post.title}</h3>
                         </motion.div>
                     ))}
                 </div>
 
                 {!showAll && (
                     <div className="mt-12 md:hidden flex justify-center">
-                        <Link to="/blog" className="flex items-center gap-2 font-bold text-primary-black border-b-2 border-primary-black pb-1">
+                        <Link to="/blog" className="flex items-center gap-2 font-bold text-primary-black dark:text-gold border-b-2 border-primary-black dark:border-gold pb-1">
                             View all articles <ArrowRight size={20} />
                         </Link>
                     </div>

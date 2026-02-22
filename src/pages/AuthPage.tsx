@@ -85,9 +85,9 @@ const AuthPage = () => {
             </div>
 
             {/* Right Side - Form */}
-            <div className="flex items-center justify-center p-8 bg-white relative">
+            <div className="flex items-center justify-center p-8 bg-white dark:bg-dark-bg transition-colors relative">
                 <div className="absolute top-8 right-8">
-                    <Link to="/" className="text-neutral-grey hover:text-primary-black text-sm font-bold flex items-center gap-2 transition-colors">
+                    <Link to="/" className="text-neutral-grey dark:text-neutral-grey/60 hover:text-primary-black dark:hover:text-gold text-sm font-bold flex items-center gap-2 transition-colors">
                         Back to Site <ArrowRight size={16} />
                     </Link>
                 </div>
@@ -100,13 +100,13 @@ const AuthPage = () => {
                     className="w-full max-w-md"
                 >
                     <div className="mb-10 text-center lg:text-left">
-                        <div className="inline-flex items-center justify-center w-12 h-12 rounded-xl bg-primary-black text-white mb-6 shadow-lg text-2xl font-bold">
+                        <div className="inline-flex items-center justify-center w-12 h-12 rounded-xl bg-primary-black dark:bg-gold text-white dark:text-black mb-6 shadow-lg text-2xl font-bold">
                             B
                         </div>
-                        <h2 className="text-3xl font-bold text-primary-black mb-2">
+                        <h2 className="text-3xl font-bold text-primary-black dark:text-white mb-2">
                             {isLogin ? "Sign In" : "Create Account"}
                         </h2>
-                        <p className="text-neutral-grey">
+                        <p className="text-neutral-grey dark:text-neutral-grey/60">
                             {isLogin ? "Enter your details below" : "Start your journey with us"}
                         </p>
                     </div>
@@ -120,14 +120,14 @@ const AuthPage = () => {
                                     exit={{ opacity: 0, height: 0 }}
                                     className="overflow-hidden"
                                 >
-                                    <label className="block text-sm font-bold text-primary-black mb-2 ml-1">Full Name</label>
+                                    <label className="block text-sm font-bold text-primary-black dark:text-white mb-2 ml-1">Full Name</label>
                                     <div className="relative group">
-                                        <User className="absolute left-4 top-3.5 text-neutral-grey group-focus-within:text-primary-black transition-colors" size={20} />
+                                        <User className="absolute left-4 top-3.5 text-neutral-grey group-focus-within:text-primary-black dark:group-focus-within:text-gold transition-colors" size={20} />
                                         <input
                                             type="text"
                                             value={name}
                                             onChange={(e) => setName(e.target.value)}
-                                            className="w-full pl-12 pr-4 py-3.5 bg-light-grey rounded-xl outline-none border border-transparent focus:border-neutral-grey/50 focus:bg-white transition-all"
+                                            className="w-full pl-12 pr-4 py-3.5 bg-light-grey dark:bg-dark-surface rounded-xl outline-none border border-transparent focus:border-neutral-grey/50 dark:focus:border-gold focus:bg-white dark:focus:bg-dark-surface transition-all text-primary-black dark:text-white"
                                             placeholder="John Doe"
                                         />
                                     </div>
@@ -136,14 +136,14 @@ const AuthPage = () => {
                         </AnimatePresence>
 
                         <div>
-                            <label className="block text-sm font-bold text-primary-black mb-2 ml-1">Email Address</label>
+                            <label className="block text-sm font-bold text-primary-black dark:text-white mb-2 ml-1">Email Address</label>
                             <div className="relative group">
-                                <Mail className="absolute left-4 top-3.5 text-neutral-grey group-focus-within:text-primary-black transition-colors" size={20} />
+                                <Mail className="absolute left-4 top-3.5 text-neutral-grey group-focus-within:text-primary-black dark:group-focus-within:text-gold transition-colors" size={20} />
                                 <input
                                     type="email"
                                     value={email}
                                     onChange={(e) => setEmail(e.target.value)}
-                                    className="w-full pl-12 pr-4 py-3.5 bg-light-grey rounded-xl outline-none border border-transparent focus:border-neutral-grey/50 focus:bg-white transition-all"
+                                    className="w-full pl-12 pr-4 py-3.5 bg-light-grey dark:bg-dark-surface rounded-xl outline-none border border-transparent focus:border-neutral-grey/50 dark:focus:border-gold focus:bg-white dark:focus:bg-dark-surface transition-all text-primary-black dark:text-white"
                                     placeholder="name@example.com"
                                     required
                                 />
@@ -152,16 +152,16 @@ const AuthPage = () => {
 
                         <div>
                             <div className="flex justify-between items-center mb-2 ml-1">
-                                <label className="block text-sm font-bold text-primary-black">Password</label>
-                                {isLogin && <a href="#" className="text-xs text-neutral-grey hover:text-primary-black font-medium transition-colors">Forgot password?</a>}
+                                <label className="block text-sm font-bold text-primary-black dark:text-white">Password</label>
+                                {isLogin && <a href="#" className="text-xs text-neutral-grey dark:text-neutral-grey/60 hover:text-primary-black dark:hover:text-gold font-medium transition-colors">Forgot password?</a>}
                             </div>
                             <div className="relative group">
-                                <Lock className="absolute left-4 top-3.5 text-neutral-grey group-focus-within:text-primary-black transition-colors" size={20} />
+                                <Lock className="absolute left-4 top-3.5 text-neutral-grey group-focus-within:text-primary-black dark:group-focus-within:text-gold transition-colors" size={20} />
                                 <input
                                     type="password"
                                     value={password}
                                     onChange={(e) => setPassword(e.target.value)}
-                                    className="w-full pl-12 pr-4 py-3.5 bg-light-grey rounded-xl outline-none border border-transparent focus:border-neutral-grey/50 focus:bg-white transition-all"
+                                    className="w-full pl-12 pr-4 py-3.5 bg-light-grey dark:bg-dark-surface rounded-xl outline-none border border-transparent focus:border-neutral-grey/50 dark:focus:border-gold focus:bg-white dark:focus:bg-dark-surface transition-all text-primary-black dark:text-white"
                                     placeholder="••••••••"
                                     required
                                 />
@@ -172,7 +172,7 @@ const AuthPage = () => {
                             <motion.div
                                 initial={{ opacity: 0, height: 0 }}
                                 animate={{ opacity: 1, height: 'auto' }}
-                                className="text-red-500 text-sm font-bold bg-red-50 p-3 rounded-lg flex items-center justify-center border border-red-100"
+                                className="text-red-500 dark:text-red-400 text-sm font-bold bg-red-50 dark:bg-red-900/10 p-3 rounded-lg flex items-center justify-center border border-red-100 dark:border-red-900/20"
                             >
                                 {error}
                             </motion.div>
@@ -180,7 +180,7 @@ const AuthPage = () => {
 
                         <button
                             type="submit"
-                            className="w-full bg-primary-black text-white font-bold py-4 rounded-xl hover:bg-neutral-grey transition-all shadow-xl hover:shadow-2xl hover:-translate-y-1 active:scale-95 duration-300 flex items-center justify-center gap-2 group"
+                            className="w-full bg-primary-black dark:bg-gold text-white dark:text-black font-bold py-4 rounded-xl hover:bg-neutral-grey dark:hover:bg-gold-hover transition-all shadow-xl hover:shadow-2xl hover:-translate-y-1 active:scale-95 duration-300 flex items-center justify-center gap-2 group"
                         >
                             <span>{isLogin ? "Sign In" : "Create Account"}</span>
                             <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
@@ -188,11 +188,11 @@ const AuthPage = () => {
                     </form>
 
                     <div className="mt-8 text-center">
-                        <p className="text-neutral-grey text-sm">
+                        <p className="text-neutral-grey dark:text-neutral-grey/60 text-sm">
                             {isLogin ? "Don't have an account? " : "Already have an account? "}
                             <button
                                 onClick={() => setIsLogin(!isLogin)}
-                                className="font-bold text-primary-black cursor-pointer hover:underline"
+                                className="font-bold text-primary-black dark:text-gold cursor-pointer hover:underline"
                             >
                                 {isLogin ? "Sign Up" : "Sign In"}
                             </button>

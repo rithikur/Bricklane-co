@@ -35,15 +35,15 @@ const ServicesSection = () => {
     const [activeId, setActiveId] = useState<number | null>(null);
 
     return (
-        <section id="services" className="py-24 bg-white">
+        <section id="services" className="py-24 bg-white dark:bg-dark-bg transition-colors">
             <div className="max-w-[1440px] mx-auto px-4 md:px-8">
                 <div className="flex flex-col md:flex-row justify-between items-end mb-12 md:mb-16 gap-6">
                     <div className="max-w-xl">
-                        <span className="text-xs font-bold tracking-widest text-neutral-grey uppercase mb-2 block">Our Expertise</span>
-                        <RevealText as="h2" className="text-4xl md:text-5xl font-bold text-primary-black mb-4">
+                        <span className="text-xs font-bold tracking-widest text-neutral-grey dark:text-gold uppercase mb-2 block">Our Expertise</span>
+                        <RevealText as="h2" className="text-4xl md:text-5xl font-bold text-primary-black dark:text-white mb-4">
                             Real Estate Made Simple.
                         </RevealText>
-                        <RevealText as="p" className="text-neutral-grey text-lg leading-relaxed" delay={0.2}>
+                        <RevealText as="p" className="text-neutral-grey dark:text-neutral-grey/60 text-lg leading-relaxed" delay={0.2}>
                             Navigate the market with confidence. Whether you're buying, selling, or renting, we provide the tools and guidance you need.
                         </RevealText>
                     </div>
@@ -90,7 +90,7 @@ const ServicesSection = () => {
 
                                             <Link
                                                 to="/search"
-                                                className="inline-flex items-center gap-3 font-bold px-6 py-3 rounded-full bg-white text-primary-black hover:bg-white/90 transition-all hover:gap-5"
+                                                className="inline-flex items-center gap-3 font-bold px-6 py-3 rounded-full bg-white dark:bg-gold text-primary-black dark:text-black hover:bg-white/90 dark:hover:bg-gold-hover transition-all hover:gap-5"
                                             >
                                                 {service.link}
                                                 <ArrowRight size={18} />

@@ -44,7 +44,7 @@ const AuthGateModal = ({ isOpen, onClose, message = "Sign in to unlock this feat
                         <div className="flex flex-row gap-3">
                             <Link
                                 to={`/signin?from=${from}`}
-                                className="flex items-center justify-center gap-1.5 w-full bg-white text-primary-black py-3 rounded-lg text-sm font-bold hover:bg-white/90 transition-colors shadow-lg group"
+                                className="flex items-center justify-center gap-1.5 w-full bg-gold text-black py-3 rounded-lg text-sm font-bold hover:bg-gold-hover transition-colors shadow-lg group"
                                 onClick={onClose}
                             >
                                 Sign In
@@ -55,7 +55,7 @@ const AuthGateModal = ({ isOpen, onClose, message = "Sign in to unlock this feat
                                 className="flex items-center justify-center w-full border border-white/30 text-white py-3 rounded-lg text-sm font-bold hover:bg-white/10 transition-colors"
                                 onClick={onClose}
                             >
-                                Create an Account
+                                Sign Up
                             </Link>
                         </div>
                     </motion.div>

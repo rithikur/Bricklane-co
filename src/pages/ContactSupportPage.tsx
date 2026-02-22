@@ -27,7 +27,7 @@ const ContactSupportPage = () => {
     };
 
     return (
-        <div className="min-h-screen bg-white font-display text-primary-black">
+        <div className="min-h-screen bg-white dark:bg-dark-bg font-display text-primary-black dark:text-white transition-colors">
             <Navbar />
 
             <main className="container mx-auto px-6 py-32 max-w-6xl">
@@ -38,8 +38,8 @@ const ContactSupportPage = () => {
                 </div>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-12 lg:gap-24">
-                    <div className="bg-light-grey/30 p-12 rounded-std border border-light-grey">
-                        <h2 className="text-3xl font-bold mb-8">Send us a message</h2>
+                    <div className="bg-light-grey/30 dark:bg-dark-surface p-12 rounded-std border border-light-grey dark:border-dark-border">
+                        <h2 className="text-3xl font-bold mb-8 dark:text-gold">Send us a message</h2>
                         <form className="space-y-6" onSubmit={handleSubmit} noValidate>
                             <div>
                                 <label className="block text-sm font-bold mb-2 ml-1">Name</label>
@@ -47,7 +47,7 @@ const ContactSupportPage = () => {
                                     type="text"
                                     value={form.name}
                                     onChange={update('name')}
-                                    className="w-full px-4 py-3 bg-white border border-light-grey rounded-std focus:outline-none focus:border-primary-black transition-colors"
+                                    className="w-full px-4 py-3 bg-white dark:bg-dark-bg border border-light-grey dark:border-dark-border rounded-std focus:outline-none focus:border-primary-black dark:focus:border-gold transition-colors text-primary-black dark:text-white"
                                     placeholder="Your Name"
                                 />
                             </div>
@@ -57,7 +57,7 @@ const ContactSupportPage = () => {
                                     type="email"
                                     value={form.email}
                                     onChange={update('email')}
-                                    className="w-full px-4 py-3 bg-white border border-light-grey rounded-std focus:outline-none focus:border-primary-black transition-colors"
+                                    className="w-full px-4 py-3 bg-white dark:bg-dark-bg border border-light-grey dark:border-dark-border rounded-std focus:outline-none focus:border-primary-black dark:focus:border-gold transition-colors text-primary-black dark:text-white"
                                     placeholder="name@example.com"
                                 />
                             </div>
@@ -66,14 +66,14 @@ const ContactSupportPage = () => {
                                 <textarea
                                     value={form.message}
                                     onChange={update('message')}
-                                    className="w-full px-4 py-3 bg-white border border-light-grey rounded-std focus:outline-none focus:border-primary-black transition-colors h-32 resize-none"
+                                    className="w-full px-4 py-3 bg-white dark:bg-dark-bg border border-light-grey dark:border-dark-border rounded-std focus:outline-none focus:border-primary-black dark:focus:border-gold transition-colors h-32 resize-none text-primary-black dark:text-white"
                                     placeholder="How can we help you?"
                                 />
                             </div>
                             <button
                                 type="submit"
                                 disabled={loading}
-                                className="w-full bg-primary-black text-white font-bold py-4 rounded-std hover:bg-neutral-grey transition-colors disabled:opacity-60 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+                                className="w-full bg-primary-black dark:bg-gold text-white dark:text-black font-bold py-4 rounded-std hover:bg-neutral-grey dark:hover:bg-gold-hover transition-colors disabled:opacity-60 disabled:cursor-not-allowed flex items-center justify-center gap-2"
                             >
                                 {loading ? (
                                     <>
@@ -91,7 +91,7 @@ const ContactSupportPage = () => {
                     <div className="flex flex-col justify-center space-y-12">
                         <div>
                             <div className="flex items-center gap-4 mb-4">
-                                <div className="p-3 bg-primary-black text-white rounded-full"><Mail size={20} /></div>
+                                <div className="p-3 bg-primary-black dark:bg-gold text-white dark:text-black rounded-full"><Mail size={20} /></div>
                                 <h3 className="text-xl font-bold">Email Us</h3>
                             </div>
                             <p className="text-neutral-grey ml-14 mb-1">General Inquiries</p>
@@ -100,7 +100,7 @@ const ContactSupportPage = () => {
 
                         <div>
                             <div className="flex items-center gap-4 mb-4">
-                                <div className="p-3 bg-primary-black text-white rounded-full"><Phone size={20} /></div>
+                                <div className="p-3 bg-primary-black dark:bg-gold text-white dark:text-black rounded-full"><Phone size={20} /></div>
                                 <h3 className="text-xl font-bold">Call Us</h3>
                             </div>
                             <p className="text-neutral-grey ml-14 mb-1">Mon-Fri from 9am to 6pm</p>
@@ -109,7 +109,7 @@ const ContactSupportPage = () => {
 
                         <div>
                             <div className="flex items-center gap-4 mb-4">
-                                <div className="p-3 bg-primary-black text-white rounded-full"><MapPin size={20} /></div>
+                                <div className="p-3 bg-primary-black dark:bg-gold text-white dark:text-black rounded-full"><MapPin size={20} /></div>
                                 <h3 className="text-xl font-bold">Visit Us</h3>
                             </div>
                             <p className="text-neutral-grey ml-14 max-w-xs leading-relaxed">

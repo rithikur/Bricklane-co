@@ -1,6 +1,7 @@
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
 import L from 'leaflet';
 import { Link } from 'react-router-dom';
+import { useTheme } from '../context/ThemeContext';
 
 // Fix leaflet icon issue in React
 import icon from 'leaflet/dist/images/marker-icon.png';
@@ -31,12 +32,16 @@ interface MapComponentProps {
 
 const MapComponent = ({ properties }: MapComponentProps) => {
     const defaultPosition: [number, number] = [19.0760, 72.8777]; // Mumbai coordinates
+    const { theme } = useTheme();
 
     return (
         <MapContainer center={defaultPosition} zoom={11} scrollWheelZoom={false} style={{ height: "100%", width: "100%" }}>
             <TileLayer
                 attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-                url="https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png"
+                url={theme === 'dark'
+                    ? "https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png"
+                    : "https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png"
+                }
             />
             {properties.map((property) => (
                 <Marker

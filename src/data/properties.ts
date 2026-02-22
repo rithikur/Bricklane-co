@@ -53,7 +53,7 @@ export const properties = [
         view: 'Garden',
         description: "An architectural masterpiece in Bandra West. This expansive house features a private pool, lush gardens, and state-of-the-art interiors.",
         agent: {
-            name: "Vikram Malhotra",
+            name: "Suriyavel",
             image: "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&q=80&w=200"
         },
         isExclusive: true,

@@ -9,10 +9,12 @@ import HelpSection from '../components/HelpSection';
 import Footer from '../components/Footer';
 import Chatbot from '../components/Chatbot';
 import ReviewSection from '../components/ReviewSection';
+import BackToTop from '../components/common/BackToTop';
+import FloatingContact from '../components/common/FloatingContact';
 
 const LandingPage = () => {
     return (
-        <div className="min-h-screen font-display bg-white">
+        <div className="min-h-screen font-display bg-white dark:bg-dark-bg transition-colors duration-300">
             <Navbar />
             <Hero />
             <FeaturedSection />
@@ -24,6 +26,8 @@ const LandingPage = () => {
             <HelpSection />
             <Footer />
             <Chatbot />
+            <BackToTop />
+            <FloatingContact />
         </div>
     );
 };

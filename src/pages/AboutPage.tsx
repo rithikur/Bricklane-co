@@ -40,7 +40,7 @@ const AboutPage = () => {
     const heroY = useTransform(scrollYProgress, [0, 1], ['0%', '18%']);
 
     return (
-        <div className="min-h-screen font-display bg-white overflow-x-hidden">
+        <div className="min-h-screen font-display bg-white dark:bg-dark-bg transition-colors overflow-x-hidden">
             <Navbar />
 
             {/* ── HERO ─────────────────────────────────────────────── */}
@@ -137,8 +137,8 @@ const AboutPage = () => {
                 {/* Right — copy */}
                 <div className="md:pl-8">
                     <motion.p {...fade(0)} className="text-xs font-bold text-neutral-grey uppercase tracking-[0.2em] mb-4">Our Story</motion.p>
-                    <motion.h2 {...fade(0.1)} className="text-4xl md:text-5xl font-bold text-primary-black leading-tight mb-8">
-                        A decade of<br /><span className="italic font-light text-neutral-grey">excellence</span>
+                    <motion.h2 {...fade(0.1)} className="text-4xl md:text-5xl font-bold text-primary-black dark:text-white leading-tight mb-8">
+                        A decade of<br /><span className="italic font-light text-neutral-grey dark:text-neutral-grey/60">excellence</span>
                     </motion.h2>
                     <motion.p {...fade(0.18)} className="text-neutral-grey text-lg leading-relaxed mb-6">
                         Founded in Mumbai with a boutique philosophy, Bricklane began with a simple conviction: finding a home should feel as beautiful as the home itself.
@@ -147,8 +147,8 @@ const AboutPage = () => {
                         Today we're a premier platform connecting discerning buyers with exceptional properties across India's most vibrant cities — always with curated collections, high-fidelity imagery, and radical transparency.
                     </motion.p>
                     <motion.div {...fade(0.3)} className="flex items-center gap-4">
-                        <div className="w-12 h-px bg-primary-black" />
-                        <span className="text-sm font-bold text-primary-black uppercase tracking-widest">Bricklane co. 2016–present</span>
+                        <div className="w-12 h-px bg-primary-black dark:bg-gold" />
+                        <span className="text-sm font-bold text-primary-black dark:text-white uppercase tracking-widest">Bricklane co. 2016–present</span>
                     </motion.div>
                 </div>
             </section>
@@ -196,8 +196,8 @@ const AboutPage = () => {
                 <motion.div {...fade()} className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
                     <div>
                         <p className="text-xs font-bold text-neutral-grey uppercase tracking-[0.2em] mb-3">The People</p>
-                        <h2 className="text-4xl md:text-5xl font-bold text-primary-black leading-tight">
-                            Meet the<br /><span className="italic font-light text-neutral-grey">leadership</span>
+                        <h2 className="text-4xl md:text-5xl font-bold text-primary-black dark:text-white leading-tight">
+                            Meet the<br /><span className="italic font-light text-neutral-grey dark:text-neutral-grey/60">leadership</span>
                         </h2>
                     </div>
                     <p className="text-neutral-grey text-lg max-w-sm leading-relaxed">
@@ -220,8 +220,8 @@ const AboutPage = () => {
                                     <p className="text-white/70 text-sm">{m.role}</p>
                                 </div>
                             </div>
-                            <h3 className="text-xl font-bold text-primary-black">{m.name}</h3>
-                            <p className="text-neutral-grey font-medium text-sm mt-1">{m.role}</p>
+                            <h3 className="text-xl font-bold text-primary-black dark:text-white">{m.name}</h3>
+                            <p className="text-neutral-grey dark:text-neutral-grey/60 font-medium text-sm mt-1">{m.role}</p>
                         </motion.div>
                     ))}
                 </div>

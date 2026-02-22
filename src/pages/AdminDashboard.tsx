@@ -125,24 +125,24 @@ const AdminDashboard = () => {
                             </div>
                         )}
 
-                        <div className="bg-white rounded-3xl shadow-sm border border-light-grey overflow-hidden">
-                            <div className="p-8 border-b border-light-grey flex flex-col md:flex-row justify-between items-center gap-6">
+                        <div className="bg-white dark:bg-dark-surface rounded-3xl shadow-sm border border-light-grey dark:border-dark-border overflow-hidden">
+                            <div className="p-8 border-b border-light-grey dark:border-dark-border flex flex-col md:flex-row justify-between items-center gap-6">
                                 <div>
-                                    <h2 className="text-2xl font-bold text-primary-black">Property Listings</h2>
-                                    <p className="text-neutral-grey text-base mt-2">Manage and update your property inventory</p>
+                                    <h2 className="text-2xl font-bold text-primary-black dark:text-white">Property Listings</h2>
+                                    <p className="text-neutral-grey dark:text-neutral-grey/60 text-base mt-2">Manage and update your property inventory</p>
                                 </div>
                                 <div className="flex gap-4 w-full md:w-auto">
                                     <div className="relative flex-1 md:w-64 lg:hidden">
-                                        <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-neutral-grey" size={18} />
+                                        <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-neutral-grey dark:text-neutral-grey/60" size={18} />
                                         <input
                                             type="text"
                                             placeholder="Filter..."
                                             value={searchTerm}
                                             onChange={(e) => setSearchTerm(e.target.value)}
-                                            className="pl-10 pr-4 py-3 bg-light-grey rounded-full w-full focus:outline-none focus:ring-2 focus:ring-primary-black transition-all text-base"
+                                            className="pl-10 pr-4 py-3 bg-light-grey dark:bg-dark-bg rounded-full w-full focus:outline-none focus:ring-2 focus:ring-primary-black dark:focus:ring-gold transition-all text-base dark:text-white"
                                         />
                                     </div>
-                                    <Link to="/admin/property/new" className="bg-primary-black text-white px-8 py-4 rounded-full font-bold flex items-center gap-2 hover:opacity-90 transition-all shadow-lg hover:shadow-xl active:scale-95 text-base">
+                                    <Link to="/admin/property/new" className="bg-primary-black dark:bg-gold text-white dark:text-black px-8 py-4 rounded-full font-bold flex items-center gap-2 hover:opacity-90 transition-all shadow-lg hover:shadow-xl active:scale-95 text-base">
                                         <Plus size={20} /> <span className="hidden sm:inline">Add New Property</span>
                                     </Link>
                                 </div>
@@ -150,7 +150,7 @@ const AdminDashboard = () => {
                             <div className="overflow-x-auto">
                                 <table className="w-full text-left border-collapse">
                                     <thead>
-                                        <tr className="bg-light-grey/30 text-neutral-grey text-xs uppercase tracking-wider font-bold">
+                                        <tr className="bg-light-grey/30 dark:bg-white/5 text-neutral-grey dark:text-neutral-grey/60 text-xs uppercase tracking-wider font-bold">
                                             <th className="p-8">Property</th>
                                             <th className="p-8">Status</th>
                                             <th className="p-8">Price</th>
@@ -158,40 +158,40 @@ const AdminDashboard = () => {
                                             <th className="p-8 text-right">Actions</th>
                                         </tr>
                                     </thead>
-                                    <tbody className="divide-y divide-light-grey">
+                                    <tbody className="divide-y divide-light-grey dark:divide-dark-border">
                                         {filteredProperties.map((property) => (
-                                            <motion.tr initial={{ opacity: 0 }} animate={{ opacity: 1 }} key={property.id} className="hover:bg-neutral-50 transition-colors group">
+                                            <motion.tr initial={{ opacity: 0 }} animate={{ opacity: 1 }} key={property.id} className="hover:bg-neutral-50 dark:hover:bg-white/5 transition-colors group">
                                                 <td className="p-8">
                                                     <div className="flex items-center gap-6 min-w-[350px]">
-                                                        <div className="w-20 h-20 rounded-2xl overflow-hidden flex-shrink-0 shadow-sm border border-light-grey">
+                                                        <div className="w-20 h-20 rounded-2xl overflow-hidden flex-shrink-0 shadow-sm border border-light-grey dark:border-dark-border">
                                                             <img src={property.image} alt={property.type} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
                                                         </div>
                                                         <div>
-                                                            <div className="font-bold text-primary-black text-lg">{property.address}</div>
-                                                            <div className="text-sm text-neutral-grey mt-1 truncate max-w-[280px]">{property.description.substring(0, 50)}...</div>
+                                                            <div className="font-bold text-primary-black dark:text-white text-lg">{property.address}</div>
+                                                            <div className="text-sm text-neutral-grey dark:text-neutral-grey/60 mt-1 truncate max-w-[280px]">{property.description.substring(0, 50)}...</div>
                                                         </div>
                                                     </div>
                                                 </td>
                                                 <td className="p-8">
-                                                    <span className={`inline-flex items-center px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-wide ${property.type === 'Commercial' ? 'bg-purple-100 text-purple-800' : property.type === 'Houses' ? 'bg-blue-100 text-blue-800' : 'bg-green-100 text-green-800'}`}>
+                                                    <span className={`inline-flex items-center px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-wide ${property.type === 'Commercial' ? 'bg-purple-100 dark:bg-purple-900/20 text-purple-800 dark:text-purple-400' : property.type === 'Houses' ? 'bg-blue-100 dark:bg-blue-900/20 text-blue-800 dark:text-blue-400' : 'bg-green-100 dark:bg-green-900/20 text-green-800 dark:text-green-400'}`}>
                                                         {property.type}
                                                     </span>
                                                 </td>
-                                                <td className="p-8 text-xl font-bold text-primary-black">₹{property.price} Cr</td>
+                                                <td className="p-8 text-xl font-bold text-primary-black dark:text-white">₹{property.price} Cr</td>
                                                 <td className="p-8">
                                                     <div className="flex flex-col gap-2">
-                                                        <div className="w-32 h-2.5 bg-light-grey rounded-full overflow-hidden">
-                                                            <div className="bg-primary-black h-full rounded-full" style={{ width: `${Math.random() * 60 + 20}%` }}></div>
+                                                        <div className="w-32 h-2.5 bg-light-grey dark:bg-dark-bg rounded-full overflow-hidden">
+                                                            <div className="bg-primary-black dark:bg-gold h-full rounded-full" style={{ width: `${Math.random() * 60 + 20}%` }}></div>
                                                         </div>
-                                                        <span className="text-xs text-neutral-grey font-bold">{Math.floor(Math.random() * 500)} views</span>
+                                                        <span className="text-xs text-neutral-grey dark:text-neutral-grey/60 font-bold">{Math.floor(Math.random() * 500)} views</span>
                                                     </div>
                                                 </td>
                                                 <td className="p-8 text-right">
                                                     <div className="flex justify-end gap-3 opacity-0 group-hover:opacity-100 transition-opacity">
-                                                        <Link to={`/admin/property/edit/${property.id}`} className="p-3 text-neutral-grey hover:text-primary-black hover:bg-white rounded-full transition-all border border-transparent hover:border-light-grey hover:shadow-md" title="Edit">
+                                                        <Link to={`/admin/property/edit/${property.id}`} className="p-3 text-neutral-grey hover:text-primary-black dark:hover:text-gold hover:bg-white dark:hover:bg-dark-bg rounded-full transition-all border border-transparent hover:border-light-grey dark:hover:border-dark-border hover:shadow-md" title="Edit">
                                                             <Edit size={20} />
                                                         </Link>
-                                                        <button onClick={() => handleDelete(property.id)} className="p-3 text-red-400 hover:text-red-600 hover:bg-red-50 rounded-full transition-all" title="Delete">
+                                                        <button onClick={() => handleDelete(property.id)} className="p-3 text-red-400 hover:text-red-600 hover:bg-red-50 dark:hover:bg-red-900/10 rounded-full transition-all" title="Delete">
                                                             <Trash2 size={20} />
                                                         </button>
                                                     </div>
@@ -217,8 +217,8 @@ const AdminDashboard = () => {
                         {/* Header + Add button */}
                         <div className="flex items-center justify-between">
                             <div>
-                                <h2 className="text-2xl font-bold text-primary-black">Agents</h2>
-                                <p className="text-neutral-grey text-sm mt-1">{filteredAgents.length} team members</p>
+                                <h2 className="text-2xl font-bold text-primary-black dark:text-white">Agents</h2>
+                                <p className="text-neutral-grey dark:text-neutral-grey/60 text-sm mt-1">{filteredAgents.length} team members</p>
                             </div>
                             <button
                                 onClick={openAddAgent}
@@ -343,9 +343,9 @@ const AdminDashboard = () => {
                     <div className="space-y-8">
                         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
                             {/* Area Chart */}
-                            <div className="bg-white p-8 rounded-3xl border border-light-grey shadow-sm">
-                                <h3 className="text-xl font-bold text-primary-black mb-1">Revenue Overview</h3>
-                                <p className="text-sm text-neutral-grey mb-6">Monthly revenue in ₹ Crores</p>
+                            <div className="bg-white dark:bg-dark-surface p-8 rounded-3xl border border-light-grey dark:border-dark-border shadow-sm">
+                                <h3 className="text-xl font-bold text-primary-black dark:text-white mb-1">Revenue Overview</h3>
+                                <p className="text-sm text-neutral-grey dark:text-neutral-grey/60 mb-6">Monthly revenue in ₹ Crores</p>
                                 <ResponsiveContainer width="100%" height={220}>
                                     <AreaChart data={revenueData} margin={{ top: 5, right: 10, left: -20, bottom: 0 }}>
                                         <defs>
@@ -367,9 +367,9 @@ const AdminDashboard = () => {
                             </div>
 
                             {/* Pie Chart */}
-                            <div className="bg-white p-8 rounded-3xl border border-light-grey shadow-sm">
-                                <h3 className="text-xl font-bold text-primary-black mb-1">Listings by Type</h3>
-                                <p className="text-sm text-neutral-grey mb-2">Distribution of property categories</p>
+                            <div className="bg-white dark:bg-dark-surface p-8 rounded-3xl border border-light-grey dark:border-dark-border shadow-sm">
+                                <h3 className="text-xl font-bold text-primary-black dark:text-white mb-1">Listings by Type</h3>
+                                <p className="text-sm text-neutral-grey dark:text-neutral-grey/60 mb-2">Distribution of property categories</p>
                                 <ResponsiveContainer width="100%" height={250}>
                                     <PieChart>
                                         <Pie data={typeData} cx="50%" cy="50%" innerRadius={60} outerRadius={90} paddingAngle={3} dataKey="value">
@@ -388,8 +388,8 @@ const AdminDashboard = () => {
                         </div>
 
                         {/* Traffic Sources */}
-                        <div className="bg-white p-8 rounded-3xl border border-light-grey shadow-sm">
-                            <h3 className="text-xl font-bold text-primary-black mb-6">Traffic Sources</h3>
+                        <div className="bg-white dark:bg-dark-surface p-8 rounded-3xl border border-light-grey dark:border-dark-border shadow-sm">
+                            <h3 className="text-xl font-bold text-primary-black dark:text-white mb-6">Traffic Sources</h3>
                             <div className="space-y-6">
                                 {[
                                     { label: 'Direct', val: 40, color: 'bg-primary-black' },
@@ -398,7 +398,7 @@ const AdminDashboard = () => {
                                     { label: 'Organic Search', val: 15, color: 'bg-gray-300' }
                                 ].map((item, i) => (
                                     <div key={i}>
-                                        <div className="flex justify-between text-sm font-bold text-primary-black mb-2">
+                                        <div className="flex justify-between text-sm font-bold text-primary-black dark:text-white mb-2">
                                             <span>{item.label}</span>
                                             <span>{item.val}%</span>
                                         </div>
@@ -428,15 +428,15 @@ const AdminDashboard = () => {
                     <div className="space-y-6">
                         <div className="flex items-center justify-between">
                             <div>
-                                <h2 className="text-2xl font-bold text-primary-black">Enquiries & Leads</h2>
-                                <p className="text-neutral-grey text-sm mt-1">{leads.length} total enquiries · <span className="text-blue-600 font-bold">{newCount} new</span></p>
+                                <h2 className="text-2xl font-bold text-primary-black dark:text-white">Enquiries & Leads</h2>
+                                <p className="text-neutral-grey dark:text-neutral-grey/60 text-sm mt-1">{leads.length} total enquiries · <span className="text-blue-600 dark:text-blue-400 font-bold">{newCount} new</span></p>
                             </div>
                         </div>
-                        <div className="bg-white rounded-3xl border border-light-grey shadow-sm overflow-hidden">
+                        <div className="bg-white dark:bg-dark-surface rounded-3xl border border-light-grey dark:border-dark-border shadow-sm overflow-hidden">
                             <div className="overflow-x-auto">
                                 <table className="w-full text-left">
                                     <thead>
-                                        <tr className="bg-light-grey/40 text-neutral-grey text-xs uppercase tracking-wider font-bold border-b border-light-grey">
+                                        <tr className="bg-light-grey/40 dark:bg-white/5 text-neutral-grey dark:text-neutral-grey/60 text-xs uppercase tracking-wider font-bold border-b border-light-grey dark:border-dark-border">
                                             <th className="px-6 py-4 w-8"></th>
                                             <th className="px-6 py-4">Contact</th>
                                             <th className="px-6 py-4">Property Interested In</th>
@@ -445,23 +445,23 @@ const AdminDashboard = () => {
                                             <th className="px-6 py-4 text-right">Actions</th>
                                         </tr>
                                     </thead>
-                                    <tbody className="divide-y divide-light-grey">
+                                    <tbody className="divide-y divide-light-grey dark:divide-dark-border">
                                         {leads.map(lead => (
-                                            <motion.tr key={lead.id} initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="hover:bg-neutral-50 transition-colors group">
+                                            <motion.tr key={lead.id} initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="hover:bg-neutral-50 dark:hover:bg-white/5 transition-colors group">
                                                 <td className="px-6 py-5">
                                                     <button onClick={() => toggleLeadStar(lead.id)} className="transition-transform hover:scale-125">
                                                         <Star size={16} fill={lead.starred ? '#f59e0b' : 'none'} className={lead.starred ? 'text-yellow-400' : 'text-neutral-grey/40'} />
                                                     </button>
                                                 </td>
                                                 <td className="px-6 py-5">
-                                                    <p className="font-bold text-primary-black">{lead.name}</p>
-                                                    <p className="text-xs text-neutral-grey mt-0.5 flex items-center gap-1"><Mail size={11} />{lead.email}</p>
+                                                    <p className="font-bold text-primary-black dark:text-white">{lead.name}</p>
+                                                    <p className="text-xs text-neutral-grey dark:text-neutral-grey/60 mt-0.5 flex items-center gap-1"><Mail size={11} />{lead.email}</p>
                                                 </td>
                                                 <td className="px-6 py-5">
-                                                    <p className="text-sm font-medium text-primary-black max-w-[220px] truncate">{lead.property}</p>
+                                                    <p className="text-sm font-medium text-primary-black dark:text-white max-w-[220px] truncate">{lead.property}</p>
                                                 </td>
                                                 <td className="px-6 py-5">
-                                                    <p className="text-sm text-neutral-grey font-medium">{lead.date}</p>
+                                                    <p className="text-sm text-neutral-grey dark:text-neutral-grey/60 font-medium">{lead.date}</p>
                                                 </td>
                                                 <td className="px-6 py-5">
                                                     <LeadStatusDropdown
@@ -486,14 +486,14 @@ const AdminDashboard = () => {
             }
             case 'settings':
                 return (
-                    <div className="max-w-2xl mx-auto bg-white rounded-3xl border border-light-grey shadow-sm overflow-hidden">
-                        <div className="p-8 border-b border-light-grey">
-                            <h3 className="text-2xl font-bold text-primary-black">Account Settings</h3>
-                            <p className="text-neutral-grey mt-1">Manage your profile and preferences</p>
+                    <div className="max-w-2xl mx-auto bg-white dark:bg-dark-surface rounded-3xl border border-light-grey dark:border-dark-border shadow-sm overflow-hidden">
+                        <div className="p-8 border-b border-light-grey dark:border-dark-border">
+                            <h3 className="text-2xl font-bold text-primary-black dark:text-white">Account Settings</h3>
+                            <p className="text-neutral-grey dark:text-neutral-grey/60 mt-1">Manage your profile and preferences</p>
                         </div>
                         <div className="p-8 space-y-8">
                             <div className="flex items-center gap-6">
-                                <div className="w-20 h-20 rounded-full overflow-hidden border-2 border-light-grey shrink-0">
+                                <div className="w-20 h-20 rounded-full overflow-hidden border-2 border-light-grey dark:border-dark-border shrink-0">
                                     <img src={avatarUrl} alt="Admin" className="w-full h-full object-cover" />
                                 </div>
                                 <div>
@@ -507,48 +507,48 @@ const AdminDashboard = () => {
                                     />
                                     <button
                                         onClick={() => avatarInputRef.current?.click()}
-                                        className="bg-primary-black text-white px-5 py-2.5 rounded-full text-sm font-bold hover:opacity-90 transition-opacity"
+                                        className="bg-primary-black dark:bg-gold text-white dark:text-black px-5 py-2.5 rounded-full text-sm font-bold hover:opacity-90 transition-opacity"
                                     >
                                         Change Avatar
                                     </button>
-                                    <p className="text-xs text-neutral-grey mt-2">JPG, GIF or PNG. Max size 800K</p>
+                                    <p className="text-xs text-neutral-grey dark:text-neutral-grey/60 mt-2">JPG, GIF or PNG. Max size 800K</p>
                                 </div>
                             </div>
 
                             <div className="space-y-4">
-                                <h4 className="font-bold text-primary-black flex items-center gap-2">
+                                <h4 className="font-bold text-primary-black dark:text-white flex items-center gap-2">
                                     <Users size={18} /> Personal Information
                                 </h4>
                                 <div className="grid grid-cols-2 gap-4">
                                     <div>
-                                        <label className="block text-xs font-bold text-neutral-grey mb-1 uppercase">First Name</label>
-                                        <input type="text" defaultValue="Admin" className="w-full bg-light-grey px-4 py-3 rounded-xl font-bold text-primary-black focus:outline-none focus:ring-2 focus:ring-primary-black" />
+                                        <label className="block text-xs font-bold text-neutral-grey dark:text-neutral-grey/60 mb-1 uppercase">First Name</label>
+                                        <input type="text" defaultValue="Admin" className="w-full bg-light-grey dark:bg-dark-bg px-4 py-3 rounded-xl font-bold text-primary-black dark:text-white focus:outline-none focus:ring-2 focus:ring-primary-black dark:focus:ring-gold" />
                                     </div>
                                     <div>
-                                        <label className="block text-xs font-bold text-neutral-grey mb-1 uppercase">Last Name</label>
-                                        <input type="text" defaultValue="User" className="w-full bg-light-grey px-4 py-3 rounded-xl font-bold text-primary-black focus:outline-none focus:ring-2 focus:ring-primary-black" />
+                                        <label className="block text-xs font-bold text-neutral-grey dark:text-neutral-grey/60 mb-1 uppercase">Last Name</label>
+                                        <input type="text" defaultValue="User" className="w-full bg-light-grey dark:bg-dark-bg px-4 py-3 rounded-xl font-bold text-primary-black dark:text-white focus:outline-none focus:ring-2 focus:ring-primary-black dark:focus:ring-gold" />
                                     </div>
                                     <div className="col-span-2">
-                                        <label className="block text-xs font-bold text-neutral-grey mb-1 uppercase">Email Address</label>
-                                        <input type="email" defaultValue="admin@bricklane.co" className="w-full bg-light-grey px-4 py-3 rounded-xl font-bold text-primary-black focus:outline-none focus:ring-2 focus:ring-primary-black" />
+                                        <label className="block text-xs font-bold text-neutral-grey dark:text-neutral-grey/60 mb-1 uppercase">Email Address</label>
+                                        <input type="email" defaultValue="admin@bricklane.co" className="w-full bg-light-grey dark:bg-dark-bg px-4 py-3 rounded-xl font-bold text-primary-black dark:text-white focus:outline-none focus:ring-2 focus:ring-primary-black dark:focus:ring-gold" />
                                     </div>
                                 </div>
                             </div>
 
-                            <div className="border-t border-light-grey pt-8 space-y-4">
-                                <h4 className="font-bold text-primary-black flex items-center gap-2">
+                            <div className="border-t border-light-grey dark:border-dark-border pt-8 space-y-4">
+                                <h4 className="font-bold text-primary-black dark:text-white flex items-center gap-2">
                                     <Shield size={18} /> Security
                                 </h4>
 
                                 {/* Change Password */}
                                 <button
                                     onClick={() => setShowPasswordForm(v => !v)}
-                                    className="w-full flex items-center justify-between p-4 bg-light-grey rounded-xl hover:bg-neutral-200 transition-colors group"
+                                    className="w-full flex items-center justify-between p-4 bg-light-grey dark:bg-dark-bg rounded-xl hover:bg-neutral-200 dark:hover:bg-white/5 transition-colors group"
                                 >
-                                    <span className="font-bold text-primary-black flex items-center gap-3">
+                                    <span className="font-bold text-primary-black dark:text-white flex items-center gap-3">
                                         <Key size={18} /> Change Password
                                     </span>
-                                    <span className="text-xs font-bold bg-white px-2 py-1 rounded text-neutral-grey">{showPasswordForm ? 'Close' : 'Update'}</span>
+                                    <span className="text-xs font-bold bg-white dark:bg-dark-surface px-2 py-1 rounded text-neutral-grey dark:text-neutral-grey/60 border dark:border-dark-border">{showPasswordForm ? 'Close' : 'Update'}</span>
                                 </button>
 
                                 <AnimatePresence>
@@ -559,17 +559,17 @@ const AdminDashboard = () => {
                                             exit={{ opacity: 0, height: 0 }}
                                             className="overflow-hidden"
                                         >
-                                            <div className="bg-light-grey/40 border border-light-grey rounded-xl p-5 space-y-3">
+                                            <div className="bg-light-grey/40 dark:bg-dark-bg/40 border border-light-grey dark:border-dark-border rounded-xl p-5 space-y-3">
                                                 {(['current', 'next', 'confirm'] as const).map(field => (
                                                     <div key={field}>
-                                                        <label className="block text-xs font-bold text-neutral-grey uppercase mb-1">
+                                                        <label className="block text-xs font-bold text-neutral-grey dark:text-neutral-grey/60 uppercase mb-1">
                                                             {field === 'current' ? 'Current Password' : field === 'next' ? 'New Password' : 'Confirm Password'}
                                                         </label>
                                                         <input
                                                             type="password"
                                                             value={passwordForm[field]}
                                                             onChange={e => setPasswordForm(prev => ({ ...prev, [field]: e.target.value }))}
-                                                            className="w-full bg-white border border-light-grey px-4 py-2.5 rounded-xl text-sm font-bold text-primary-black focus:outline-none focus:ring-2 focus:ring-primary-black"
+                                                            className="w-full bg-white dark:bg-dark-surface border border-light-grey dark:border-dark-border px-4 py-2.5 rounded-xl text-sm font-bold text-primary-black dark:text-white focus:outline-none focus:ring-2 focus:ring-primary-black dark:focus:ring-gold"
                                                             placeholder={field === 'current' ? '••••••••' : field === 'next' ? 'Min 8 characters' : 'Re-enter new password'}
                                                         />
                                                     </div>
@@ -583,7 +583,7 @@ const AdminDashboard = () => {
                                                         setPasswordForm({ current: '', next: '', confirm: '' });
                                                         setShowPasswordForm(false);
                                                     }}
-                                                    className="w-full py-2.5 bg-primary-black text-white rounded-xl font-bold text-sm hover:opacity-90 transition-opacity"
+                                                    className="w-full py-2.5 bg-primary-black dark:bg-gold text-white dark:text-black rounded-xl font-bold text-sm hover:opacity-90 transition-opacity"
                                                 >Update Password</button>
                                             </div>
                                         </motion.div>
@@ -596,12 +596,12 @@ const AdminDashboard = () => {
                                         setNotificationsOn(v => !v);
                                         toast.info(!notificationsOn ? 'Notifications on' : 'Notifications off', !notificationsOn ? 'You will receive email & push alerts.' : 'You will no longer receive alerts.');
                                     }}
-                                    className="w-full flex items-center justify-between p-4 bg-light-grey rounded-xl hover:bg-neutral-200 transition-colors group"
+                                    className="w-full flex items-center justify-between p-4 bg-light-grey dark:bg-dark-bg rounded-xl hover:bg-neutral-200 dark:hover:bg-white/5 transition-colors group"
                                 >
-                                    <span className="font-bold text-primary-black flex items-center gap-3">
+                                    <span className="font-bold text-primary-black dark:text-white flex items-center gap-3">
                                         <Bell size={18} /> Notifications
                                     </span>
-                                    <span className={`text-xs font-bold px-2 py-1 rounded transition-colors ${notificationsOn ? 'bg-green-100 text-green-700' : 'bg-neutral-200 text-neutral-grey'}`}>
+                                    <span className={`text-xs font-bold px-2 py-1 rounded transition-colors ${notificationsOn ? 'bg-green-100 dark:bg-green-900/20 text-green-700 dark:text-green-400' : 'bg-neutral-200 dark:bg-white/10 text-neutral-grey dark:text-neutral-grey/60'}`}>
                                         {notificationsOn ? 'On' : 'Off'}
                                     </span>
                                 </button>
@@ -615,13 +615,13 @@ const AdminDashboard = () => {
     };
 
     return (
-        <div className="min-h-screen bg-[#F5F5F7] font-display flex">
+        <div className="min-h-screen bg-[#F5F5F7] dark:bg-dark-bg font-display flex transition-colors">
             {/* Sidebar */}
-            <aside className="w-72 bg-white border-r border-light-grey hidden lg:flex flex-col sticky top-0 h-screen">
+            <aside className="w-72 bg-white dark:bg-dark-surface border-r border-light-grey dark:border-dark-border hidden lg:flex flex-col sticky top-0 h-screen">
                 <div className="p-8 pb-4">
-                    <Link to="/" className="text-3xl font-bold tracking-tight text-primary-black flex items-center gap-2 mb-2">
-                        <div className="w-10 h-10 bg-primary-black rounded-xl text-white flex items-center justify-center text-xl shadow-md shrink-0">B</div>
-                        BRICKLANE<span className="font-normal text-neutral-grey text-xl">co.</span>
+                    <Link to="/" className="text-3xl font-bold tracking-tight text-primary-black dark:text-white flex items-center gap-2 mb-2">
+                        <div className="w-10 h-10 bg-primary-black dark:bg-gold rounded-xl text-white dark:text-black flex items-center justify-center text-xl shadow-md shrink-0">B</div>
+                        BRICKLANE<span className="font-normal text-neutral-grey dark:text-neutral-grey/60 text-xl">co.</span>
                     </Link>
                 </div>
 
@@ -634,10 +634,10 @@ const AdminDashboard = () => {
                     <NavItem icon={<Settings size={22} />} label="Settings" active={activeTab === 'settings'} onClick={() => setActiveTab('settings')} />
                 </nav>
 
-                <div className="p-6 border-t border-light-grey">
+                <div className="p-6 border-t border-light-grey dark:border-dark-border">
                     <button
                         onClick={handleLogout}
-                        className="flex items-center gap-3 px-6 py-4 text-red-500 font-bold hover:bg-red-50 rounded-2xl w-full transition-colors text-base"
+                        className="flex items-center gap-3 px-6 py-4 text-red-500 font-bold hover:bg-red-50 dark:hover:bg-red-900/10 rounded-2xl w-full transition-colors text-base"
                     >
                         <LogOut size={22} />
                         Logout
@@ -647,29 +647,29 @@ const AdminDashboard = () => {
 
             {/* Main Content */}
             <main className="flex-1 overflow-y-auto">
-                <header className="bg-white/80 backdrop-blur-md sticky top-0 z-30 px-8 py-5 border-b border-light-grey flex justify-between items-center shadow-sm">
-                    <h1 className="text-3xl font-bold text-primary-black capitalize">{activeTab}</h1>
+                <header className="bg-white/80 dark:bg-dark-surface/80 backdrop-blur-md sticky top-0 z-30 px-8 py-5 border-b border-light-grey dark:border-dark-border flex justify-between items-center shadow-sm">
+                    <h1 className="text-3xl font-bold text-primary-black dark:text-white capitalize">{activeTab}</h1>
                     <div className="flex items-center gap-6">
-                        <div className="hidden md:flex items-center bg-white border border-light-grey px-5 py-3 rounded-full w-80 shadow-sm focus-within:ring-2 focus-within:ring-primary-black transition-all">
-                            <Search size={20} className="text-neutral-grey" />
+                        <div className="hidden md:flex items-center bg-white dark:bg-dark-bg border border-light-grey dark:border-dark-border px-5 py-3 rounded-full w-80 shadow-sm focus-within:ring-2 focus-within:ring-primary-black dark:focus-within:ring-gold transition-all">
+                            <Search size={20} className="text-neutral-grey dark:text-neutral-grey/60" />
                             <input
                                 type="text"
                                 placeholder={`Search ${activeTab}...`}
                                 value={searchTerm}
                                 onChange={(e) => setSearchTerm(e.target.value)}
-                                className="bg-transparent border-none outline-none ml-3 text-base w-full placeholder-neutral-grey font-medium"
+                                className="bg-transparent border-none outline-none ml-3 text-base w-full placeholder-neutral-grey dark:placeholder-neutral-grey/60 dark:text-white font-medium"
                             />
                         </div>
                         <button
                             onClick={() => setActiveTab('settings')}
-                            className="flex items-center gap-3 pl-6 border-l border-light-grey group"
+                            className="flex items-center gap-3 pl-6 border-l border-light-grey dark:border-dark-border group"
                             title="Open Settings"
                         >
                             <div className="text-right hidden md:block">
-                                <p className="text-sm font-bold text-primary-black group-hover:text-neutral-grey transition-colors">Admin User</p>
-                                <p className="text-xs text-neutral-grey font-medium">Super Admin</p>
+                                <p className="text-sm font-bold text-primary-black dark:text-white group-hover:text-neutral-grey dark:group-hover:text-gold transition-colors">Admin User</p>
+                                <p className="text-xs text-neutral-grey dark:text-neutral-grey/60 font-medium">Super Admin</p>
                             </div>
-                            <div className="w-12 h-12 bg-primary-black rounded-full overflow-hidden border-2 border-white shadow-md group-hover:scale-105 transition-transform">
+                            <div className="w-12 h-12 bg-primary-black dark:bg-gold rounded-full overflow-hidden border-2 border-white dark:border-dark-surface shadow-md group-hover:scale-105 transition-transform">
                                 <img src={avatarUrl} alt="Admin" className="w-full h-full object-cover" />
                             </div>
                         </button>
@@ -690,7 +690,7 @@ const AdminDashboard = () => {
 const NavItem = ({ icon, label, active = false, onClick }: { icon: any, label: string, active?: boolean, onClick: () => void }) => (
     <button
         onClick={onClick}
-        className={`flex items-center gap-4 px-6 py-4 rounded-2xl w-full text-base font-bold transition-all ${active ? 'bg-primary-black text-white shadow-lg scale-[1.02]' : 'text-neutral-grey hover:bg-light-grey hover:text-primary-black'
+        className={`flex items-center gap-4 px-6 py-4 rounded-2xl w-full text-base font-bold transition-all ${active ? 'bg-primary-black dark:bg-gold text-white dark:text-black shadow-lg scale-[1.02]' : 'text-neutral-grey dark:text-neutral-grey/60 hover:bg-light-grey dark:hover:bg-white/5 hover:text-primary-black dark:hover:text-white'
             }`}
     >
         {icon}
@@ -699,17 +699,17 @@ const NavItem = ({ icon, label, active = false, onClick }: { icon: any, label: s
 );
 
 const StatCard = ({ title, value, icon, trend, negative = false }: any) => (
-    <div className="bg-white p-8 rounded-3xl border border-light-grey shadow-sm hover:shadow-lg transition-all hover:-translate-y-1">
+    <div className="bg-white dark:bg-dark-surface p-8 rounded-3xl border border-light-grey dark:border-dark-border shadow-sm hover:shadow-lg dark:hover:shadow-white/5 transition-all hover:-translate-y-1">
         <div className="flex justify-between items-start mb-6">
-            <div className={`p-4 rounded-2xl ${negative ? 'bg-red-50 text-red-500' : 'bg-green-50 text-green-600'}`}>
+            <div className={`p-4 rounded-2xl ${negative ? 'bg-red-50 dark:bg-red-900/10 text-red-500 dark:text-red-400' : 'bg-green-50 dark:bg-green-900/10 text-green-600 dark:text-green-400'}`}>
                 {icon}
             </div>
-            <span className={`text-xs font-bold px-3 py-1.5 rounded-full uppercase tracking-wide ${negative ? 'bg-red-50 text-red-500' : 'bg-green-50 text-green-600'}`}>
+            <span className={`text-xs font-bold px-3 py-1.5 rounded-full uppercase tracking-wide ${negative ? 'bg-red-50 dark:bg-red-900/10 text-red-500 dark:text-red-400' : 'bg-green-50 dark:bg-green-900/10 text-green-600 dark:text-green-400'}`}>
                 {trend}
             </span>
         </div>
-        <h3 className="text-neutral-grey text-base font-bold mb-2 uppercase tracking-wide opacity-70">{title}</h3>
-        <p className="text-4xl font-bold text-primary-black tracking-tight">{value}</p>
+        <h3 className="text-neutral-grey dark:text-neutral-grey/60 text-base font-bold mb-2 uppercase tracking-wide opacity-70">{title}</h3>
+        <p className="text-4xl font-bold text-primary-black dark:text-white tracking-tight">{value}</p>
     </div>
 );
 
@@ -721,7 +721,7 @@ const LeadStatusDropdown = ({ statuses, value, onChange }: { statuses: { value: 
         <div className="relative inline-block">
             <button
                 onClick={() => setOpen(o => !o)}
-                className="flex items-center gap-2 px-3 py-1.5 bg-light-grey hover:bg-neutral-200 rounded-full text-xs font-bold text-primary-black transition-colors"
+                className="flex items-center gap-2 px-3 py-1.5 bg-light-grey dark:bg-white/5 hover:bg-neutral-200 dark:hover:bg-white/10 rounded-full text-xs font-bold text-primary-black dark:text-white transition-colors"
             >
                 <span className={`w-1.5 h-1.5 rounded-full ${current.dot}`} />
                 {current.label}
@@ -731,16 +731,16 @@ const LeadStatusDropdown = ({ statuses, value, onChange }: { statuses: { value: 
                 <>
                     {/* backdrop */}
                     <div className="fixed inset-0 z-10" onClick={() => setOpen(false)} />
-                    <div className="absolute left-0 top-full mt-1.5 w-36 bg-white border border-light-grey rounded-2xl shadow-xl py-1.5 z-20 overflow-hidden">
+                    <div className="absolute left-0 top-full mt-1.5 w-36 bg-white dark:bg-dark-surface border border-light-grey dark:border-dark-border rounded-2xl shadow-xl py-1.5 z-20 overflow-hidden">
                         {statuses.map(s => (
                             <button
                                 key={s.value}
                                 onClick={() => { onChange(s.value); setOpen(false); }}
-                                className="w-full flex items-center gap-2.5 px-4 py-2.5 text-xs font-bold text-primary-black hover:bg-light-grey transition-colors"
+                                className="w-full flex items-center gap-2.5 px-4 py-2.5 text-xs font-bold text-primary-black dark:text-white hover:bg-light-grey dark:hover:bg-white/5 transition-colors text-left"
                             >
                                 <span className={`w-1.5 h-1.5 rounded-full ${s.dot}`} />
                                 {s.label}
-                                {s.value === value && <Check size={11} className="ml-auto text-primary-black" />}
+                                {s.value === value && <Check size={11} className="ml-auto text-primary-black dark:text-gold" />}
                             </button>
                         ))}
                     </div>
@@ -761,12 +761,12 @@ const AgentModal = ({ isOpen, agent, onClose, onSave }: { isOpen: boolean; agent
 
     const field = (label: string, key: string, type = 'text') => (
         <div>
-            <label className="block text-xs font-bold text-neutral-grey uppercase mb-1">{label}</label>
+            <label className="block text-xs font-bold text-neutral-grey dark:text-neutral-grey/60 uppercase mb-1">{label}</label>
             <input
                 type={type}
                 value={(form as any)[key]}
                 onChange={e => setForm(f => ({ ...f, [key]: type === 'number' ? parseFloat(e.target.value) : e.target.value }))}
-                className="w-full bg-light-grey px-4 py-3 rounded-xl font-bold text-primary-black focus:outline-none focus:border focus:border-primary-black transition-all"
+                className="w-full bg-light-grey dark:bg-dark-bg px-4 py-3 rounded-xl font-bold text-primary-black dark:text-white focus:outline-none focus:border focus:border-primary-black dark:focus:border-gold transition-all"
             />
         </div>
     );
@@ -781,28 +781,28 @@ const AgentModal = ({ isOpen, agent, onClose, onSave }: { isOpen: boolean; agent
                 animate={{ x: 0 }}
                 exit={{ x: '100%' }}
                 transition={{ type: 'spring', stiffness: 380, damping: 32 }}
-                className="w-full max-w-md bg-white h-full overflow-y-auto shadow-2xl flex flex-col font-display"
+                className="w-full max-w-md bg-white dark:bg-dark-surface h-full overflow-y-auto shadow-2xl flex flex-col font-display"
             >
                 {/* Header */}
-                <div className="p-8 border-b border-light-grey flex items-center justify-between">
+                <div className="p-8 border-b border-light-grey dark:border-dark-border flex items-center justify-between">
                     <div>
-                        <h2 className="text-2xl font-bold text-primary-black">{agent ? 'Edit Agent' : 'Add New Agent'}</h2>
-                        <p className="text-neutral-grey text-sm mt-1">{agent ? 'Update agent details' : 'Fill in the details below'}</p>
+                        <h2 className="text-2xl font-bold text-primary-black dark:text-white">{agent ? 'Edit Agent' : 'Add New Agent'}</h2>
+                        <p className="text-neutral-grey dark:text-neutral-grey/60 text-sm mt-1">{agent ? 'Update agent details' : 'Fill in the details below'}</p>
                     </div>
-                    <button onClick={onClose} className="p-2 hover:bg-light-grey rounded-full transition-colors"><X size={20} /></button>
+                    <button onClick={onClose} className="p-2 hover:bg-light-grey dark:hover:bg-white/5 text-primary-black dark:text-white rounded-full transition-colors"><X size={20} /></button>
                 </div>
 
                 {/* Form */}
                 <div className="p-8 flex-1 space-y-5">
                     {field('Full Name', 'name')}
                     <div>
-                        <label className="block text-xs font-bold text-neutral-grey uppercase mb-1">Role</label>
+                        <label className="block text-xs font-bold text-neutral-grey dark:text-neutral-grey/60 uppercase mb-1">Role</label>
                         <select
                             value={form.role}
                             onChange={e => setForm(f => ({ ...f, role: e.target.value }))}
-                            className="w-full bg-light-grey px-4 py-3 rounded-xl font-bold text-primary-black focus:outline-none appearance-none cursor-pointer"
+                            className="w-full bg-light-grey dark:bg-dark-bg px-4 py-3 rounded-xl font-bold text-primary-black dark:text-white focus:outline-none appearance-none cursor-pointer"
                         >
-                            {ROLES.map(r => <option key={r} value={r}>{r}</option>)}
+                            {ROLES.map(r => <option key={r} value={r} className="dark:bg-dark-surface">{r}</option>)}
                         </select>
                     </div>
                     {field('Email Address', 'email', 'email')}
@@ -814,12 +814,12 @@ const AgentModal = ({ isOpen, agent, onClose, onSave }: { isOpen: boolean; agent
                 </div>
 
                 {/* Footer */}
-                <div className="p-8 border-t border-light-grey flex gap-3">
-                    <button onClick={onClose} className="flex-1 py-3 rounded-xl border border-light-grey text-primary-black font-bold hover:bg-light-grey transition-colors">Cancel</button>
+                <div className="p-8 border-t border-light-grey dark:border-dark-border flex gap-3">
+                    <button onClick={onClose} className="flex-1 py-3 rounded-xl border border-light-grey dark:border-dark-border text-primary-black dark:text-white font-bold hover:bg-light-grey dark:hover:bg-white/5 transition-colors">Cancel</button>
                     <button
                         onClick={() => onSave({ ...(agent ? { id: agent.id } : {}), ...form })}
                         disabled={!form.name || !form.email}
-                        className="flex-1 py-3 rounded-xl bg-primary-black text-white font-bold hover:bg-neutral-grey transition-colors disabled:opacity-40"
+                        className="flex-1 py-3 rounded-xl bg-primary-black dark:bg-gold text-white dark:text-black font-bold hover:bg-neutral-grey dark:hover:bg-gold-hover transition-colors disabled:opacity-40"
                     >
                         {agent ? 'Save Changes' : 'Add Agent'}
                     </button>

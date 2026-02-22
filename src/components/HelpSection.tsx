@@ -25,27 +25,27 @@ const HelpSection = () => {
     ];
 
     return (
-        <section id="help" className="py-20 bg-light-grey/20">
+        <section id="help" className="py-20 bg-light-grey/20 dark:bg-dark-bg transition-colors">
             <div className="max-w-[800px] mx-auto px-4 md:px-8 text-center">
-                <h2 className="text-3xl md:text-5xl font-bold text-primary-black mb-4 md:mb-6">How can we help?</h2>
-                <p className="text-lg md:text-xl text-neutral-grey mb-12 md:mb-16">
+                <h2 className="text-3xl md:text-5xl font-bold text-primary-black dark:text-white mb-4 md:mb-6">How can we help?</h2>
+                <p className="text-lg md:text-xl text-neutral-grey dark:text-neutral-grey/60 mb-12 md:mb-16">
                     Find answers to common questions about buying, renting, and selling with Bricklane co.
                 </p>
 
                 <div className="space-y-4 text-left">
                     {faqs.map((faq, index) => (
-                        <div key={index} className="border border-light-grey rounded-3xl overflow-hidden bg-white shadow-sm hover:shadow-md transition-shadow">
+                        <div key={index} className="border border-light-grey dark:border-dark-border rounded-3xl overflow-hidden bg-white dark:bg-dark-surface shadow-sm hover:shadow-md transition-shadow">
                             <button
-                                className="w-full flex justify-between items-center p-6 bg-white hover:bg-light-grey/10 transition-colors text-left"
+                                className="w-full flex justify-between items-center p-6 bg-white dark:bg-dark-surface hover:bg-light-grey/10 dark:hover:bg-white/5 transition-colors text-left"
                                 onClick={() => setOpenIndex(openIndex === index ? null : index)}
                             >
-                                <span className="font-bold text-lg text-primary-black">{faq.question}</span>
-                                {openIndex === index ? <ChevronUp size={20} /> : <ChevronDown size={20} />}
+                                <span className="font-bold text-lg text-primary-black dark:text-white">{faq.question}</span>
+                                {openIndex === index ? <ChevronUp size={20} className="dark:text-gold" /> : <ChevronDown size={20} className="text-neutral-grey dark:text-neutral-grey/60" />}
                             </button>
                             <div
                                 className={`overflow-hidden transition-all duration-300 ease-in-out ${openIndex === index ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'}`}
                             >
-                                <div className="p-6 pt-0 text-neutral-grey leading-relaxed">
+                                <div className="p-6 pt-0 text-neutral-grey dark:text-neutral-grey/60 leading-relaxed">
                                     {faq.answer}
                                 </div>
                             </div>
@@ -54,9 +54,9 @@ const HelpSection = () => {
                 </div>
 
                 <div className="mt-20">
-                    <h3 className="text-xl font-bold mb-4">Still have questions?</h3>
-                    <p className="text-neutral-grey mb-8">Our support team is available 24/7 to assist you.</p>
-                    <Link to="/contact" className="inline-block bg-primary-black text-white px-8 py-3 rounded-full font-bold hover:bg-neutral-grey transition-colors shadow-lg hover:shadow-xl active:scale-95 duration-200">
+                    <h3 className="text-xl font-bold mb-4 dark:text-white">Still have questions?</h3>
+                    <p className="text-neutral-grey dark:text-neutral-grey/60 mb-8">Our support team is available 24/7 to assist you.</p>
+                    <Link to="/contact" className="inline-block bg-primary-black dark:bg-gold text-white dark:text-black px-8 py-3 rounded-full font-bold hover:bg-neutral-grey dark:hover:bg-gold-hover transition-colors shadow-lg hover:shadow-xl active:scale-95 duration-200">
                         Contact Support
                     </Link>
                 </div>

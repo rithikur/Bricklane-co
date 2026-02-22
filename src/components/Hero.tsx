@@ -57,7 +57,7 @@ const Hero = () => {
                     {/* Left Text */}
                     <motion.div variants={container} initial="hidden" animate="show" className="text-white pt-10 md:pt-0">
                         <motion.div variants={item}>
-                            <span className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-sm border border-white/20 text-white/90 text-[10px] md:text-xs font-bold tracking-widest px-3 md:px-4 py-2 rounded-full mb-6">
+                            <span className="inline-flex items-center gap-2 bg-white/10 dark:bg-gold/10 backdrop-blur-sm border border-white/20 dark:border-gold/30 text-white/90 dark:text-gold text-[10px] md:text-xs font-bold tracking-widest px-3 md:px-4 py-2 rounded-full mb-6">
                                 <span className="w-2 h-2 bg-green-400 rounded-full animate-pulse" />
                                 PREMIUM REAL ESTATE MARKETPLACE
                             </span>
@@ -79,7 +79,7 @@ const Hero = () => {
                             className="relative w-[92%] sm:w-full max-w-xl bg-white/10 backdrop-blur-xl border border-white/20 rounded-2xl shadow-[0_20px_50px_rgba(0,0,0,0.4)] flex flex-row items-center p-2 mb-10 gap-2 group transition-all duration-500 hover:bg-white/15 focus-within:bg-white/20 focus-within:border-white/40"
                         >
                             <div className="flex items-center gap-2 pl-3 pr-2 border-r border-white/20 shrink-0">
-                                <MapPin size={18} className="text-amber-400" />
+                                <MapPin size={18} className="text-gold" />
                             </div>
                             <input
                                 type="text"
@@ -90,7 +90,7 @@ const Hero = () => {
                             />
                             <button
                                 type="submit"
-                                className="bg-white text-primary-black h-12 px-6 rounded-xl flex items-center justify-center font-bold hover:bg-amber-400 transition-all shrink-0 active:scale-95 duration-200"
+                                className="bg-white dark:bg-gold text-primary-black h-12 px-6 rounded-xl flex items-center justify-center font-bold hover:bg-gold dark:hover:bg-gold-hover transition-all shrink-0 active:scale-95 duration-200"
                             >
                                 <span className="hidden sm:inline mr-2">Search</span>
                                 <Search size={18} />
@@ -104,7 +104,7 @@ const Hero = () => {
                                 <button
                                     key={loc}
                                     onClick={() => navigate(`/search?location=${loc}`)}
-                                    className="text-xs font-bold text-white/80 hover:text-white bg-white/10 hover:bg-white/20 border border-white/20 px-3 py-1.5 rounded-full transition-all"
+                                    className="text-xs font-bold text-white/80 hover:text-white bg-white/10 dark:bg-gold/10 hover:bg-white/20 dark:hover:bg-gold/20 border border-white/20 dark:border-gold/30 px-3 py-1.5 rounded-full transition-all"
                                 >
                                     {loc}
                                 </button>
@@ -112,14 +112,14 @@ const Hero = () => {
                         </motion.div>
                     </motion.div>
 
-                    {/* Right — Floating Stats Cards */}
-                    <div className="hidden lg:flex flex-col items-end gap-4 relative">
+                    {/* Right — Floating Stats Cards (Now visible on mobile with adjusted layout) */}
+                    <div className="flex flex-col items-center lg:items-end gap-6 relative">
                         {/* Stats Strip */}
                         <motion.div
                             initial={{ x: 60, opacity: 0 }}
                             animate={{ x: 0, opacity: 1 }}
                             transition={{ delay: 0.6, duration: 0.8 }}
-                            className="flex gap-4"
+                            className="flex flex-wrap justify-center lg:justify-end gap-3 md:gap-4"
                         >
                             {[
                                 { value: '12k+', label: 'Properties', icon: <MapPin size={16} /> },
@@ -131,11 +131,11 @@ const Hero = () => {
                                     initial={{ y: 20, opacity: 0 }}
                                     animate={{ y: 0, opacity: 1 }}
                                     transition={{ delay: 0.8 + i * 0.1, duration: 0.6 }}
-                                    className="bg-white/10 backdrop-blur-md border border-white/20 text-white px-6 py-4 rounded-std text-center min-w-[100px]"
+                                    className="bg-white/10 backdrop-blur-md border border-white/20 text-white px-4 md:px-6 py-3 md:py-4 rounded-std text-center min-w-[90px] md:min-w-[100px]"
                                 >
                                     <div className="text-white/60 flex justify-center mb-1">{stat.icon}</div>
-                                    <p className="text-2xl font-bold">{stat.value}</p>
-                                    <p className="text-xs text-white/60 font-medium uppercase tracking-wide">{stat.label}</p>
+                                    <p className="text-xl md:text-2xl font-bold">{stat.value}</p>
+                                    <p className="text-[10px] md:text-xs text-white/60 font-medium uppercase tracking-wide">{stat.label}</p>
                                 </motion.div>
                             ))}
                         </motion.div>
@@ -144,27 +144,27 @@ const Hero = () => {
                             initial={{ y: 40, opacity: 0 }}
                             animate={{ y: 0, opacity: 1 }}
                             transition={{ delay: 1, duration: 0.8 }}
-                            className="bg-white/95 backdrop-blur-md p-5 rounded-std shadow-2xl max-w-xs border border-white/50 w-full"
+                            className="bg-white/95 dark:bg-dark-surface/95 backdrop-blur-md p-5 rounded-std shadow-2xl max-w-[280px] sm:max-w-xs border border-white/50 dark:border-dark-border w-full"
                         >
                             <div className="flex items-center gap-3 mb-3">
                                 <div className="flex -space-x-2">
                                     {[1, 2, 3].map(i => (
-                                        <div key={i} className="w-9 h-9 rounded-full bg-light-grey border-2 border-white overflow-hidden shadow">
+                                        <div key={i} className="w-8 h-8 md:w-9 md:h-9 rounded-full bg-light-grey border-2 border-white overflow-hidden shadow">
                                             <img src={`https://i.pravatar.cc/100?img=${i + 10}`} alt="User" className="w-full h-full object-cover" />
                                         </div>
                                     ))}
                                 </div>
                                 <div className="flex items-center gap-1">
                                     {[...Array(5)].map((_, i) => (
-                                        <Star key={i} size={12} className="text-yellow-400" fill="currentColor" />
+                                        <Star key={i} size={10} md:size={12} className="text-yellow-400" fill="currentColor" />
                                     ))}
-                                    <span className="text-xs font-bold text-neutral-grey ml-1">4.9</span>
+                                    <span className="text-[10px] md:text-xs font-bold text-neutral-grey dark:text-neutral-grey/60 ml-1">4.9</span>
                                 </div>
                             </div>
-                            <p className="text-sm font-bold text-primary-black leading-relaxed">
+                            <p className="text-xs md:text-sm font-bold text-primary-black dark:text-white leading-relaxed">
                                 "Found my dream penthouse in just 2 days. Best real estate experience!"
                             </p>
-                            <p className="text-xs text-neutral-grey font-medium mt-2">— Priya S., Mumbai</p>
+                            <p className="text-[10px] md:text-xs text-neutral-grey dark:text-neutral-grey/60 font-medium mt-2">— Priya S., Mumbai</p>
                         </motion.div>
 
                         {/* Trust Badge */}
@@ -172,10 +172,10 @@ const Hero = () => {
                             initial={{ x: 40, opacity: 0 }}
                             animate={{ x: 0, opacity: 1 }}
                             transition={{ delay: 1.2, duration: 0.6 }}
-                            className="flex items-center gap-2 bg-white/10 backdrop-blur-sm border border-white/20 text-white px-4 py-2.5 rounded-full text-xs font-bold"
+                            className="flex items-center gap-2 bg-white/10 backdrop-blur-sm border border-white/20 text-white px-4 py-2.5 rounded-full text-[10px] md:text-xs font-bold"
                         >
                             <Shield size={14} className="text-green-400" />
-                            Verified listings · No brokerage hidden fees
+                            Verified listings · No hidden fees
                         </motion.div>
                     </div>
                 </div>

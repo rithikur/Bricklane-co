@@ -83,7 +83,7 @@ const SearchPage = () => {
     }));
 
     return (
-        <div className="h-screen flex flex-col font-display overflow-hidden bg-white">
+        <div className="h-screen flex flex-col font-display overflow-hidden bg-white dark:bg-dark-bg transition-colors duration-300">
             <Navbar />
             <div className="flex-1 flex flex-col overflow-hidden relative">
                 {/* Filters sidebar - passing props to control it */}
@@ -100,11 +100,11 @@ const SearchPage = () => {
                 <main className="flex-1 flex flex-col md:flex-row overflow-hidden relative">
 
                     {/* Property List */}
-                    <div className={`flex-1 overflow-y-auto p-4 md:p-6 bg-white z-10 scrollbar-hide ${showMapMobile ? 'hidden md:block' : 'block'}`}>
+                    <div className={`flex-1 overflow-y-auto p-4 md:p-6 bg-white dark:bg-dark-bg z-10 scrollbar-hide transition-colors duration-300 ${showMapMobile ? 'hidden md:block' : 'block'}`}>
                         <div className="mb-6">
                             <div className="flex items-center gap-3">
-                                <div className="flex items-center bg-light-grey px-5 py-3 rounded-full flex-1 shadow-sm border border-transparent focus-within:border-primary-black transition-all">
-                                    <Search size={20} className="text-neutral-grey" />
+                                <div className="flex items-center bg-light-grey dark:bg-dark-surface px-5 py-3 rounded-full flex-1 shadow-sm border border-transparent focus-within:border-primary-black dark:focus-within:border-gold transition-all">
+                                    <Search size={20} className="text-neutral-grey dark:text-neutral-grey/60" />
                                     <input
                                         type="text"
                                         placeholder="Search by location..."
@@ -118,7 +118,7 @@ const SearchPage = () => {
                                             }
                                             setSearchParams(newParams);
                                         }}
-                                        className="bg-transparent border-none outline-none ml-3 text-base w-full font-bold text-primary-black placeholder-neutral-grey"
+                                        className="bg-transparent border-none outline-none ml-3 text-base w-full font-bold text-primary-black dark:text-white placeholder-neutral-grey dark:placeholder-neutral-grey/60"
                                     />
                                 </div>
                                 <AISmartSearch onApplyFilters={handleAIFilters} />
@@ -126,13 +126,13 @@ const SearchPage = () => {
                         </div>
 
                         <div className="flex items-center justify-between mb-6">
-                            <h2 className="text-xl font-bold text-primary-black">{filteredProperties.length} Properties Found</h2>
+                            <h2 className="text-xl font-bold text-primary-black dark:text-white">{filteredProperties.length} Properties Found</h2>
 
                             <div className="flex gap-4 items-center">
                                 {/* Desktop Map Toggle */}
                                 <button
                                     onClick={() => setShowMapMobile(!showMapMobile)}
-                                    className="hidden md:flex items-center gap-2 px-4 py-2 border border-light-grey rounded-full text-sm font-bold hover:bg-light-grey transition-colors"
+                                    className="hidden md:flex items-center gap-2 px-4 py-2 border border-light-grey dark:border-dark-border rounded-full text-sm font-bold hover:bg-light-grey dark:hover:bg-dark-surface transition-colors dark:text-white"
                                 >
                                     {showMapMobile ? (
                                         <>
@@ -146,19 +146,19 @@ const SearchPage = () => {
                                 </button>
                             </div>
 
-                            <div className="flex gap-2 text-sm text-primary-black font-medium items-center relative z-20">
-                                <span className="text-neutral-grey hidden sm:inline">Sort by:</span>
+                            <div className="flex gap-2 text-sm text-primary-black dark:text-white font-medium items-center relative z-20">
+                                <span className="text-neutral-grey dark:text-neutral-grey/60 hidden sm:inline">Sort by:</span>
                                 <div className="relative">
                                     <button
                                         onClick={() => setShowSortDropdown(!showSortDropdown)}
-                                        className="flex items-center gap-1 font-bold cursor-pointer hover:underline"
+                                        className="flex items-center gap-1 font-bold cursor-pointer hover:underline dark:text-white"
                                     >
                                         {sortBy}
-                                        <ChevronDown size={14} />
+                                        <ChevronDown size={14} className="dark:text-gold" />
                                     </button>
 
                                     {showSortDropdown && (
-                                        <div className="absolute right-0 top-full mt-2 w-48 bg-white border border-light-grey rounded-std shadow-xl py-1 z-30">
+                                        <div className="absolute right-0 top-full mt-2 w-48 bg-white dark:bg-dark-surface border border-light-grey dark:border-dark-border rounded-std shadow-xl py-1 z-30">
                                             {['Relevance', 'Price: Low to High', 'Price: High to Low'].map((option) => (
                                                 <button
                                                     key={option}
@@ -166,10 +166,10 @@ const SearchPage = () => {
                                                         setSortBy(option);
                                                         setShowSortDropdown(false);
                                                     }}
-                                                    className={`w-full text-left px-4 py-3 text-sm flex items-center justify-between hover:bg-light-grey/50 transition-colors ${sortBy === option ? 'font-bold text-primary-black' : 'text-neutral-grey'}`}
+                                                    className={`w-full text-left px-4 py-3 text-sm flex items-center justify-between hover:bg-light-grey/50 dark:hover:bg-white/5 transition-colors ${sortBy === option ? 'font-bold text-primary-black dark:text-white' : 'text-neutral-grey'}`}
                                                 >
                                                     {option}
-                                                    {sortBy === option && <Check size={14} className="text-primary-black" />}
+                                                    {sortBy === option && <Check size={14} className="text-primary-black dark:text-gold" />}
                                                 </button>
                                             ))}
                                         </div>
@@ -180,7 +180,7 @@ const SearchPage = () => {
 
                         {filteredProperties.length === 0 ? (
                             <div className="text-center py-20">
-                                <h3 className="text-xl font-bold text-neutral-grey">No properties found matching your filters.</h3>
+                                <h3 className="text-xl font-bold text-neutral-grey dark:text-neutral-grey/60">No properties found matching your filters.</h3>
                                 <button
                                     onClick={() => {
                                         setPriceRange([0, 20]);
@@ -191,7 +191,7 @@ const SearchPage = () => {
                                         // Force re-render/update
                                         window.location.reload();
                                     }}
-                                    className="mt-4 text-primary-black font-bold underline"
+                                    className="mt-4 text-primary-black dark:text-gold font-bold underline decoration-2 underline-offset-4"
                                 >
                                     Clear Filters
                                 </button>
@@ -207,13 +207,13 @@ const SearchPage = () => {
 
                     {/* Map Area */}
                     {showMapMobile && (
-                        <div className="w-full md:w-[45%] lg:w-[40%] bg-light-grey relative min-h-full border-l border-light-grey">
+                        <div className="w-full md:w-[45%] lg:w-[40%] bg-light-grey dark:bg-dark-bg relative min-h-full border-l border-light-grey dark:border-dark-border">
                             <MapComponent properties={displayProperties} />
 
                             {/* Mobile List Toggle (Overlay on Map) */}
                             <button
                                 onClick={() => setShowMapMobile(false)}
-                                className="md:hidden absolute bottom-6 left-1/2 transform -translate-x-1/2 z-50 bg-primary-black text-white px-6 py-3 rounded-full font-bold shadow-lg flex items-center gap-2"
+                                className="md:hidden absolute bottom-6 left-1/2 transform -translate-x-1/2 z-50 bg-primary-black dark:bg-gold text-white dark:text-black px-6 py-3 rounded-full font-bold shadow-lg flex items-center gap-2"
                             >
                                 <List size={20} /> Show List
                             </button>
@@ -225,7 +225,7 @@ const SearchPage = () => {
                         <div className="md:hidden absolute bottom-6 left-1/2 transform -translate-x-1/2 z-50">
                             <button
                                 onClick={() => setShowMapMobile(true)}
-                                className="bg-primary-black text-white px-6 py-3 rounded-full font-bold shadow-lg flex items-center gap-2 hover:scale-105 transition-transform"
+                                className="bg-primary-black dark:bg-gold text-white dark:text-black px-6 py-3 rounded-full font-bold shadow-lg flex items-center gap-2 hover:scale-105 transition-transform"
                             >
                                 <Map size={20} /> Show Map
                             </button>
