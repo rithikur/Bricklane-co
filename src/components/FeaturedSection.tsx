@@ -1,35 +1,27 @@
-import { useState, useCallback } from 'react';
+import { useCallback } from 'react';
 import { ArrowRight, Heart } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import RevealText from './common/RevealText';
 import { ToastContainer, useToast } from './common/Toast';
-
-const properties = [
-    { id: 1, price: '4.5 Cr', address: 'Worli Sea Face, Mumbai', rooms: 3, baths: 3, area: 1850, image: 'https://images.unsplash.com/photo-1613977257363-707ba9348227?auto=format&fit=crop&q=80&w=2070' },
-    { id: 2, price: '2.1 Cr', address: 'Juhu Tara Road, Mumbai', rooms: 2, baths: 2, area: 1200, image: 'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&q=80&w=2053' },
-    { id: 3, price: '8.5 Cr', address: 'Bandra West, Mumbai', rooms: 5, baths: 5, area: 4500, image: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&q=80&w=2070' },
-];
-
-const getSaved = (): number[] => {
-    try { return JSON.parse(localStorage.getItem('savedProperties') || '[]'); } catch { return []; }
-};
+import { useProperties } from '../context/PropertyContext';
 
 const FeaturedSection = () => {
-    const [saved, setSaved] = useState<number[]>(getSaved);
+    const { properties, wishlist, toggleWishlist } = useProperties();
     const { toasts, dismiss, toast } = useToast();
 
-    const toggleSave = useCallback((e: React.MouseEvent, id: number, address: string) => {
+    const handleToggleWishlist = useCallback((e: React.MouseEvent, id: number, address: string) => {
         e.preventDefault();
         e.stopPropagation();
-        setSaved(prev => {
-            const next = prev.includes(id) ? prev.filter(x => x !== id) : [...prev, id];
-            localStorage.setItem('savedProperties', JSON.stringify(next));
-            if (next.includes(id)) toast.success('Saved!', `${address} added to your saved homes.`);
-            else toast.info('Removed', `${address} removed from saved homes.`);
-            return next;
-        });
-    }, [toast]);
+        toggleWishlist(id);
+        if (!wishlist.includes(id)) toast.success('Saved!', `${address} added to your saved homes.`);
+        else toast.info('Removed', `${address} removed from saved homes.`);
+    }, [toggleWishlist, wishlist, toast]);
+
+    // Show top 3 properties marked as exclusive, or just the first 3
+    const featuredProperties = properties.filter(p => p.isExclusive).slice(0, 3).length > 0
+        ? properties.filter(p => p.isExclusive).slice(0, 3)
+        : properties.slice(0, 3);
 
     return (
         <section className="py-20 bg-white">
@@ -49,7 +41,7 @@ const FeaturedSection = () => {
                 </div>
 
                 <div className="flex overflow-x-auto pb-12 -mx-4 px-4 gap-6 scrollbar-hide snap-x snap-mandatory md:grid md:grid-cols-2 lg:grid-cols-3 md:gap-8 md:overflow-visible">
-                    {properties.map((p, index) => (
+                    {featuredProperties.map((p, index) => (
                         <motion.div
                             key={p.id}
                             initial={{ opacity: 0, y: 30 }}
@@ -59,15 +51,15 @@ const FeaturedSection = () => {
                             className="min-w-[85vw] md:min-w-0 snap-center group"
                         >
                             <Link to={`/property/${p.id}`}>
-                                <div className="relative aspect-[4/5] md:aspect-[4/3] overflow-hidden rounded-[2rem] mb-6 bg-light-grey shadow-sm">
+                                <div className="relative aspect-[4/5] md:aspect-[4/3] overflow-hidden rounded-std mb-6 bg-light-grey shadow-sm">
                                     <img src={p.image} alt={p.address} className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110" />
                                     <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-60" />
                                     <button
-                                        onClick={(e) => toggleSave(e, p.id, p.address)}
-                                        className={`absolute top-6 right-6 p-3 rounded-full shadow-lg backdrop-blur-md transition-all duration-300 active:scale-90 ${saved.includes(p.id) ? 'bg-white text-primary-black' : 'bg-white/20 text-white hover:bg-white hover:text-primary-black'}`}
-                                        title={saved.includes(p.id) ? 'Remove from saved' : 'Save property'}
+                                        onClick={(e) => handleToggleWishlist(e, p.id, p.address)}
+                                        className={`absolute top-6 right-6 p-3 rounded-full shadow-lg backdrop-blur-md transition-all duration-300 active:scale-90 ${wishlist.includes(p.id) ? 'bg-white text-primary-black' : 'bg-white/20 text-white hover:bg-white hover:text-primary-black'}`}
+                                        title={wishlist.includes(p.id) ? 'Remove from saved' : 'Save property'}
                                     >
-                                        <Heart size={22} className={saved.includes(p.id) ? 'fill-current' : ''} />
+                                        <Heart size={22} className={wishlist.includes(p.id) ? 'fill-current' : ''} />
                                     </button>
                                     <div className="absolute bottom-6 left-6 right-6">
                                         <span className="text-2xl font-bold text-white tracking-tight">₹{p.price}</span>

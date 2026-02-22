@@ -115,7 +115,7 @@ const AISmartSearch = ({ onApplyFilters }: AISmartSearchProps) => {
                             animate={{ opacity: 1, y: 0, scale: 1 }}
                             exit={{ opacity: 0, y: -24, scale: 0.95 }}
                             transition={{ type: 'spring', stiffness: 400, damping: 30 }}
-                            className="bg-white rounded-2xl shadow-2xl w-full max-w-xl font-display overflow-hidden"
+                            className="bg-white rounded-std shadow-2xl w-full max-w-xl font-display overflow-hidden"
                             onClick={(e) => e.stopPropagation()}
                         >
                             {/* Header */}

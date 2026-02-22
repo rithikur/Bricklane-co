@@ -32,7 +32,7 @@ const StatsSection = () => {
                     </RevealText>
                 </div>
 
-                <div className="grid grid-cols-2 md:grid-cols-4 gap-px bg-white/10 rounded-2xl overflow-hidden">
+                <div className="grid grid-cols-2 md:grid-cols-4 gap-px bg-white/10 rounded-std overflow-hidden">
                     {stats.map((stat, index) => (
                         <motion.div
                             key={index}

@@ -6,10 +6,10 @@ import PropertyCard from '../components/PropertyCard';
 import MapComponent from '../components/MapComponent';
 import AISmartSearch, { type ParsedQuery } from '../components/common/AISmartSearch';
 import { Map, List, Search, ChevronDown, Check } from 'lucide-react';
-
-import { properties as initialProperties } from '../data/properties';
+import { useProperties } from '../context/PropertyContext';
 
 const SearchPage = () => {
+    const { properties } = useProperties();
     const [showMapMobile, setShowMapMobile] = useState(false);
     const [searchParams, setSearchParams] = useSearchParams();
 
@@ -41,7 +41,7 @@ const SearchPage = () => {
 
     // Filter Logic
     const filteredProperties = useMemo(() => {
-        return initialProperties.filter(property => {
+        return properties.filter(property => {
             // Location Filter (from URL)
             if (locationQuery && !property.address.toLowerCase().includes(locationQuery.toLowerCase())) {
                 return false;
@@ -74,7 +74,7 @@ const SearchPage = () => {
             }
             return 0; // Relevance (Default order)
         });
-    }, [listingType, priceRange, bedrooms, propertyType, view, sortBy, locationQuery]);
+    }, [properties, listingType, priceRange, bedrooms, propertyType, view, sortBy, locationQuery]);
 
     // Derived properties for display (adding Cr suffix)
     const displayProperties = filteredProperties.map(p => ({

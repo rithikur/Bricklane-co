@@ -3,13 +3,14 @@ import { useParams, Link } from 'react-router-dom';
 import Navbar from '../components/Navbar';
 import { Heart, Share2, Check, ArrowLeft, Copy, Link2, PlayCircle, Lock, ArrowRight } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { properties } from '../data/properties';
 import { useAuth } from '../context/AuthContext';
+import { useProperties } from '../context/PropertyContext';
 import AuthGateModal from '../components/common/AuthGateModal';
 import VirtualTourModal from '../components/common/VirtualTourModal';
 
 const PropertyDetailPage = () => {
     const { id } = useParams();
+    const { properties } = useProperties();
     const [isSaved, setIsSaved] = useState(false);
     const [showShareModal, setShowShareModal] = useState(false);
     const [copied, setCopied] = useState(false);
@@ -37,12 +38,26 @@ const PropertyDetailPage = () => {
         setShowShareModal(true);
     };
 
-    const propertyId = id ? parseInt(id) : 1;
-    const property = properties.find(p => p.id === propertyId) || properties[0];
+    const propertyId = id ? parseInt(id) : null;
+    const property = properties.find(p => p.id === propertyId);
 
     useEffect(() => {
         window.scrollTo(0, 0);
-    }, [id]);
+        if (id && !property) {
+            // If ID exists but property not found, it might be a newly added property 
+            // but we'll fallback or redirect if it truly doesn't exist
+        }
+    }, [id, property]);
+
+    if (!property) {
+        return (
+            <div className="min-h-screen flex flex-col items-center justify-center">
+                <Navbar />
+                <h1 className="text-2xl font-bold mb-4">Property not found</h1>
+                <Link to="/search" className="text-primary-black underline">Back to Search</Link>
+            </div>
+        );
+    }
 
     const images = [
         property.image,

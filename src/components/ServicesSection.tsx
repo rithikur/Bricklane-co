@@ -59,12 +59,12 @@ const ServicesSection = () => {
                                 key={service.id}
                                 onHoverStart={() => setActiveId(service.id)}
                                 onHoverEnd={() => setActiveId(null)}
-                                className={`relative overflow-hidden rounded-[2.5rem] md:rounded-std cursor-pointer group transition-all duration-500 ease-out ${isActive ? 'md:flex-[2.5]' : 'md:flex-1'
+                                className={`relative overflow-hidden rounded-std cursor-pointer group transition-all duration-500 ease-out ${isActive ? 'md:flex-[2.5]' : 'md:flex-1'
                                     } flex flex-col min-h-[400px] md:min-h-0 border border-transparent mb-4 md:mb-0`}
                             >
                                 {/* Mobile-only large number (Editorial feel) */}
-                                <div className="absolute top-8 left-8 z-20 md:hidden overflow-hidden h-12">
-                                    <span className="text-6xl font-bold text-white/20 -translate-y-4 block">0{idx + 1}</span>
+                                <div className="absolute top-4 left-6 z-0 md:hidden overflow-hidden h-10">
+                                    <span className="text-5xl font-bold text-white/20 -translate-y-2 block">0{idx + 1}</span>
                                 </div>
 
                                 {/* Background Image */}

@@ -72,28 +72,28 @@ const Hero = () => {
                         <RevealText as="p" className="text-white/70 text-base md:text-lg font-medium leading-relaxed max-w-md mb-8" delay={0.4}>
                             Discover over 12,000+ premium properties in the most exclusive neighborhoods across India.
                         </RevealText>
-
-                        {/* Search Bar */}
+                        {/* Search Bar - Redesigned for a unique floating glass look */}
                         <motion.form
                             variants={item}
                             onSubmit={handleSearch}
-                            className="relative w-full max-w-xl bg-white rounded-2xl shadow-2xl flex flex-row items-center p-2 mb-6 gap-2 focus-within:ring-2 focus-within:ring-white/50"
+                            className="relative w-[92%] sm:w-full max-w-xl bg-white/10 backdrop-blur-xl border border-white/20 rounded-2xl shadow-[0_20px_50px_rgba(0,0,0,0.4)] flex flex-row items-center p-2 mb-10 gap-2 group transition-all duration-500 hover:bg-white/15 focus-within:bg-white/20 focus-within:border-white/40"
                         >
-                            <div className="flex items-center gap-2 pl-2 pr-2 border-r border-light-grey shrink-0">
-                                <MapPin size={16} className="text-neutral-grey" />
+                            <div className="flex items-center gap-2 pl-3 pr-2 border-r border-white/20 shrink-0">
+                                <MapPin size={18} className="text-amber-400" />
                             </div>
                             <input
                                 type="text"
                                 value={searchQuery}
                                 onChange={(e) => setSearchQuery(e.target.value)}
                                 placeholder="Search city or area..."
-                                className="flex-1 h-11 px-2 text-primary-black placeholder-neutral-grey/70 focus:outline-none text-sm font-medium bg-transparent"
+                                className="flex-1 h-12 px-2 text-white placeholder-white/50 focus:outline-none text-base font-medium bg-transparent"
                             />
                             <button
                                 type="submit"
-                                className="bg-primary-black text-white h-11 w-11 rounded-xl flex items-center justify-center hover:bg-neutral-grey transition-all shrink-0 active:scale-95 duration-200"
+                                className="bg-white text-primary-black h-12 px-6 rounded-xl flex items-center justify-center font-bold hover:bg-amber-400 transition-all shrink-0 active:scale-95 duration-200"
                             >
-                                <Search size={17} />
+                                <span className="hidden sm:inline mr-2">Search</span>
+                                <Search size={18} />
                             </button>
                         </motion.form>
 
@@ -131,7 +131,7 @@ const Hero = () => {
                                     initial={{ y: 20, opacity: 0 }}
                                     animate={{ y: 0, opacity: 1 }}
                                     transition={{ delay: 0.8 + i * 0.1, duration: 0.6 }}
-                                    className="bg-white/10 backdrop-blur-md border border-white/20 text-white px-6 py-4 rounded-2xl text-center min-w-[100px]"
+                                    className="bg-white/10 backdrop-blur-md border border-white/20 text-white px-6 py-4 rounded-std text-center min-w-[100px]"
                                 >
                                     <div className="text-white/60 flex justify-center mb-1">{stat.icon}</div>
                                     <p className="text-2xl font-bold">{stat.value}</p>
@@ -140,12 +140,11 @@ const Hero = () => {
                             ))}
                         </motion.div>
 
-                        {/* Testimonial floating card */}
                         <motion.div
                             initial={{ y: 40, opacity: 0 }}
                             animate={{ y: 0, opacity: 1 }}
                             transition={{ delay: 1, duration: 0.8 }}
-                            className="bg-white/95 backdrop-blur-md p-5 rounded-2xl shadow-2xl max-w-xs border border-white/50 w-full"
+                            className="bg-white/95 backdrop-blur-md p-5 rounded-std shadow-2xl max-w-xs border border-white/50 w-full"
                         >
                             <div className="flex items-center gap-3 mb-3">
                                 <div className="flex -space-x-2">

@@ -3,7 +3,7 @@ import Footer from '../components/Footer';
 import { useProperties } from '../context/PropertyContext';
 import { useAuth } from '../context/AuthContext';
 import PropertyCard from '../components/PropertyCard';
-import { Heart, Lock, ArrowRight } from 'lucide-react';
+import { Heart, ArrowRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 const WishlistPage = () => {
@@ -20,9 +20,6 @@ const WishlistPage = () => {
                 <div className="max-w-[1440px] mx-auto px-4 md:px-8">
                     {!isLoggedIn ? (
                         <div className="text-center py-20 flex flex-col items-center">
-                            <div className="w-16 h-16 bg-primary-black rounded-2xl flex items-center justify-center mb-6 shadow-xl">
-                                <Lock size={28} className="text-white" />
-                            </div>
                             <h1 className="text-3xl font-bold text-primary-black mb-3">Sign in to view your wishlist</h1>
                             <p className="text-neutral-grey leading-relaxed mb-10 max-w-sm mx-auto">
                                 Save your favorite properties and access them anytime from your private collection.
