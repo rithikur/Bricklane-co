@@ -102,8 +102,9 @@ const SearchPage = () => {
                     {/* Property List */}
                     <div className={`flex-1 overflow-y-auto p-4 md:p-6 bg-white dark:bg-dark-bg z-10 scrollbar-hide transition-colors duration-300 ${showMapMobile ? 'hidden md:block' : 'block'}`}>
                         <div className="mb-6">
-                            <div className="flex items-center gap-3">
+                            <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
                                 <div className="flex items-center bg-light-grey dark:bg-dark-surface px-5 py-3 rounded-full flex-1 shadow-sm border border-transparent focus-within:border-primary-black dark:focus-within:border-gold transition-all">
+
                                     <Search size={20} className="text-neutral-grey dark:text-neutral-grey/60" />
                                     <input
                                         type="text"

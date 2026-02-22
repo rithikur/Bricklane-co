@@ -158,10 +158,9 @@ const Chatbot = () => {
 
     return (
         <div ref={containerRef} className="contents transition-colors">
-            {/* Toggle Button */}
             <motion.button
                 onClick={() => setIsOpen(!isOpen)}
-                className="fixed bottom-6 right-6 z-50 w-14 h-14 bg-primary-black dark:bg-gold text-white dark:text-black rounded-full flex items-center justify-center shadow-2xl hover:scale-110 transition-transform duration-300"
+                className="fixed bottom-6 right-6 z-30 w-14 h-14 bg-primary-black dark:bg-gold text-white dark:text-black rounded-full flex items-center justify-center shadow-2xl hover:scale-110 transition-transform duration-300"
                 whileHover={{ scale: 1.1 }}
                 whileTap={{ scale: 0.9 }}
             >
@@ -176,7 +175,7 @@ const Chatbot = () => {
                         animate={{ opacity: 1, y: 0, scale: 1 }}
                         exit={{ opacity: 0, y: 20, scale: 0.95 }}
                         transition={{ duration: 0.2 }}
-                        className="fixed bottom-24 right-6 z-50 w-[350px] max-h-[500px] h-[70vh] bg-white dark:bg-dark-surface rounded-2xl shadow-2xl border border-light-grey dark:border-dark-border flex flex-col overflow-hidden font-display transition-colors"
+                        className="fixed bottom-24 right-4 md:right-6 z-50 w-[calc(100vw-2rem)] md:w-[350px] max-h-[500px] h-[70vh] bg-white dark:bg-dark-surface rounded-2xl shadow-2xl border border-light-grey dark:border-dark-border flex flex-col overflow-hidden font-display transition-colors"
                     >
                         {/* Header */}
                         <div className="bg-primary-black dark:bg-dark-bg text-white dark:text-gold p-4 flex items-center gap-3 border-b dark:border-dark-border">
@@ -230,7 +229,7 @@ const Chatbot = () => {
                     </motion.div>
                 )}
             </AnimatePresence>
-        </div>
+        </div >
     );
 };
 

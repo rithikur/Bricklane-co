@@ -153,7 +153,7 @@ const Navbar = () => {
                     )}
 
                     {/* Logo */}
-                    <Link to="/" className="flex items-center gap-2.5 group shrink-0 ml-8 md:ml-0" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>
+                    <Link to="/" className="flex items-center gap-2.5 group shrink-0 ml-10 md:ml-0" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>
                         <div className={`w-9 h-9 rounded-xl flex items-center justify-center font-bold text-lg shadow-md transition-all group-hover:scale-110 duration-300 ${isTransparent ? 'bg-white text-primary-black' : 'bg-primary-black dark:bg-gold text-white dark:text-black'}`}>
                             B
                         </div>

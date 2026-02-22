@@ -76,7 +76,7 @@ const Hero = () => {
                         <motion.form
                             variants={item}
                             onSubmit={handleSearch}
-                            className="relative w-[92%] sm:w-full max-w-xl bg-white/10 backdrop-blur-xl border border-white/20 rounded-2xl shadow-[0_20px_50px_rgba(0,0,0,0.4)] flex flex-row items-center p-2 mb-10 gap-2 group transition-all duration-500 hover:bg-white/15 focus-within:bg-white/20 focus-within:border-white/40"
+                            className="relative w-full max-w-xl bg-white/10 backdrop-blur-xl border border-white/20 rounded-2xl shadow-[0_20px_50px_rgba(0,0,0,0.4)] flex flex-row items-center p-1.5 sm:p-2 mb-10 gap-2 group transition-all duration-500 hover:bg-white/15 focus-within:bg-white/20 focus-within:border-white/40"
                         >
                             <div className="flex items-center gap-2 pl-3 pr-2 border-r border-white/20 shrink-0">
                                 <MapPin size={18} className="text-gold" />
@@ -86,25 +86,25 @@ const Hero = () => {
                                 value={searchQuery}
                                 onChange={(e) => setSearchQuery(e.target.value)}
                                 placeholder="Search city or area..."
-                                className="flex-1 h-12 px-2 text-white placeholder-white/50 focus:outline-none text-base font-medium bg-transparent"
+                                className="flex-1 h-10 sm:h-12 px-2 text-white placeholder-white/50 focus:outline-none text-sm sm:text-base font-medium bg-transparent min-w-[100px]"
                             />
                             <button
                                 type="submit"
-                                className="bg-white dark:bg-gold text-primary-black h-12 px-6 rounded-xl flex items-center justify-center font-bold hover:bg-gold dark:hover:bg-gold-hover transition-all shrink-0 active:scale-95 duration-200"
+                                className="bg-white dark:bg-gold text-primary-black h-10 w-12 sm:w-auto sm:h-12 sm:px-6 rounded-xl flex items-center justify-center font-bold hover:bg-gold dark:hover:bg-gold-hover transition-all shrink-0 active:scale-95 duration-200"
                             >
                                 <span className="hidden sm:inline mr-2">Search</span>
-                                <Search size={18} />
+                                <Search size={18} className="shrink-0" />
                             </button>
                         </motion.form>
 
                         {/* Popular Searches */}
-                        <motion.div variants={item} className="flex flex-wrap items-center gap-2 justify-center sm:justify-start">
-                            <span className="text-white/50 text-xs font-bold uppercase tracking-wider hidden sm:inline">Popular:</span>
+                        <motion.div variants={item} className="flex overflow-x-auto sm:flex-wrap items-center gap-2 sm:justify-start pb-2 sm:pb-0 w-full no-scrollbar max-w-[100vw]">
+                            <span className="text-white/50 text-xs font-bold uppercase tracking-wider hidden sm:inline shrink-0">Popular:</span>
                             {popularLocations.map(loc => (
                                 <button
                                     key={loc}
                                     onClick={() => navigate(`/search?location=${loc}`)}
-                                    className="text-xs font-bold text-white/80 hover:text-white bg-white/10 dark:bg-gold/10 hover:bg-white/20 dark:hover:bg-gold/20 border border-white/20 dark:border-gold/30 px-3 py-1.5 rounded-full transition-all"
+                                    className="text-xs font-bold text-white/80 hover:text-white bg-white/10 dark:bg-gold/10 hover:bg-white/20 dark:hover:bg-gold/20 border border-white/20 dark:border-gold/30 px-3 py-1.5 rounded-full transition-all whitespace-nowrap shrink-0"
                                 >
                                     {loc}
                                 </button>
@@ -119,7 +119,7 @@ const Hero = () => {
                             initial={{ x: 60, opacity: 0 }}
                             animate={{ x: 0, opacity: 1 }}
                             transition={{ delay: 0.6, duration: 0.8 }}
-                            className="flex flex-wrap justify-center lg:justify-end gap-3 md:gap-4"
+                            className="w-full grid grid-cols-3 sm:flex sm:flex-wrap justify-between lg:justify-end gap-2 md:gap-4"
                         >
                             {[
                                 { value: '12k+', label: 'Properties', icon: <MapPin size={16} /> },
@@ -131,11 +131,11 @@ const Hero = () => {
                                     initial={{ y: 20, opacity: 0 }}
                                     animate={{ y: 0, opacity: 1 }}
                                     transition={{ delay: 0.8 + i * 0.1, duration: 0.6 }}
-                                    className="bg-white/10 backdrop-blur-md border border-white/20 text-white px-4 md:px-6 py-3 md:py-4 rounded-std text-center min-w-[90px] md:min-w-[100px]"
+                                    className="bg-white/10 backdrop-blur-md border border-white/20 text-white px-2 sm:px-4 py-3 md:py-4 rounded-xl md:rounded-std text-center min-w-0 sm:min-w-[100px] flex-1 sm:flex-none"
                                 >
                                     <div className="text-white/60 flex justify-center mb-1">{stat.icon}</div>
-                                    <p className="text-xl md:text-2xl font-bold">{stat.value}</p>
-                                    <p className="text-[10px] md:text-xs text-white/60 font-medium uppercase tracking-wide">{stat.label}</p>
+                                    <p className="text-lg md:text-2xl font-bold">{stat.value}</p>
+                                    <p className="text-[9px] md:text-xs text-white/60 font-medium uppercase tracking-wide truncate">{stat.label}</p>
                                 </motion.div>
                             ))}
                         </motion.div>
@@ -156,7 +156,7 @@ const Hero = () => {
                                 </div>
                                 <div className="flex items-center gap-1">
                                     {[...Array(5)].map((_, i) => (
-                                        <Star key={i} size={10} md:size={12} className="text-yellow-400" fill="currentColor" />
+                                        <Star key={i} size={10} className="text-yellow-400 sm:w-3 sm:h-3" fill="currentColor" />
                                     ))}
                                     <span className="text-[10px] md:text-xs font-bold text-neutral-grey dark:text-neutral-grey/60 ml-1">4.9</span>
                                 </div>

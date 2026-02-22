@@ -14,7 +14,7 @@ const AnimatedCounter = ({ value, className = '' }: AnimatedCounterProps) => {
 
     const [count, setCount] = useState(0);
     const ref = useRef(null);
-    const isInView = useInView(ref, { once: true, margin: '-10% 0px' });
+    const isInView = useInView(ref, { once: true, amount: 0.1 });
 
     useEffect(() => {
         if (!isInView) return;
