@@ -28,7 +28,10 @@ const parseNaturalQuery = (query: string): ParsedQuery => {
     if (priceMatch) result.maxPrice = parseFloat(priceMatch[1]);
 
     // Location keywords
-    const locationKeywords = ['bandra', 'andheri', 'juhu', 'powai', 'worli', 'lower parel', 'goregaon', 'malad', 'borivali', 'thane', 'navi mumbai', 'pune', 'delhi', 'gurgaon', 'noida', 'bangalore', 'hyderabad'];
+    const locationKeywords = [
+        'bandra', 'andheri', 'juhu', 'powai', 'worli', 'lower parel', 'goregaon', 'malad', 'borivali', 'thane', 'navi mumbai', 'pune', 'delhi', 'gurgaon', 'noida', 'bangalore', 'hyderabad',
+        'ahmedabad', 'chandigarh', 'jaipur', 'kolkata', 'surat'
+    ];
     for (const loc of locationKeywords) {
         if (q.includes(loc)) { result.location = loc; break; }
     }
@@ -91,7 +94,7 @@ const AISmartSearch = ({ onApplyFilters }: AISmartSearchProps) => {
             {/* Trigger Button */}
             <button
                 onClick={() => { setIsOpen(true); setTimeout(() => inputRef.current?.focus(), 100); }}
-                className="flex items-center gap-2 px-4 py-2.5 bg-gradient-to-r from-violet-600 to-indigo-600 text-white rounded-full text-sm font-bold shadow-lg hover:shadow-violet-200 hover:scale-105 transition-all duration-200"
+                className="flex items-center gap-2 px-4 py-2.5 bg-gradient-to-r from-amber-400 to-yellow-500 text-black rounded-full text-sm font-bold shadow-lg hover:shadow-amber-300/50 hover:scale-105 transition-all duration-200"
             >
                 <Sparkles size={15} className="animate-pulse" />
                 AI Search
@@ -118,7 +121,7 @@ const AISmartSearch = ({ onApplyFilters }: AISmartSearchProps) => {
                             {/* Header */}
                             <div className="px-6 pt-6 pb-4 border-b border-light-grey flex items-center justify-between">
                                 <div className="flex items-center gap-2">
-                                    <div className="w-8 h-8 rounded-xl bg-gradient-to-br from-violet-600 to-indigo-600 flex items-center justify-center">
+                                    <div className="w-8 h-8 rounded-xl bg-gradient-to-br from-amber-400 to-yellow-500 flex items-center justify-center">
                                         <Sparkles size={16} className="text-white" />
                                     </div>
                                     <div>
@@ -141,12 +144,12 @@ const AISmartSearch = ({ onApplyFilters }: AISmartSearchProps) => {
                                         onChange={(e) => { setQuery(e.target.value); setParsed(null); }}
                                         onKeyDown={(e) => e.key === 'Enter' && handleSearch()}
                                         placeholder="e.g. 3BHK under ₹2Cr with garden view near Bandra"
-                                        className="flex-1 bg-light-grey rounded-xl px-4 py-3 text-sm font-medium outline-none border border-transparent focus:border-indigo-300 transition-all placeholder-neutral-grey"
+                                        className="flex-1 bg-light-grey rounded-xl px-4 py-3 text-sm font-medium outline-none border border-transparent focus:border-amber-300 transition-all placeholder-neutral-grey"
                                     />
                                     <button
                                         onClick={handleSearch}
                                         disabled={!query.trim() || isSearching}
-                                        className="flex items-center gap-1.5 px-4 py-3 bg-gradient-to-r from-violet-600 to-indigo-600 text-white rounded-xl text-sm font-bold disabled:opacity-50 hover:opacity-90 transition-opacity"
+                                        className="flex items-center gap-1.5 px-4 py-3 bg-gradient-to-r from-amber-400 to-yellow-500 text-black rounded-xl text-sm font-bold disabled:opacity-50 hover:opacity-90 transition-opacity"
                                     >
                                         {isSearching ? <Loader size={16} className="animate-spin" /> : <Sparkles size={16} />}
                                         {isSearching ? '' : 'Parse'}
@@ -163,9 +166,9 @@ const AISmartSearch = ({ onApplyFilters }: AISmartSearchProps) => {
                                         exit={{ opacity: 0, height: 0 }}
                                         className="px-6 pt-4"
                                     >
-                                        <div className="flex items-center gap-3 p-4 bg-indigo-50 rounded-xl border border-indigo-100">
-                                            <Loader size={18} className="text-indigo-500 animate-spin" />
-                                            <span className="text-sm font-medium text-indigo-700">Analysing your search...</span>
+                                        <div className="flex items-center gap-3 p-4 bg-amber-50 rounded-xl border border-amber-100">
+                                            <Loader size={18} className="text-amber-500 animate-spin" />
+                                            <span className="text-sm font-medium text-amber-700">Analysing your search...</span>
                                         </div>
                                     </motion.div>
                                 )}

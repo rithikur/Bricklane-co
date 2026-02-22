@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import Navbar from '../components/Navbar';
-import { Heart, Share2, Check, ArrowLeft, Copy, Link2, PlayCircle } from 'lucide-react';
+import { Heart, Share2, Check, ArrowLeft, Copy, Link2, PlayCircle, Lock, ArrowRight } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { properties } from '../data/properties';
 import { useAuth } from '../context/AuthContext';
@@ -37,22 +37,18 @@ const PropertyDetailPage = () => {
         setShowShareModal(true);
     };
 
-    // Find property by ID
     const propertyId = id ? parseInt(id) : 1;
     const property = properties.find(p => p.id === propertyId) || properties[0];
 
-    // Scroll to top on load
     useEffect(() => {
         window.scrollTo(0, 0);
     }, [id]);
 
-    // Generate more images based on the main image for the bento grid
-    // In a real app, these would be separate images from the API
     const images = [
         property.image,
-        property.kitchen_image || "https://images.unsplash.com/photo-1556910103-1c02745a30bf?auto=format&fit=crop&q=80&w=2000", // Kitchen (from data or fallback)
-        "https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?auto=format&fit=crop&q=80&w=2070", // Living Room (New working URL)
-        "https://images.unsplash.com/photo-1600607686527-6fb886090705?auto=format&fit=crop&q=80&w=2000"  // Patio
+        property.kitchen_image || "https://images.unsplash.com/photo-1556910103-1c02745a30bf?auto=format&fit=crop&q=80&w=2000",
+        "https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?auto=format&fit=crop&q=80&w=2070",
+        "https://images.unsplash.com/photo-1600607686527-6fb886090705?auto=format&fit=crop&q=80&w=2000"
     ];
 
     const amenities = [
@@ -60,6 +56,46 @@ const PropertyDetailPage = () => {
         "Free parking", "Swimming pool", "Light",
         "Air conditioning", "Gym"
     ];
+
+    // Full-page gate for exclusive properties
+    if (property.isExclusive && !isLoggedIn) {
+        return (
+            <div className="font-display min-h-screen bg-white">
+                <Navbar />
+                <div className="flex flex-col items-center justify-center min-h-[80vh] px-4 text-center">
+                    <div className="max-w-md">
+                        <div className="w-16 h-16 rounded-2xl bg-primary-black flex items-center justify-center mx-auto mb-6 shadow-xl">
+                            <Lock size={28} className="text-white" />
+                        </div>
+                        <span className="inline-block bg-amber-400 text-black text-[10px] font-bold px-3 py-1 rounded-full tracking-widest uppercase mb-4">
+                            Exclusive Listing
+                        </span>
+                        <h1 className="text-3xl font-bold text-primary-black mb-3">Sign in to view this property</h1>
+                        <p className="text-neutral-grey leading-relaxed mb-8">
+                            This is a members-only listing. Create a free account or sign in to unlock full details, photos, pricing and agent contact.
+                        </p>
+                        <div className="flex gap-3">
+                            <Link
+                                to={`/signin?from=${encodeURIComponent(`/property/${property.id}`)}`}
+                                className="flex-1 flex items-center justify-center gap-2 bg-primary-black text-white py-3.5 rounded-xl font-bold hover:bg-neutral-grey transition-colors group"
+                            >
+                                Sign In <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
+                            </Link>
+                            <Link
+                                to={`/signup?from=${encodeURIComponent(`/property/${property.id}`)}`}
+                                className="flex-1 flex items-center justify-center border border-light-grey text-primary-black py-3.5 rounded-xl font-bold hover:border-primary-black transition-colors"
+                            >
+                                Create Account
+                            </Link>
+                        </div>
+                        <Link to="/search" className="inline-block mt-6 text-sm text-neutral-grey hover:text-primary-black font-medium transition-colors">
+                            ← Back to search
+                        </Link>
+                    </div>
+                </div>
+            </div>
+        );
+    }
 
     return (
         <div className="font-display min-h-screen bg-white pb-20">
@@ -79,6 +115,7 @@ const PropertyDetailPage = () => {
                 onClose={() => setShowAuthGate(false)}
                 message={authGateMessage}
             />
+
             <AnimatePresence>
                 {showShareModal && (
                     <motion.div
@@ -99,7 +136,6 @@ const PropertyDetailPage = () => {
                             <h3 className="text-2xl font-bold text-primary-black mb-2">Share this property</h3>
                             <p className="text-neutral-grey mb-8 text-sm">Copy the link below or share directly.</p>
 
-                            {/* URL Copy Box */}
                             <div className="flex items-center gap-3 border border-light-grey rounded-std p-3 mb-6 bg-light-grey/20">
                                 <Link2 size={16} className="text-neutral-grey shrink-0" />
                                 <span className="text-sm text-neutral-grey truncate flex-1">{window.location.href}</span>
@@ -135,7 +171,6 @@ const PropertyDetailPage = () => {
                 <div className="grid grid-cols-1 md:grid-cols-4 grid-rows-2 gap-4 h-auto md:h-[500px] mb-8 md:mb-12 relative">
                     <div className="md:col-span-2 md:row-span-2 rounded-std overflow-hidden relative group h-64 md:h-auto">
                         <img src={images[0]} alt="Main" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
-                        {/* Virtual Tour Button */}
                         <button
                             onClick={() => setShowTour(true)}
                             className="absolute bottom-4 left-4 flex items-center gap-2 bg-black/70 hover:bg-black/90 backdrop-blur-md text-white px-4 py-2.5 rounded-full text-sm font-bold transition-all hover:scale-105 shadow-lg group/btn"
@@ -233,7 +268,6 @@ const PropertyDetailPage = () => {
                             </div>
                         </div>
 
-
                         {/* Reviews */}
                         {(property as any).reviews && (property as any).reviews.length > 0 && (
                             <div className="mb-12 border-t border-light-grey pt-12">
@@ -299,7 +333,6 @@ const PropertyDetailPage = () => {
                 </div>
             </div>
         </div>
-
     );
 };
 

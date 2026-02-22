@@ -3,7 +3,6 @@ import { Search, Star, MapPin, TrendingUp, Shield } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
 import RevealText from './common/RevealText';
-import Magnetic from './common/Magnetic';
 
 const Hero = () => {
     const navigate = useNavigate();
@@ -78,28 +77,24 @@ const Hero = () => {
                         <motion.form
                             variants={item}
                             onSubmit={handleSearch}
-                            className="relative w-full max-w-xl bg-white rounded-2xl shadow-2xl flex flex-col sm:flex-row items-stretch sm:items-center p-2 mb-6 group focus-within:ring-2 focus-within:ring-white/50"
+                            className="relative w-full max-w-xl bg-white rounded-2xl shadow-2xl flex flex-row items-center p-2 mb-6 gap-2 focus-within:ring-2 focus-within:ring-white/50"
                         >
-                            <div className="hidden sm:flex items-center gap-2 pl-3 pr-1 border-r border-light-grey">
-                                <MapPin size={18} className="text-neutral-grey shrink-0" />
-                                <span className="text-xs font-bold text-neutral-grey whitespace-nowrap">Location</span>
+                            <div className="flex items-center gap-2 pl-2 pr-2 border-r border-light-grey shrink-0">
+                                <MapPin size={16} className="text-neutral-grey" />
                             </div>
                             <input
                                 type="text"
                                 value={searchQuery}
                                 onChange={(e) => setSearchQuery(e.target.value)}
-                                placeholder="City or address..."
-                                className="flex-1 h-12 px-4 text-primary-black placeholder-neutral-grey focus:outline-none text-base font-medium bg-transparent text-center sm:text-left"
+                                placeholder="Search city or area..."
+                                className="flex-1 h-11 px-2 text-primary-black placeholder-neutral-grey/70 focus:outline-none text-sm font-medium bg-transparent"
                             />
-                            <Magnetic strength={0.2}>
-                                <button
-                                    type="submit"
-                                    className="bg-primary-black text-white h-12 px-6 rounded-xl flex items-center justify-center gap-2 hover:bg-neutral-grey transition-all shrink-0 font-bold text-sm active:scale-95 duration-200 mt-2 sm:mt-0 w-full sm:w-auto"
-                                >
-                                    <Search size={18} />
-                                    <span>Search</span>
-                                </button>
-                            </Magnetic>
+                            <button
+                                type="submit"
+                                className="bg-primary-black text-white h-11 w-11 rounded-xl flex items-center justify-center hover:bg-neutral-grey transition-all shrink-0 active:scale-95 duration-200"
+                            >
+                                <Search size={17} />
+                            </button>
                         </motion.form>
 
                         {/* Popular Searches */}

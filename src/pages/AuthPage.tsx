@@ -1,11 +1,12 @@
 import { useState } from 'react';
-import { useNavigate, Link } from 'react-router-dom';
+import { useNavigate, useLocation, Link } from 'react-router-dom';
 import { ArrowRight, User, Lock, Mail } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useAuth } from '../context/AuthContext';
 
 const AuthPage = () => {
-    const [isLogin, setIsLogin] = useState(true);
+    const location = useLocation();
+    const [isLogin, setIsLogin] = useState(!location.pathname.includes('signup'));
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [name, setName] = useState('');
@@ -13,26 +14,42 @@ const AuthPage = () => {
     const navigate = useNavigate();
     const { login } = useAuth();
 
+    // Where to go after sign-in (supports ?from= redirect)
+    const params = new URLSearchParams(location.search);
+    const from = params.get('from') || '/';
+
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
         setError('');
 
         if (isLogin) {
-            // Login Logic
-            if (email === 'user@example.com' && password === 'password') {
+            // Check stored accounts first, then fallback demo creds
+            const stored = JSON.parse(localStorage.getItem('bricklane_accounts') || '[]') as { name: string; email: string; password: string }[];
+            const match = stored.find(a => a.email === email && a.password === password);
+            if (match) {
+                login(match.name, match.email);
+                navigate(from, { replace: true });
+            } else if (email === 'user@example.com' && password === 'password') {
                 login('User', email);
-                navigate('/');
+                navigate(from, { replace: true });
             } else {
-                setError('Invalid credentials. Try user@example.com / password');
+                setError('Incorrect email or password. New here? Switch to Sign Up.');
             }
         } else {
-            // Register Logic
-            if (email && password && name) {
-                login(name, email);
-                navigate('/');
-            } else {
+            // Register
+            if (!email || !password || !name) {
                 setError('Please fill in all fields.');
+                return;
             }
+            const stored = JSON.parse(localStorage.getItem('bricklane_accounts') || '[]') as { name: string; email: string; password: string }[];
+            if (stored.find(a => a.email === email)) {
+                setError('An account with this email already exists. Sign in instead.');
+                return;
+            }
+            stored.push({ name, email, password });
+            localStorage.setItem('bricklane_accounts', JSON.stringify(stored));
+            login(name, email);
+            navigate(from, { replace: true });
         }
     };
 

@@ -29,6 +29,7 @@ export interface Property {
         image: string;
     };
     reviews?: Review[];
+    isExclusive?: boolean;
 }
 
 interface PropertyContextType {
@@ -44,7 +45,16 @@ interface PropertyContextType {
 const PropertyContext = createContext<PropertyContextType | undefined>(undefined);
 
 export const PropertyProvider = ({ children }: { children: ReactNode }) => {
+    const DATA_VERSION = 'v3'; // bump this whenever properties.ts changes shape
+
     const [properties, setProperties] = useState<Property[]>(() => {
+        const savedVersion = localStorage.getItem('bricklane_data_version');
+        if (savedVersion !== DATA_VERSION) {
+            // Clear stale cache so new fields (isExclusive etc.) are picked up
+            localStorage.removeItem('bricklane_properties');
+            localStorage.setItem('bricklane_data_version', DATA_VERSION);
+            return initialProperties;
+        }
         const saved = localStorage.getItem('bricklane_properties');
         return saved ? JSON.parse(saved) : initialProperties;
     });

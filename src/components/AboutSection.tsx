@@ -28,7 +28,7 @@ const AboutSection = () => {
                     <div className="relative grid md:grid-cols-12 gap-6 items-end">
 
                         {/* Left — oversized image with text overlay */}
-                        <div className="md:col-span-7 relative h-[420px] md:h-[560px] rounded-[2rem] overflow-hidden group">
+                        <div className="md:col-span-7 relative h-[420px] md:h-[560px] rounded-[0.75rem] overflow-hidden group">
                             <img
                                 src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&q=90&w=1400"
                                 alt="Luxury living space"
@@ -61,7 +61,7 @@ const AboutSection = () => {
 
                             {/* Mission card */}
                             <motion.div {...f(0.1)}
-                                className="flex-1 bg-primary-black text-white rounded-[2rem] p-8 md:p-10 flex flex-col justify-between min-h-[220px]"
+                                className="flex-1 bg-primary-black text-white rounded-[0.75rem] p-8 md:p-10 flex flex-col justify-between min-h-[220px]"
                             >
                                 <div>
                                     <span className="text-white/40 text-xs font-bold uppercase tracking-[0.2em] block mb-5">Our Mission</span>
@@ -75,7 +75,7 @@ const AboutSection = () => {
                             </motion.div>
 
                             {/* Accent image */}
-                            <motion.div {...f(0.2)} className="h-[200px] rounded-[2rem] overflow-hidden relative group">
+                            <motion.div {...f(0.2)} className="h-[200px] rounded-[0.75rem] overflow-hidden relative group">
                                 <img
                                     src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&q=80&w=900"
                                     alt="Interior"
@@ -114,7 +114,7 @@ const AboutSection = () => {
 
                     <div className="flex flex-col gap-8 md:grid md:grid-cols-6 lg:grid-cols-12 md:gap-6 md:auto-rows-[minmax(180px,auto)]">
                         {/* Card 1: Headquarters (Offset on mobile) */}
-                        <div className="bg-primary-black text-white p-10 md:p-10 rounded-[2.5rem] md:col-span-3 lg:col-span-4 flex flex-col justify-between group hover:shadow-2xl transition-all duration-500 md:translate-y-0 translate-x-4">
+                        <div className="bg-primary-black text-white p-10 md:p-10 rounded-[0.75rem] md:col-span-3 lg:col-span-4 flex flex-col justify-between group hover:shadow-2xl transition-all duration-500">
                             <div>
                                 <div className="w-14 h-14 bg-white/10 rounded-2xl flex items-center justify-center mb-8 backdrop-blur-sm">
                                     <MapPin size={28} />
@@ -128,7 +128,7 @@ const AboutSection = () => {
                         </div>
 
                         {/* Card 2: Stats (Tilted on mobile) */}
-                        <div className="bg-light-grey/30 p-10 md:p-10 rounded-[2.5rem] md:col-span-3 lg:col-span-4 flex flex-col justify-center items-center text-center hover:bg-light-grey/50 transition-colors duration-500 relative overflow-hidden md:rotate-0 -rotate-2 -translate-x-4 z-10 shadow-xl md:shadow-none bg-white md:bg-light-grey/30">
+                        <div className="bg-light-grey/30 p-10 md:p-10 rounded-[0.75rem] md:col-span-3 lg:col-span-4 flex flex-col justify-center items-center text-center hover:bg-light-grey/50 transition-colors duration-500 relative overflow-hidden bg-white md:bg-light-grey/30">
                             <div className="absolute top-0 right-0 p-32 bg-gradient-to-br from-transparent to-black/5 rounded-full -mr-16 -mt-16 pointer-events-none" />
                             <div className="w-16 h-16 bg-white shadow-sm rounded-full flex items-center justify-center mb-6 text-primary-black">
                                 <Globe size={28} />
@@ -138,7 +138,7 @@ const AboutSection = () => {
                         </div>
 
                         {/* Card 3: Image Card (Asymmetric) */}
-                        <div className="bg-gray-100 rounded-[2.5rem] md:col-span-6 lg:col-span-4 relative overflow-hidden group min-h-[350px] md:translate-y-0 translate-y-4">
+                        <div className="bg-gray-100 rounded-[0.75rem] md:col-span-6 lg:col-span-4 relative overflow-hidden group min-h-[350px]">
                             <img
                                 src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&q=80&w=2070"
                                 alt="Modern Architecture"
@@ -151,7 +151,7 @@ const AboutSection = () => {
                         </div>
 
                         {/* Card 4: Recognition (Full width, but with floating badge) */}
-                        <div className="border border-light-grey bg-white p-10 rounded-[2.5rem] md:col-span-6 lg:col-span-8 flex flex-col md:flex-row items-start md:items-center gap-8 hover:shadow-lg transition-all duration-500 relative">
+                        <div className="border border-light-grey bg-white p-10 rounded-[0.75rem] md:col-span-6 lg:col-span-8 flex flex-col md:flex-row items-start md:items-center gap-8 hover:shadow-lg transition-all duration-500 relative">
                             <div className="w-24 h-24 bg-yellow-50 text-yellow-600 rounded-3xl flex items-center justify-center shrink-0 md:rotate-0 rotate-12">
                                 <Award size={48} />
                             </div>
@@ -165,7 +165,7 @@ const AboutSection = () => {
                         </div>
 
                         {/* Card 5: Culture (Overlapping agents) */}
-                        <div className="bg-primary-black text-white p-10 rounded-[2.5rem] md:col-span-6 lg:col-span-4 relative overflow-hidden group md:translate-x-0 -translate-x-4">
+                        <div className="bg-primary-black text-white p-10 rounded-[0.75rem] md:col-span-6 lg:col-span-4 relative overflow-hidden group">
                             <div className="absolute -right-10 -bottom-10 w-40 h-40 bg-white/10 rounded-full blur-2xl" />
                             <h4 className="text-6xl font-bold mb-2 tracking-tighter">150+</h4>
                             <p className="text-white/40 font-bold uppercase tracking-[0.2em] text-xs mb-8">Expert Agents</p>

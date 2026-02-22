@@ -16,7 +16,8 @@ export const properties = [
         agent: {
             name: "Rajesh Kumar",
             image: "https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&q=80&w=200"
-        }
+        },
+        isExclusive: true,
     },
     {
         id: 2,
@@ -54,7 +55,8 @@ export const properties = [
         agent: {
             name: "Vikram Malhotra",
             image: "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&q=80&w=200"
-        }
+        },
+        isExclusive: true,
     },
     {
         id: 4,
@@ -130,7 +132,8 @@ export const properties = [
         agent: {
             name: "Amit Malhotra",
             image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=200"
-        }
+        },
+        isExclusive: true,
     },
     {
         id: 8,
@@ -208,7 +211,8 @@ export const properties = [
         agent: {
             name: "Arjun Rao",
             image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&q=80&w=200"
-        }
+        },
+        isExclusive: true,
     },
     // Goa Properties
     {
@@ -288,7 +292,8 @@ export const properties = [
         agent: {
             name: "Rohit Verma",
             image: "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&q=80&w=200"
-        }
+        },
+        isExclusive: true,
     },
     // Rent Properties
     {
@@ -381,5 +386,129 @@ export const properties = [
                 date: "2024-01-10"
             }
         ]
+    },
+    // Ahmedabad Properties
+    {
+        id: 19,
+        price: '4.2',
+        address: 'SG Highway, Ahmedabad',
+        rooms: 4,
+        baths: 4,
+        area: 2600,
+        image: 'https://images.unsplash.com/photo-1580587771525-78b9dba3b914?auto=format&fit=crop&q=80&w=2074',
+        kitchen_image: 'https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?auto=format&fit=crop&q=80&w=2000',
+        lat: 23.0225,
+        lng: 72.5714,
+        type: 'Houses',
+        view: 'Garden',
+        description: "Stunning contemporary bungalow on SG Highway with a private pool, Italian marble flooring, and a landscaped courtyard. Located in Ahmedabad's most sought-after corridor.",
+        agent: {
+            name: "Devam Patel",
+            image: "https://images.unsplash.com/photo-1531427186611-ecfd6d936c79?auto=format&fit=crop&q=80&w=200"
+        }
+    },
+    // Chandigarh Properties
+    {
+        id: 20,
+        price: '3.1',
+        address: 'Sector 17, Chandigarh',
+        rooms: 3,
+        baths: 3,
+        area: 1900,
+        image: 'https://images.unsplash.com/photo-1564013799919-ab600027ffc6?auto=format&fit=crop&q=80&w=2070',
+        kitchen_image: 'https://images.unsplash.com/photo-1556909172-54557c7e4fb7?auto=format&fit=crop&q=80&w=2000',
+        lat: 30.7333,
+        lng: 76.7794,
+        type: 'Apartments',
+        view: 'City View',
+        description: "Elegant apartment in the heart of Chandigarh's planned city grid. Spacious, well-lit interiors with premium fittings and easy access to the Sector 17 plaza.",
+        agent: {
+            name: "Harpreet Kaur",
+            image: "https://images.unsplash.com/photo-1521146764736-56c929d59c83?auto=format&fit=crop&q=80&w=200"
+        }
+    },
+    // Jaipur Properties
+    {
+        id: 21,
+        price: '6.0',
+        address: 'Civil Lines, Jaipur',
+        rooms: 5,
+        baths: 5,
+        area: 4800,
+        image: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?auto=format&fit=crop&q=80&w=2066',
+        kitchen_image: 'https://images.unsplash.com/photo-1556912167-f556f1f39fdf?auto=format&fit=crop&q=80&w=2000',
+        lat: 26.9124,
+        lng: 75.7914,
+        type: 'Houses',
+        view: 'Garden',
+        description: "Royal-inspired villa in Civil Lines, Jaipur. Features hand-crafted Rajasthani stonework, arched corridors, a private courtyard, and rooftop with panoramic city views.",
+        agent: {
+            name: "Arpit Sharma",
+            image: "https://images.unsplash.com/photo-1463453091185-61582044d556?auto=format&fit=crop&q=80&w=200"
+        },
+        isExclusive: true,
+    },
+    // Kolkata Properties
+    {
+        id: 22,
+        price: '2.4',
+        address: 'Alipore, Kolkata',
+        rooms: 3,
+        baths: 2,
+        area: 1700,
+        image: 'https://images.unsplash.com/photo-1487958449943-2429e8be8625?auto=format&fit=crop&q=80&w=2070',
+        kitchen_image: 'https://images.unsplash.com/photo-1556911220-bff31c812dba?auto=format&fit=crop&q=80&w=2000',
+        lat: 22.5357,
+        lng: 88.3387,
+        type: 'Apartments',
+        view: 'Garden',
+        description: "Heritage apartment in Alipore, Kolkata's most prestigious enclave. High ceilings, teak wood floors, and a wraparound balcony overlooking lush green gardens.",
+        agent: {
+            name: "Saurav Bose",
+            image: "https://images.unsplash.com/photo-1504257432389-52343af06ae3?auto=format&fit=crop&q=80&w=200"
+        }
+    },
+    // Noida Properties
+    {
+        id: 23,
+        price: '1.6',
+        address: 'Sector 62, Noida',
+        rooms: 2,
+        baths: 2,
+        area: 1050,
+        image: 'https://images.unsplash.com/photo-1449844908441-8829872d2607?auto=format&fit=crop&q=80&w=2070',
+        kitchen_image: 'https://images.unsplash.com/photo-1556912173-3bb406ef7e77?auto=format&fit=crop&q=80&w=2000',
+        lat: 28.6267,
+        lng: 77.3665,
+        type: 'Condos',
+        view: 'City View',
+        description: "Modern condo in Noida's thriving tech corridor. Part of a premium gated township with clubhouse, rooftop pool, and direct metro connectivity to Delhi.",
+        agent: {
+            name: "Nidhi Agarwal",
+            image: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?auto=format&fit=crop&q=80&w=200"
+        },
+        listingType: 'Rent',
+    },
+    // Surat Properties
+    {
+        id: 24,
+        price: '5.8',
+        address: 'Vesu, Surat',
+        rooms: 4,
+        baths: 4,
+        area: 3400,
+        image: 'https://images.unsplash.com/photo-1570129477492-45c003edd2be?auto=format&fit=crop&q=80&w=2070',
+        kitchen_image: 'https://images.unsplash.com/photo-1556911073-38141963c9e0?auto=format&fit=crop&q=80&w=2000',
+        lat: 21.1702,
+        lng: 72.8311,
+        type: 'Houses',
+        view: 'Garden',
+        description: "Ultra-modern smart home in Surat's upscale Vesu locality. Fully automated lighting and security, a rooftop terrace, and a private swimming pool in a quiet gated neighbourhood.",
+        agent: {
+            name: "Bhavesh Mehta",
+            image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=200"
+        },
+        isExclusive: true,
     }
 ];
+
