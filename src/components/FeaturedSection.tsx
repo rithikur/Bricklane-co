@@ -62,7 +62,7 @@ const FeaturedSection = () => {
                                         <Heart size={22} className={wishlist.includes(p.id) ? 'fill-current' : ''} />
                                     </button>
                                     <div className="absolute bottom-6 left-6 right-6">
-                                        <span className="text-2xl font-bold text-white tracking-tight">₹{p.price}</span>
+                                        <span className="text-2xl font-bold text-white tracking-tight">₹{p.price} cr</span>
                                     </div>
                                     {p.isExclusive && (
                                         <div className="absolute top-6 left-6 bg-gold text-black text-[10px] font-bold px-2.5 py-1 rounded-full tracking-widest uppercase shadow">

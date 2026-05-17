@@ -59,7 +59,6 @@ const ServicesSection = () => {
                                 key={service.id}
                                 onHoverStart={() => setActiveId(service.id)}
                                 onHoverEnd={() => setActiveId(null)}
-                                onClick={() => setActiveId(isActive ? null : service.id)}
                                 className={`relative overflow-hidden rounded-std cursor-pointer group transition-all duration-500 ease-out ${isActive ? 'md:flex-[2.5]' : 'md:flex-1'
                                     } flex flex-col min-h-[400px] md:min-h-0 border border-transparent mb-4 md:mb-0`}
                             >
@@ -78,20 +77,20 @@ const ServicesSection = () => {
                                 />
 
                                 {/* Content Layer */}
-                                <div className="relative z-10 p-6 md:p-10 h-full flex flex-col justify-end">
+                                <div className="relative z-10 p-10 h-full flex flex-col justify-end">
                                     <div className="md:translate-y-0 translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
                                         <h3 className="text-3xl md:text-2xl font-bold mb-4 text-white leading-tight">
                                             {service.title}
                                         </h3>
 
-                                        <div className={`overflow-hidden transition-all duration-500 ${isActive ? 'max-h-[500px]' : 'max-h-0 md:max-h-24'}`}>
-                                            <p className="text-lg md:text-base mb-6 md:mb-8 leading-relaxed text-white/80 max-w-sm">
+                                        <div className={`overflow-hidden transition-all duration-500 ${isActive ? 'max-h-48' : 'max-h-0 md:max-h-24'}`}>
+                                            <p className="text-lg md:text-base mb-8 leading-relaxed text-white/80 max-w-sm">
                                                 {service.description}
                                             </p>
 
                                             <Link
                                                 to="/search"
-                                                className="inline-flex items-center gap-3 font-bold px-6 py-3 rounded-full bg-white dark:bg-gold text-primary-black dark:text-black hover:bg-white/90 dark:hover:bg-gold-hover transition-all hover:gap-5 mb-2"
+                                                className="inline-flex items-center gap-3 font-bold px-6 py-3 rounded-full bg-white dark:bg-gold text-primary-black dark:text-black hover:bg-white/90 dark:hover:bg-gold-hover transition-all hover:gap-5"
                                             >
                                                 {service.link}
                                                 <ArrowRight size={18} />
